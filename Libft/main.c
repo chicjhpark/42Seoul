@@ -6,7 +6,7 @@
 /*   By: jaehpark </var/mail/jaehpark>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 08:14:24 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/03 15:58:59 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/04 12:12:14 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 
 int		main(void)
 {
-	char	*s;
-	int		i;
+	char	*i;
 
-	i = ft_atoi("   2147483699");
-/*	write(0, s, 20);
+	i = ft_substr("i am optimus prime", 5, 20);
+	write(0, i, 20);
 	write(0, "\n", 1);
-	puts(s);
-	printf("%s\n", s); */
-	printf("%d\n", i);
+	puts(i);
+	printf("%s\n", i); 
 	return (0);
 }
