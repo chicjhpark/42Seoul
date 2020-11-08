@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaehpark </var/mail/jaehpark>              +#+  +:+       +#+        */
+/*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/03 08:14:24 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/04 12:12:14 by jaehpark         ###   ########.fr       */
+/*   Created: 2020/11/05 18:38:59 by jaehpark          #+#    #+#             */
+/*   Updated: 2020/11/08 15:14:48 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 
 int		main(void)
 {
-	char	*i;
+	char	s1[] = "cbhaelloba";
+	char	set[] = "abc";
+	char	*result;
 
-	i = ft_substr("i am optimus prime", 5, 20);
-	write(0, i, 20);
-	write(0, "\n", 1);
-	puts(i);
-	printf("%s\n", i); 
+	result = ft_strtrim("cbhaelloba", "abc");
+	printf("%s\n", result);
 	return (0);
 }
