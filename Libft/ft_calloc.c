@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 16:18:19 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/03 23:45:21 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/08 23:32:54 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,5 @@ void	*ft_calloc(size_t count, size_t size)
 	if (!(p = malloc(size * count)))
 		return (NULL);
 	ft_bzero(p, (size * count));
-	free(p);
 	return (p);
 }

@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 11:21:52 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/05 14:43:51 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/08 23:33:08 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		i++;
 	}
 	s2[i] = 0;
-	free(s2);
 	return (s2);
 }
