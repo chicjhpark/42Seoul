@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:38:59 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/08 15:14:48 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/10 00:09:42 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 
 int		main(void)
 {
-	char	s1[] = "cbhaelloba";
-	char	set[] = "abc";
-	char	*result;
+	char	**s;
+	size_t	i;
 
-	result = ft_strtrim("cbhaelloba", "abc");
-	printf("%s\n", result);
+	i = 0;
+	s = ft_split("I'm optimus prime", ' ');
+	while (s[i])
+	{
+		printf("%s\n", s[i]);
+		i++;
+	}
 	return (0);
 }

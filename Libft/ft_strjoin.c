@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 13:00:42 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/08 23:33:17 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/10 00:06:44 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	l1 = strlen(s1);
 	l2 = strlen(s2);
-	if (!(s3 = (char *)malloc(sizeof(char *) * (l1 + l2 + 1))))
+	if (!(s3 = (char *)malloc(sizeof(char) * (l1 + l2 + 1))))
 		return (NULL);
 	l1 = 0;
 	while (s1[l1])
