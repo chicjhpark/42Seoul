@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 20:03:30 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/10 00:05:14 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/10 16:58:07 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char			**ft_split(char const *s, char c)
 	size_t	i;
 	size_t	j;
 	size_t	k;
+	size_t	temp;
 
 	if (!s)
 		return (NULL);
@@ -67,6 +68,7 @@ char			**ft_split(char const *s, char c)
 			return (NULL);
 		i++;
 	}
+	temp = i;
 	i = 0;
 	j = 0;
 	k = 0;
@@ -82,6 +84,11 @@ char			**ft_split(char const *s, char c)
 		j++;
 		k++;
 	}
-	s2[i][j] = 0;
+	s2[i][j] = '\0';
+	while (temp)
+	{
+		free(s2[temp]);
+		temp--;
+	}
 	return (s2);
 }
