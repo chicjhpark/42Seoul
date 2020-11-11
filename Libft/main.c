@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:38:59 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/10 16:58:09 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/11 21:19:46 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		main(void)
 	size_t	i;
 
 	i = 0;
-	s = ft_split("I'm optimus prime", ' ');
+	s = ft_split("     I'm optimus  prim e", 32);
 	while (s[i])
 	{
 		printf("%s\n", s[i]);

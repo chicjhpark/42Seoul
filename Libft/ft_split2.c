@@ -6,11 +6,10 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 20:03:30 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/10 16:58:07 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/11 16:26:41 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 
 static size_t	ft_str_count(char const *s, char c)
 {
