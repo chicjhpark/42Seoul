@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:38:59 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/12 23:51:45 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/13 00:01:22 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int		main(void)
 	size_t	i;
 	char	*temp;
 
-	i = 12345678;
+	i = -12345678;
 	temp = ft_itoa(i);
-//	printf("%s\n", &temp[9]);
+	printf("%s\n", temp);
 //	write(0, temp, 10);
 	return (0);
 }
