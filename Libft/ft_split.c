@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 16:08:29 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/12 19:27:11 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/12 21:04:17 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ static char		**ft_chr_count(char **s2, char const *s, char c)
 			ft_free(s2, j - 1);
 			return (NULL);
 		}
-		j++;
+		if (s[i] == c)
+			j++;
 	}
 	return (s2);
 }
@@ -94,9 +95,10 @@ static void		ft_strcpy(char **s2, char const *s, char c)
 			k++;
 		}
 		s2[j][k] = '\0';
-		j++;
+		if (s[i] == c)
+			j++;
 	}
-	s2[j][0] = '\0';
+	s2[j] = NULL;
 }
 
 char			**ft_split(char const *s, char c)
