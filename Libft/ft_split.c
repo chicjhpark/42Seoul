@@ -5,75 +5,78 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/11 14:07:55 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/12 01:36:31 by jaehpark         ###   ########.fr       */
+/*   Created: 2020/11/12 16:08:29 by jaehpark          #+#    #+#             */
+/*   Updated: 2020/11/12 18:46:49 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_str_count(char const *s, char c)
+static char	**ft_str_count(char **s2, char const *s, char c)
 {
-	size_t	count;
 	size_t	i;
+	size_t	count;
 
-	count = 0;
 	i = 0;
-	if (!c)
-		return (1);
-	while (s[i] == c)
-		i++;
+	count = 0;
 	while (s[i])
 	{
-		if (!s[i + 1] || (s[i] == c && s[i + 1] != c))
+		while (s[i] && s[i] == c)
+			i++;
+		if (s[i] && s[i] != c)
+		{
 			count++;
-		i++;
+			while (s[i] && s[i] != c)
+				i++;
+		}
 	}
-	return (count);
+	s2 = (char **)malloc(sizeof(char *) * count + 1);
+	return (s2);
 }
 
-static void		ft_free(char **s2, size_t j)
+static void	ft_free(char **s2, size_t j)
 {
 	size_t	i;
 
 	i = 0;
 	while (i <= j)
 	{
-		free(s2[j]);
+		free(s2[i]);
 		i++;
 	}
+	free(s2);
 }
 
-static char		**ft_chr_count(char const *s, char c, char **s2)
+static char	**ft_chr_count(char **s2, char const *s, char c)
 {
-	size_t	count;
 	size_t	i;
 	size_t	j;
+	size_t	count;
 
 	i = 0;
 	j = 0;
 	count = 0;
 	while (s[i])
 	{
-		if (s[i] != c)
-			count++;
-		else if ((s[i] == c && i != 0 && s[i + 1] != c) || !s[i + 1])
+		count = 0;
+		while (s[i] && s[i] == c)
+			i++;
+		while (s[i] && s[i] != c)
 		{
-			if (!(s2[j] = (char *)malloc(sizeof(char) * count)))
-			{
-				ft_free(s2, j - 1);
-				free(s2);
-				return (NULL);
-			}
-			count = 0;
-			j++;
+			count++;
+			i++;
 		}
-		i++;
+		if (!(s2[j] = (char *)malloc(sizeof(char) * count + 1)))
+		{
+			ft_free(s2, j - 1);
+			return (NULL);
+		}
+		j++;
 	}
 	return (s2);
 }
 
-static char		**ft_split_chr(char const *s, char c, char **s2)
+static char	**ft_strcpy(char **s2, char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
@@ -81,39 +84,32 @@ static char		**ft_split_chr(char const *s, char c, char **s2)
 
 	i = 0;
 	j = 0;
-	k = 0;
-	while (s[k] == c)
-		k++;
-	while (s[k])
+	while (s[i])
 	{
-		if (s[k] != c)
-		{
-			s2[i][j] = s[k];
-			j++;
-		}
-		else if ((s[k] == c && k != 0 && s[k + 1] != c) || !s[k + 1])
-		{
-			s2[i][j] = '\0';
-			j = 0;
+		k = 0;
+		while (s[i] && s[i] == c)
 			i++;
+		while (s[i] && s[i] != c)
+		{
+			s2[j][k] = s[i];
+			i++;
+			k++;
 		}
-		k++;
+		s2[j][k] = '\0';
+		j++;
 	}
-	s2[i][j] = '\0';
+	s2[j][0] = '\0';
 	return (s2);
 }
 
-char			**ft_split(char const *s, char c)
+char		**ft_split(char const *s, char c)
 {
 	char	**s2;
-	size_t	count;
 
 	if (!s)
 		return (NULL);
-	count = ft_str_count(s, c);
-	if (!(s2 = (char **)malloc(sizeof(char *) * (count + 1))))
-		return (NULL);
-	ft_chr_count(s, c, s2);
-	ft_split_chr(s, c, s2);
+	ft_str_count(s2, s, c);
+	ft_chr_count(s2, s, c);
+	ft_strcpy(s2, s, c);
 	return (s2);
 }
