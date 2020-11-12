@@ -6,13 +6,13 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 16:08:29 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/12 18:46:49 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/12 19:27:11 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	**ft_str_count(char **s2, char const *s, char c)
+static size_t	ft_str_count(char const *s, char c)
 {
 	size_t	i;
 	size_t	count;
@@ -30,11 +30,10 @@ static char	**ft_str_count(char **s2, char const *s, char c)
 				i++;
 		}
 	}
-	s2 = (char **)malloc(sizeof(char *) * count + 1);
-	return (s2);
+	return (count);
 }
 
-static void	ft_free(char **s2, size_t j)
+static void		ft_free(char **s2, size_t j)
 {
 	size_t	i;
 
@@ -47,7 +46,7 @@ static void	ft_free(char **s2, size_t j)
 	free(s2);
 }
 
-static char	**ft_chr_count(char **s2, char const *s, char c)
+static char		**ft_chr_count(char **s2, char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
@@ -55,7 +54,6 @@ static char	**ft_chr_count(char **s2, char const *s, char c)
 
 	i = 0;
 	j = 0;
-	count = 0;
 	while (s[i])
 	{
 		count = 0;
@@ -66,7 +64,7 @@ static char	**ft_chr_count(char **s2, char const *s, char c)
 			count++;
 			i++;
 		}
-		if (!(s2[j] = (char *)malloc(sizeof(char) * count + 1)))
+		if (!(s2[j] = (char *)malloc(sizeof(char) * (count + 1))))
 		{
 			ft_free(s2, j - 1);
 			return (NULL);
@@ -76,7 +74,7 @@ static char	**ft_chr_count(char **s2, char const *s, char c)
 	return (s2);
 }
 
-static char	**ft_strcpy(char **s2, char const *s, char c)
+static void		ft_strcpy(char **s2, char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
@@ -99,16 +97,18 @@ static char	**ft_strcpy(char **s2, char const *s, char c)
 		j++;
 	}
 	s2[j][0] = '\0';
-	return (s2);
 }
 
-char		**ft_split(char const *s, char c)
+char			**ft_split(char const *s, char c)
 {
 	char	**s2;
+	size_t	count;
 
 	if (!s)
 		return (NULL);
-	ft_str_count(s2, s, c);
+	count = ft_str_count(s, c);
+	if (!(s2 = (char **)malloc(sizeof(char *) * (count + 1))))
+		return (NULL);
 	ft_chr_count(s2, s, c);
 	ft_strcpy(s2, s, c);
 	return (s2);
