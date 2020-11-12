@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 18:38:59 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/12 23:51:45 by jaehpark         ###   ########.fr       */
+/*   Created: 2020/11/12 21:16:03 by jaehpark          #+#    #+#             */
+/*   Updated: 2020/11/12 21:16:18 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
 
-int		main(void)
+void	ft_putnbr_fd(int n, int fd)
 {
-	size_t	i;
-	char	*temp;
-
-	i = 12345678;
-	temp = ft_itoa(i);
-//	printf("%s\n", &temp[9]);
-//	write(0, temp, 10);
-	return (0);
-}

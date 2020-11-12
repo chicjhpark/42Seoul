@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/05 18:38:59 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/12 23:51:45 by jaehpark         ###   ########.fr       */
+/*   Created: 2020/11/12 21:14:40 by jaehpark          #+#    #+#             */
+/*   Updated: 2020/11/12 21:14:59 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
 
-int		main(void)
+void	ft_putchar_fd(char c, int fd)
 {
-	size_t	i;
-	char	*temp;
-
-	i = 12345678;
-	temp = ft_itoa(i);
-//	printf("%s\n", &temp[9]);
-//	write(0, temp, 10);
-	return (0);
-}
