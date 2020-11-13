@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 21:13:26 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/13 03:47:02 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/14 01:08:42 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,23 @@ static size_t	ft_count(int n)
 	return (count);
 }
 
-static char		*ft_conver(size_t n, char *temp, size_t count, size_t sign)
+static char		*ft_conver(int n, char *temp, size_t count, size_t sign)
 {
-	size_t	square;
+	int		square;
+	size_t	count2;
 	size_t	i;
 
 	square = 1;
-	while (count-- > 1)
+	count2 = count;
+	while (--count)
 		square = square * 10;
 	i = 0;
 	if (sign)
 	{
-		temp[0] = '-';
+		temp[i] = '-';
 		i++;
 	}
-	while (count--)
+	while (count2--)
 	{
 		temp[i] = (n / square) + '0';
 		n = n % square;
@@ -59,6 +61,7 @@ char			*ft_itoa(int n)
 	size_t	count;
 	size_t	sign;
 
+	sign = 0;
 	if (n < 0)
 	{
 		n = n * -1;
