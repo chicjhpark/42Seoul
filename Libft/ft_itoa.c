@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 01:22:19 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/14 05:19:04 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/15 03:03:10 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static char	*ft_convert(int n, char *str, size_t count)
 			n = n / 10;
 		}
 	}
-	printf("%s\n", str);
-	return(str);
+	return (str);
 }
+
 char		*ft_itoa(int n)
 {
 	char	*str;

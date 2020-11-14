@@ -6,7 +6,7 @@
 /*   By: jaehpark <mavin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 19:31:54 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/03 03:18:02 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/15 03:04:43 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_memset(void *b, int c, size_t len)
 
 	uc_b = b;
 	i = 0;
-	while (i < n)
+	while (i < len)
 	{
 		uc_b[i] = c;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 14:31:14 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/10 16:53:40 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/15 03:04:20 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char			*ft_strtrim(char const *s1, char const *set)
 	size_t	end;
 	size_t	i;
 
-	start = ft_startcheck(s1,set);
+	start = ft_startcheck(s1, set);
 	end = ft_endcheck(s1, set);
 	if (!(s2 = (char *)malloc(sizeof(char) * (end - start + 2))))
 		return (NULL);
