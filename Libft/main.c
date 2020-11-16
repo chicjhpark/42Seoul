@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 18:38:59 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/15 03:24:43 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/16 19:18:45 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 int		main(void)
 {
-	printf("%d\n", ft_strncmp(0, "Hells", 10));
-	//printf("%d\n", strncmp(0, "Hells", 10));
+	ft_putnbr_fd(2147483647, 1);
 	return (0);
 }
