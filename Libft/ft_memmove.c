@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 23:56:14 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/03 23:56:21 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/16 20:33:03 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	const unsigned char	*uc_src;
 	size_t				i;
 
-	uc_dst = dst;
-	uc_src = src;
+	uc_dst = (unsigned char *)dst;
+	uc_src = (unsigned char *)src;
 	if (dst <= src)
 	{
 		i = 0;

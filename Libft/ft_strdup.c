@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 23:33:34 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/12 18:59:30 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/16 20:36:39 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ char	*ft_strdup(const char *s1)
 {
 	char	*s2;
 	size_t	i;
-	size_t	count;
+	size_t	len;
 
-	count = strlen(s1);
-	if (!(s2 = (char *)malloc(sizeof(char) * (count + 1))))
+	len = strlen(s1);
+	if (!(s2 = (char *)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	i = 0;
 	while (s1[i])
@@ -27,6 +27,6 @@ char	*ft_strdup(const char *s1)
 		s2[i] = s1[i];
 		i++;
 	}
-	s2[i] = 0;
+	s2[i] = '\0';
 	return (s2);
 }

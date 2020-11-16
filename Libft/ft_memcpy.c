@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 21:49:29 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/03 03:13:19 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/16 22:08:58 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	const unsigned char	*uc_src;
 	size_t				i;
 
-	uc_dst = dst;
-	uc_src = src;
+	uc_dst = (unsigned char *)dst;
+	uc_src = (const unsigned char *)src;
 	i = 0;
 	while (i < n)
 	{
