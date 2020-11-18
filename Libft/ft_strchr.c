@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 11:24:49 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/03 17:05:42 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/18 15:05:42 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ char	*ft_strchr(const char *s, int c)
 			return ((char *)&s[i]);
 		i++;
 	}
+	if (!c)
+		return ((char *)&s[i]);
 	return (NULL);
 }

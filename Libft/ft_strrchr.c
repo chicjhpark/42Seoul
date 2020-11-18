@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 11:34:47 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/03 11:41:25 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/18 15:13:25 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ char	*ft_strrchr(const char *s, int c)
 {
 	size_t	end;
 
-	end = strlen(s);
+	end = ft_strlen(s);
+	if (!c)
+		return ((char *)&s[end]);
 	while (end--)
 		if (s[end] == c)
 			return ((char *)&s[end]);
