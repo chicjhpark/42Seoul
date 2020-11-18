@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 17:24:33 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/16 17:59:39 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/17 20:50:38 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+
+/*typedef struct	s_list
+{
+	void			*content;
+	struct s_list	*next;
+}t_list;*/
 
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
