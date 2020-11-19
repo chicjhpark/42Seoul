@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 11:21:52 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/18 17:42:16 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/19 23:14:51 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,24 @@
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*s2;
+	size_t	s_len;
 	size_t	i;
-	
+
 	if (!s)
 		return (NULL);
+	s_len = ft_strlen(s);
+	if (s_len <= start)
+		len = 0;
+	else if (s_len <= start + len)
+		len = s_len - start;
 	if (!(s2 = (char *)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	i = 0;
-	while (i < len)
+	while (i < len && s[start + i])
 	{
 		s2[i] = s[start + i];
 		i++;
 	}
+	s2[i] = '\0';
 	return (s2);
 }

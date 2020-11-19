@@ -6,7 +6,7 @@
 #    By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/16 19:38:10 by jaehpark          #+#    #+#              #
-#    Updated: 2020/11/18 14:15:07 by jaehpark         ###   ########.fr        #
+#    Updated: 2020/11/20 03:09:29 by jaehpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,19 @@ SRCS = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 	   ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c \
 	   ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
 
+SRCS_B = ft_lstnew.c \
+		 ft_lstadd_front.c \
+		 ft_lstsize.c \
+		 ft_lstlast.c \
+		 ft_lstadd_back.c \
+		 ft_lstdelone.c \
+		 ft_lstclear.c \
+		 ft_lstiter.c \
+		 ft_lstmap.c
+
 OBJS = $(SRCS:.c=.o)
+
+OBJS_B = $(SRCS_B:.c=.o)
 
 NAME = libft.a
 
@@ -37,8 +49,11 @@ clean :
 	rm -f $(OBJS)
 
 fclean : clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(OBJS_B)
 
 re : fclean all
+
+bonus : $(OBJS_B)
+	ar rc $(NAME) $(OBJS_B)
 
 .PHONY : all clean fclean re
