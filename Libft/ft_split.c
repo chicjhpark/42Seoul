@@ -6,11 +6,12 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 16:08:29 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/19 23:15:53 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/22 06:54:05 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 static size_t	ft_str_count(char const *s, char c)
 {
@@ -95,7 +96,7 @@ static void		ft_strcpy(char **s2, char const *s, char c)
 			k++;
 		}
 		s2[j][k] = '\0';
-		if (s[i] == c)
+		if (s[i] == c || (!s[i] && s[i - 1] != c))
 			j++;
 	}
 	s2[j] = NULL;

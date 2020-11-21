@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 21:42:19 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/21 05:27:03 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/22 02:03:17 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	if (!lst || !new)
 		return ;
-	if (!(*lst))
+	else if (!*lst)
 		*lst = new;
 	else
 	{
 		while ((*lst)->next)
 			*lst = (*lst)->next;
-		*lst = new;
+		(*lst)->next = new;
 	}
 }

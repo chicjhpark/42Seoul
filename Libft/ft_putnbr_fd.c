@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 21:16:03 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/16 19:18:40 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/22 02:34:04 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ static void	ft_compt(int n, int fd)
 {
 	char	temp;
 
-	if (n < 0)
+	if (n < 0 && n > -10)
+		temp = (n * -1) + '0';
+	else if (n < 0)
 	{
 		temp = ((n % 10) * -1) + '0';
 		n = n / -10;

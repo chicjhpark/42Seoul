@@ -6,13 +6,14 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 17:24:33 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/21 05:20:32 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/22 06:27:54 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
