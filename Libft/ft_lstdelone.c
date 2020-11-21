@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/19 21:09:21 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/19 22:21:12 by jaehpark         ###   ########.fr       */
+/*   Created: 2020/11/20 22:20:08 by jaehpark          #+#    #+#             */
+/*   Updated: 2020/11/20 22:27:21 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
+	if (!lst || !del)
+		return ;
 	del(lst->content);
 	free(lst);
 }

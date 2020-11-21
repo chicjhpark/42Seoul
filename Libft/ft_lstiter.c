@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaehpark </var/mail/jaehpark>              +#+  +:+       +#+        */
+/*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/19 23:55:18 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/19 23:56:52 by jaehpark         ###   ########.fr       */
+/*   Created: 2020/11/20 23:10:36 by jaehpark          #+#    #+#             */
+/*   Updated: 2020/11/21 00:19:32 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
+	if (!lst || !f)
+		return ;
 	while (lst)
 	{
 		f(lst->content);

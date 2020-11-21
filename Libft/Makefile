@@ -6,7 +6,7 @@
 #    By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/16 19:38:10 by jaehpark          #+#    #+#              #
-#    Updated: 2020/11/20 03:09:29 by jaehpark         ###   ########.fr        #
+#    Updated: 2020/11/21 05:19:31 by jaehpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ $(NAME) : $(OBJS)
 all : $(NAME)
 
 clean :
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(OBJS_B)
 
 fclean : clean
 	rm -f $(NAME) $(OBJS_B)

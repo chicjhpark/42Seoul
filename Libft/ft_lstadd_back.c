@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/19 21:02:31 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/19 21:09:12 by jaehpark         ###   ########.fr       */
+/*   Created: 2020/11/20 21:42:19 by jaehpark          #+#    #+#             */
+/*   Updated: 2020/11/21 05:27:03 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,14 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	while (lst->next)
-		lst->next = *lst;
-	lst->next = new;
+	if (!lst || !new)
+		return ;
+	if (!(*lst))
+		*lst = new;
+	else
+	{
+		while ((*lst)->next)
+			*lst = (*lst)->next;
+		*lst = new;
+	}
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/19 18:26:18 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/19 18:33:39 by jaehpark         ###   ########.fr       */
+/*   Created: 2020/11/20 21:01:29 by jaehpark          #+#    #+#             */
+/*   Updated: 2020/11/20 21:30:16 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
+	if (!lst || !new)
+		return ;
 	new->next = *lst;
 	*lst = new;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaehpark </var/mail/jaehpark>              +#+  +:+       +#+        */
+/*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/19 23:59:07 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/20 00:44:24 by jaehpark         ###   ########.fr       */
+/*   Created: 2020/11/21 00:19:40 by jaehpark          #+#    #+#             */
+/*   Updated: 2020/11/21 07:38:14 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,22 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	next;
-	
-	if(!(first = ft_lstnew(f(lst->content))))
-		return (NULL);
+	t_list	*head;
+	t_list	*new;
 
+	if (!lst || !f)
+		return (NULL);
+	head = NULL;
+	while (lst)
+	{
+		new = ft_lstnew(lst->content);
+		if (!new)
+		{
+			ft_lstclear(&head, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&head, new);
+		lst = lst->next;
+	}
+	return (head);
+}

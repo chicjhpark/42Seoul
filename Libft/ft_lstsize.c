@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/19 18:33:58 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/19 20:59:18 by jaehpark         ###   ########.fr       */
+/*   Created: 2020/11/20 21:31:14 by jaehpark          #+#    #+#             */
+/*   Updated: 2020/11/20 21:33:55 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_lstsize(t_list *lst)
 	size = 0;
 	while (lst)
 	{
-		lst->next = lst;
+		lst = lst->next;
 		size++;
 	}
 	return (size);
