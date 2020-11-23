@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 01:22:19 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/22 02:13:46 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/22 19:23:17 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ char		*ft_itoa(int n)
 {
 	char	*str;
 	int		temp;
-	size_t	count;
-	size_t	sign;
+	int		count;
+	int		sign;
 
 	if (n != 0 && !n)
 		return (NULL);

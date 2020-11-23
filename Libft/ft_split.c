@@ -6,17 +6,17 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 16:08:29 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/22 06:54:05 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/22 19:31:25 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-static size_t	ft_str_count(char const *s, char c)
+static int		ft_str_count(char const *s, char c)
 {
-	size_t	i;
-	size_t	count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -34,9 +34,9 @@ static size_t	ft_str_count(char const *s, char c)
 	return (count);
 }
 
-static void		ft_free(char **s2, size_t j)
+static void		ft_free(char **s2, int j)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (i <= j)
@@ -49,9 +49,9 @@ static void		ft_free(char **s2, size_t j)
 
 static char		**ft_chr_count(char **s2, char const *s, char c)
 {
-	size_t	i;
-	size_t	j;
-	size_t	count;
+	int	i;
+	int	j;
+	int	count;
 
 	i = 0;
 	j = 0;
@@ -78,9 +78,9 @@ static char		**ft_chr_count(char **s2, char const *s, char c)
 
 static void		ft_strcpy(char **s2, char const *s, char c)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
+	int	i;
+	int	j;
+	int	k;
 
 	i = 0;
 	j = 0;
@@ -105,7 +105,7 @@ static void		ft_strcpy(char **s2, char const *s, char c)
 char			**ft_split(char const *s, char c)
 {
 	char	**s2;
-	size_t	count;
+	int		count;
 
 	if (!s)
 		return (NULL);

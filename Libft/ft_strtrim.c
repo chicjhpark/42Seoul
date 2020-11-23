@@ -6,16 +6,16 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 14:31:14 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/22 06:35:17 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/22 19:21:58 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_startcheck(char const *s1, char const *set)
+static int	ft_startcheck(char const *s1, char const *set)
 {
-	size_t	start;
-	size_t	check;
+	int	start;
+	int	check;
 
 	start = 0;
 	check = 0;
@@ -28,34 +28,36 @@ static size_t	ft_startcheck(char const *s1, char const *set)
 	return (start);
 }
 
-static size_t	ft_endcheck(char const *s1, char const *set)
+static int	ft_endcheck(char const *s1, char const *set)
 {
-	size_t	end;
-	size_t	check;
+	int	end;
+	int	check;
 
 	end = ft_strlen(s1);
+	if (end == 0)
+		return (end);
 	check = end - 1;
-	while (s1[check] && ft_strchr(set, s1[check]))
+	while (check >= 0 && s1[check] && ft_strchr(set, s1[check]))
 	{
-		if (check <= end)
+		if (check < end)
 			end = check;
 		check--;
 	}
 	return (end);
 }
 
-char			*ft_strtrim(char const *s1, char const *set)
+char		*ft_strtrim(char const *s1, char const *set)
 {
 	char	*s2;
-	size_t	start;
-	size_t	end;
-	size_t	i;
+	int		start;
+	int		end;
+	int		i;
 
 	if (!s1 || !set)
 		return (NULL);
 	start = ft_startcheck(s1, set);
 	end = ft_endcheck(s1, set);
-	if (!s1[start] && end == 0)
+	if (start > end)
 		end = start;
 	if (!(s2 = (char *)malloc(sizeof(char) * (end - start + 1))))
 		return (NULL);

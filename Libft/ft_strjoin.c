@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 13:00:42 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/11/22 02:19:28 by jaehpark         ###   ########.fr       */
+/*   Updated: 2020/11/22 19:29:13 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*s3;
-	size_t	l1;
-	size_t	l2;
+	int		l1;
+	int		l2;
 
 	if (!s1)
 		return (NULL);
