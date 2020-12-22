@@ -5,7 +5,7 @@
 
 #define BUFFER_SIZE 32
 
-ssize_t ft_strncpy(char *s1, char *s2, ssize_t n, ssize_t read_size)
+ssize_t ft_strncpy(char *s1, char **s2, ssize_t n, ssize_t read_size)
 {
     ssize_t i;
 
@@ -14,44 +14,44 @@ ssize_t ft_strncpy(char *s1, char *s2, ssize_t n, ssize_t read_size)
         while (s1[n])
             n++;
     }
-    if(!(s2 = (char *)malloc(sizeof(char) * (n + read_size + 1))))
+    if(!(*s2 = (char *)malloc(sizeof(char) * (n + read_size + 1))))
         return (0);
     i = 0;
     while (s1[i])
     {
-        s2[i] = s1[i];
+        (*s2)[i] = s1[i];
         i++;
     }
-    s2[i] = '\0';
+    (*s2)[i] = '\0';
     return (i);
 }
 
-void    ft_arrange(char *buf, char *backup, ssize_t read_size)
+void    ft_arrange(char *buf, char **backup, ssize_t read_size)
 {
-    char    **temp;
+    char    *temp;
     ssize_t len;
     ssize_t i;
 
-    if (backup == NULL)
+    if (*backup == NULL)
         ft_strncpy(buf, backup, 0, 0);
     else
     {
         temp = NULL;
-        len = ft_strncpy(backup, *temp, 0, read_size);
+        len = ft_strncpy(*backup, &temp, 0, read_size);
         free(backup);
         i = 0;
         while (buf[i])
         {
-            (*temp)[len] = buf[i];
+            temp[len] = buf[i];
             len++;
             i++;
         }
-        (*temp)[len] = '\0';
-        ft_strncpy(*temp, backup, 0, 0);
+        temp[len] = '\0';
+        ft_strncpy(temp, backup, 0, 0);
     }
 }
 
-ssize_t ft_cutline(char *backup, char *line)
+ssize_t ft_cutline(char *backup, char **line)
 {
     ssize_t cut;
 
@@ -73,7 +73,7 @@ ssize_t ft_cutline(char *backup, char *line)
 int     get_next_line(int fd, char **line)
 {
     char        buf[BUFFER_SIZE + 1];
-    static char **backup;
+    static char *backup;
     ssize_t     read_size;
     ssize_t     cut;
 
@@ -82,11 +82,11 @@ int     get_next_line(int fd, char **line)
     while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
     {
         buf[read_size] = '\0';
-        ft_strncpy(buf, *backup, 0, 0);
-        if ((cut = ft_cutline(*backup, *line)) > 0)
+        ft_arrange(buf, &backup, read_size);
+        if ((cut = ft_cutline(backup, line)) > 0)
         {
             if (read_size == BUFFER_SIZE)
-                *backup = &(*backup)[cut + 1];
+                backup = &backup[cut + 1];
             return (1);
         }
     }
