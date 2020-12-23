@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#define BUFFER_SIZE 32
+#define BUFFER_SIZE 31
 
 ssize_t ft_strncpy(char *s1, char **s2, ssize_t n, ssize_t read_size)
 {
@@ -17,7 +17,7 @@ ssize_t ft_strncpy(char *s1, char **s2, ssize_t n, ssize_t read_size)
     if(!(*s2 = (char *)malloc(sizeof(char) * (n + read_size + 1))))
         return (0);
     i = 0;
-    while (s1[i])
+    while (i < n)
     {
         (*s2)[i] = s1[i];
         i++;
@@ -90,6 +90,7 @@ int     get_next_line(int fd, char **line)
             return (1);
         }
     }
+    ft_strncpy(backup, line, 0, 0);
     return (0);
 }
 
