@@ -3,18 +3,16 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#define BUFFER_SIZE 31
+#define BUFFER_SIZE 32
 
-ssize_t ft_strncpy(char *s1, char **s2, ssize_t n, ssize_t read_size)
+ssize_t ft_strcpy(char *s1, char **s2, ssize_t n, ssize_t size)
 {
     ssize_t i;
 
     if (n == 0)
-    {
         while (s1[n])
             n++;
-    }
-    if(!(*s2 = (char *)malloc(sizeof(char) * (n + read_size + 1))))
+    if (!(*s2 = (char *)malloc(sizeof(char) * (n + size + 1))))
         return (0);
     i = 0;
     while (i < n)
@@ -25,20 +23,18 @@ ssize_t ft_strncpy(char *s1, char **s2, ssize_t n, ssize_t read_size)
     (*s2)[i] = '\0';
     return (i);
 }
-
-void    ft_arrange(char *buf, char **backup, ssize_t read_size)
+void    ft_strcat(char *buf, char **backup, ssize_t read_size)
 {
     char    *temp;
     ssize_t len;
     ssize_t i;
 
     if (*backup == NULL)
-        ft_strncpy(buf, backup, 0, 0);
+        ft_strcpy(buf, backup, 0, 0);
     else
     {
         temp = NULL;
-        len = ft_strncpy(*backup, &temp, 0, read_size);
-        free(backup);
+        len = ft_strcpy(*backup, &temp, 0, read_size);
         i = 0;
         while (buf[i])
         {
@@ -47,7 +43,7 @@ void    ft_arrange(char *buf, char **backup, ssize_t read_size)
             i++;
         }
         temp[len] = '\0';
-        ft_strncpy(temp, backup, 0, 0);
+        ft_strcpy(temp, backup, 0, 0);
     }
 }
 
@@ -55,22 +51,27 @@ ssize_t ft_cutline(char *backup, char **line)
 {
     ssize_t cut;
 
-    if (backup == NULL)
-        return (0);
+    if (backup[0] == '\n')
+    {
+        if (!(*line = (char *)malloc(sizeof(char) * 1)))
+            return (0);
+        (*line)[0] = '\0';
+        return (1);
+    }
     cut = 0;
-    while (backup[cut])
+    while (backup[cut] != '\0')
     {
         if (backup[cut] == '\n')
             break;
         cut++;
     }
-    if (!backup[cut])
+    if (backup[cut] == '\0')
         return (0);
-    ft_strncpy(backup, line, cut, 0);
+    ft_strcpy(backup, line, cut, 0);
     return (cut);
 }
 
-int     get_next_line(int fd, char **line)
+int get_next_line(int fd, char **line)
 {
     char        buf[BUFFER_SIZE + 1];
     static char *backup;
@@ -82,16 +83,25 @@ int     get_next_line(int fd, char **line)
     while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
     {
         buf[read_size] = '\0';
-        ft_arrange(buf, &backup, read_size);
-        if ((cut = ft_cutline(backup, line)) > 0)
-        {
-            if (read_size == BUFFER_SIZE)
+        ft_strcat(buf, &backup, read_size);
+        if (backup != NULL)
+            if ((cut = ft_cutline(backup, line)) > 0)
+            {
                 backup = &backup[cut + 1];
-            return (1);
-        }
+                return (1);
+            }
     }
-    ft_strncpy(backup, line, 0, 0);
-    return (0);
+    if (backup == NULL)
+        return (0);
+    if ((cut = ft_cutline(backup, line)) > 0)
+    {
+        backup = &backup[cut + 1];
+        return (1);
+    }
+    ft_strcpy(backup, line, 0, 0);
+    free(backup);
+    backup = NULL;
+    return (1);
 }
 
 int main(void)
