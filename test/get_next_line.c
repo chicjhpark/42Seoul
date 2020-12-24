@@ -94,6 +94,9 @@ int get_next_line(int fd, char **line)
     }
     if (backup == NULL)
 	{
+		if (!(*line = (char *)malloc(sizeof(char) * 1)))
+			return (-1);
+		(*line)[0] = '\0';
 		free(backup);
         return (0);
 	}
