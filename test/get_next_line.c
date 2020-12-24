@@ -44,6 +44,7 @@ void    ft_strcat(char *buf, char **backup, ssize_t read_size)
         }
         temp[len] = '\0';
         ft_strcpy(temp, backup, 0, 0);
+		free(temp);
     }
 }
 
@@ -92,15 +93,17 @@ int get_next_line(int fd, char **line)
             }
     }
     if (backup == NULL)
+	{
+		free(backup);
         return (0);
+	}
     if ((cut = ft_cutline(backup, line)) >= 0)
     {
         backup = &backup[cut + 1];
         return (1);
     }
     ft_strcpy(backup, line, 0, 0);
-    free(backup);
-    backup = NULL;
+	backup = NULL;
     return (1);
 }
 
