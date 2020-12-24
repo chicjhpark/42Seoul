@@ -54,9 +54,9 @@ ssize_t ft_cutline(char *backup, char **line)
     if (backup[0] == '\n')
     {
         if (!(*line = (char *)malloc(sizeof(char) * 1)))
-            return (0);
+            return (-1);
         (*line)[0] = '\0';
-        return (1);
+        return (0);
     }
     cut = 0;
     while (backup[cut] != '\0')
@@ -66,7 +66,7 @@ ssize_t ft_cutline(char *backup, char **line)
         cut++;
     }
     if (backup[cut] == '\0')
-        return (0);
+        return (-1);
     ft_strcpy(backup, line, cut, 0);
     return (cut);
 }
@@ -85,7 +85,7 @@ int get_next_line(int fd, char **line)
         buf[read_size] = '\0';
         ft_strcat(buf, &backup, read_size);
         if (backup != NULL)
-            if ((cut = ft_cutline(backup, line)) > 0)
+            if ((cut = ft_cutline(backup, line)) >= 0)
             {
                 backup = &backup[cut + 1];
                 return (1);
@@ -93,7 +93,7 @@ int get_next_line(int fd, char **line)
     }
     if (backup == NULL)
         return (0);
-    if ((cut = ft_cutline(backup, line)) > 0)
+    if ((cut = ft_cutline(backup, line)) >= 0)
     {
         backup = &backup[cut + 1];
         return (1);
@@ -110,7 +110,7 @@ int main(void)
 	int 	ret;
 	int		fd;
 	
-	fd = open("C:\\Users\\Administrator\\42Seoul\\test\\test.txt", O_RDONLY);
+	fd = open("./test.txt", O_RDONLY);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		printf("result = %s\n", line);
