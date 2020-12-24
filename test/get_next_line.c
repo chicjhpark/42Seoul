@@ -44,6 +44,7 @@ void    ft_strcat(char *buf, char **backup, ssize_t read_size)
         }
         temp[len] = '\0';
         ft_strcpy(temp, backup, 0, 0);
+		free(temp);
     }
 }
 
@@ -51,12 +52,14 @@ ssize_t ft_cutline(char *backup, char **line)
 {
     ssize_t cut;
 
+    if (backup == NULL)
+        return (-1);
     if (backup[0] == '\n')
     {
         if (!(*line = (char *)malloc(sizeof(char) * 1)))
-            return (0);
+            return (-1);
         (*line)[0] = '\0';
-        return (1);
+        return (0);
     }
     cut = 0;
     while (backup[cut] != '\0')
@@ -66,7 +69,7 @@ ssize_t ft_cutline(char *backup, char **line)
         cut++;
     }
     if (backup[cut] == '\0')
-        return (0);
+        return (-1);
     ft_strcpy(backup, line, cut, 0);
     return (cut);
 }
@@ -85,23 +88,25 @@ int get_next_line(int fd, char **line)
         buf[read_size] = '\0';
         ft_strcat(buf, &backup, read_size);
         if (backup != NULL)
-            if ((cut = ft_cutline(backup, line)) > 0)
+            if ((cut = ft_cutline(backup, line)) >= 0)
             {
                 backup = &backup[cut + 1];
                 return (1);
             }
     }
-    if (backup == NULL)
-        return (0);
-    if ((cut = ft_cutline(backup, line)) > 0)
+    if ((cut = ft_cutline(backup, line)) >= 0)
     {
         backup = &backup[cut + 1];
         return (1);
     }
-    ft_strcpy(backup, line, 0, 0);
-    free(backup);
-    backup = NULL;
-    return (1);
+    if (backup != NULL)
+    {
+        ft_strcpy(backup, line, 0, 0);
+	    free(backup);
+        backup = NULL;
+        return (1);
+    }
+    return (0);
 }
 
 int main(void)
@@ -116,6 +121,7 @@ int main(void)
 		printf("result = %s\n", line);
 		free(line);
 	}
+    printf("end : %s\n", line);
 	free(line);
 	close(fd);
 	return (0);
