@@ -77,8 +77,9 @@ ssize_t ft_strline(char *backup)
 {
     ssize_t i;
 
+    if (backup == NULL)
+        return (-1);
     i = 0;
-
     while (backup[i])
     {
         if (backup[i] == '\n')
