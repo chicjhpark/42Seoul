@@ -5,15 +5,22 @@
 
 #define BUFFER_SIZE 32
 
-ssize_t ft_strcpy(char *s1, char **s2, ssize_t n, ssize_t size)
+ssize_t ft_strlen(char *s)
 {
     ssize_t i;
 
-    if (n == 0)
-        while (s1[n])
-            n++;
-    if (!(*s2 = (char *)malloc(sizeof(char) * (n + size + 1))))
-        return (0);
+    i = 0;
+    while (s[i])
+        i++;
+    return (i);
+}
+
+void    ft_strncpy(char *s1, char **s2, ssize_t n)
+{
+    ssize_t i;
+
+    if (!(*s2 = (char *)malloc(sizeof(char) * (n + 1))))
+        return ;
     i = 0;
     while (i < n)
     {
@@ -21,57 +28,93 @@ ssize_t ft_strcpy(char *s1, char **s2, ssize_t n, ssize_t size)
         i++;
     }
     (*s2)[i] = '\0';
-    return (i);
 }
-void    ft_strcat(char *buf, char **backup, ssize_t read_size)
+
+void    ft_strjoin(char *backup, char *buf, char **temp)
 {
-    char    *temp;
-    ssize_t len;
+    ssize_t len1;
+    ssize_t len2;
     ssize_t i;
 
+    len1 = ft_strlen(backup);
+    len2 = ft_strlen(buf);
+    if (!(*temp = (char *)malloc(sizeof(char) * (len1 + len2 + 1))))
+        return ;
+    i = 0;
+    while (i < len1)
+    {
+        (*temp)[i] = backup[i];
+        i++;
+    }
+    i = 0;
+    while (i < len2)
+    {
+        (*temp)[len1] = buf[i];
+        len1++;
+        i++;
+    }
+    (*temp)[len1] = '\0';
+}
+
+void    ft_strcat(char *buf, char **backup)
+{
+    char    *temp;
+
     if (*backup == NULL)
-        ft_strcpy(buf, backup, 0, 0);
+        ft_strncpy(buf, backup, ft_strlen(buf));
     else
     {
         temp = NULL;
-        len = ft_strcpy(*backup, &temp, 0, read_size);
-        i = 0;
-        while (buf[i])
-        {
-            temp[len] = buf[i];
-            len++;
-            i++;
-        }
-        temp[len] = '\0';
-        ft_strcpy(temp, backup, 0, 0);
-		free(temp);
+        ft_strjoin(*backup, buf, &temp);
+        free(*backup);
+        ft_strncpy(temp, backup, ft_strlen(temp));
+        free(temp);
     }
+    
 }
 
-ssize_t ft_cutline(char *backup, char **line)
+ssize_t ft_strline(char *backup)
 {
-    ssize_t cut;
+    ssize_t i;
 
-    if (backup == NULL)
-        return (-1);
-    if (backup[0] == '\n')
+    i = 0;
+
+    while (backup[i])
     {
-        if (!(*line = (char *)malloc(sizeof(char) * 1)))
-            return (-1);
-        (*line)[0] = '\0';
-        return (0);
+        if (backup[i] == '\n')
+            return (i);
+        i++;
     }
-    cut = 0;
-    while (backup[cut] != '\0')
+    return (-1);
+}
+
+ssize_t ft_cutline(char **backup, char **line)
+{
+    char    *temp;
+    ssize_t cut;
+    ssize_t len;
+    ssize_t i;
+
+    if ((cut = ft_strline(*backup)) >= 0)
     {
-        if (backup[cut] == '\n')
-            break;
-        cut++;
+        ft_strncpy(*backup, line, cut);
+        ft_strncpy(*backup, &temp, ft_strlen(*backup));
+        free(*backup);
+        len = ft_strlen(temp);
+        if (!(*backup = (char *)malloc(sizeof(char) * (len - cut))))
+            return (0);
+        i = 0;
+        cut = cut + 1;
+        while (temp[cut])
+        {
+            (*backup)[i] = temp[cut];
+            i++;
+            cut++;
+        }
+        (*backup)[i] = '\0';
+        return (1);
     }
-    if (backup[cut] == '\0')
-        return (-1);
-    ft_strcpy(backup, line, cut, 0);
-    return (cut);
+    return (0);
 }
 
 int get_next_line(int fd, char **line)
@@ -79,33 +122,26 @@ int get_next_line(int fd, char **line)
     char        buf[BUFFER_SIZE + 1];
     static char *backup;
     ssize_t     read_size;
-    ssize_t     cut;
 
     if (fd < 0 || line == NULL || BUFFER_SIZE <= 0)
         return (-1);
     while ((read_size = read(fd, buf, BUFFER_SIZE)) > 0)
     {
         buf[read_size] = '\0';
-        ft_strcat(buf, &backup, read_size);
-        if (backup != NULL)
-            if ((cut = ft_cutline(backup, line)) >= 0)
-            {
-                backup = &backup[cut + 1];
-                return (1);
-            }
+        ft_strcat(buf, &backup);
+        if (ft_cutline(&backup, line) > 0)
+            return (1);
     }
-    if ((cut = ft_cutline(backup, line)) >= 0)
-    {
-        backup = &backup[cut + 1];
+    if (ft_cutline(&backup, line) > 0)
         return (1);
-    }
-    if (backup != NULL)
+    else if (backup != NULL)
     {
-        ft_strcpy(backup, line, 0, 0);
-	    free(backup);
+        ft_strncpy(backup, line, ft_strlen(backup));
+        free(backup);
         backup = NULL;
         return (1);
     }
+    ft_strncpy(0, line, 0);
     return (0);
 }
 
@@ -118,7 +154,7 @@ int main(void)
 	fd = open("C:\\Users\\Administrator\\42Seoul\\test\\test.txt", O_RDONLY);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		printf("result = %s\n", line);
+		printf("result : %s\n", line);
 		free(line);
 	}
     printf("end : %s\n", line);
