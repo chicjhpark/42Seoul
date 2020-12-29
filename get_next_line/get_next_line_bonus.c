@@ -1,4 +1,16 @@
-#include "get_next_line.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/30 02:03:11 by jaehpark          #+#    #+#             */
+/*   Updated: 2020/12/30 02:05:14 by jaehpark         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line_bonus.h"
 
 ssize_t	strline(char *storage)
 {
@@ -37,6 +49,7 @@ void	separate(char **storage, char **line, ssize_t cut)
 	temp = ft_strdup(&(*storage)[cut + 1]);
 	free(*storage);
 	*storage = ft_strdup(temp);
+	free(temp);
 }
 
 int		last_process(char **storage, char **line, ssize_t read_size)
@@ -45,15 +58,14 @@ int		last_process(char **storage, char **line, ssize_t read_size)
 
 	if (read_size < 0)
 		return (-1);
-	if ((cut = strline(*storage)) >= 0)
+	if (*storage && (cut = strline(*storage)) >= 0)
 	{
 		separate(storage, line, cut);
 		return (1);
 	}
 	else if (*storage)
 	{
-		*line = ft_strdup(*storage);
-		free(*storage);
+		*line = *storage;
 		*storage = NULL;
 		return (0);
 	}
@@ -64,7 +76,7 @@ int		last_process(char **storage, char **line, ssize_t read_size)
 int		get_next_line(int fd, char **line)
 {
 	char		buf[BUFFER_SIZE + 1];
-	static char	*storage[FOPEN_MAX];
+	static char	*storage[OPEN_MAX];
 	ssize_t		read_size;
 	ssize_t		cut;
 
