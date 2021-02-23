@@ -1,13 +1,21 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/31 20:44:50 by jaehpark          #+#    #+#             */
-/*   Updated: 2020/12/31 20:44:51 by jaehpark         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdarg.h>
 
+typedef struct  s_tag
+{
+    va_list ap;
+    char    *fmt;
+    int     minus;
+    int     zero;
+    int     width;
+    int     prec;
+    int     size;
+    int     res;
+}               f_tag;
+
+#endif

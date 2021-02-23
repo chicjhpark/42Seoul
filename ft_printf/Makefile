@@ -1,13 +1,26 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/12/31 20:44:39 by jaehpark          #+#    #+#              #
-#    Updated: 2020/12/31 20:44:41 by jaehpark         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME	= fr_printf.a
 
+CC		= gcc
+CFLAGS	= -Wall -Wextra -Werror
 
+SRCS 	= ft_printf.c
+
+OBJS	= $(SRCS:.c=.o)
+
+%.o 	: %.c
+			$(CC) $(CFLAGS) -c $<
+
+$(NAME)	: $(OBJS)
+			ar rc $(NAME) $(OBJS)
+
+.PHONY	: all clean fclean re bonus
+
+all		: $(NAME)
+
+clean	:
+			rm -f $(OBJS)
+
+fclean	: clean
+			rm -f $(NAME)
+
+re		: fclean all
