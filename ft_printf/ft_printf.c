@@ -125,10 +125,7 @@ void    largest_prec(f_tag *tag, int di)
     int gap;
     
     if (di < 0)
-    {
-        tag->size += 1;
         tag->res += ft_putchar('-');
-    }
     gap = tag->prec - tag->size;
     while (gap-- != 0)
         tag->res += ft_putchar('0');
@@ -144,10 +141,7 @@ void    largest_width_right(f_tag *tag, int di)
         while (gap-- != 0)
             tag->res += ft_putchar(' ');
         if (di < 0)
-        {
-            tag->size += 1;
             tag->res += ft_putchar('-');
-        }
         gap = tag->prec - tag->size;
         while (gap-- != 0)
             tag->res += ft_putchar('0');
@@ -158,10 +152,7 @@ void    largest_width_right(f_tag *tag, int di)
         while (gap-- != 0)
             tag->res += ft_putchar(' ');
         if (di < 0)
-        {
-            tag->size += 1;
             tag->res += ft_putchar('-');
-        }
     }
 }
 
@@ -170,10 +161,7 @@ void    largest_width_left(f_tag *tag, int di)
     int gap;
 
     if (di < 0)
-    {
-        tag->size += 1;
         tag->res += ft_putchar('-');
-    }
     if (tag->prec > tag->size)
     {
         gap = tag->prec - tag->size;
@@ -201,10 +189,7 @@ void    right_sort(f_tag *tag, int di)
         largest_width_right(tag, di);
     else
         if (di < 0)
-        {
-            tag->size += 1;
             tag->res += ft_putchar('-');
-        }
     tag->res += ft_putstr(ft_itoa_sign(di));    
 }
 
@@ -220,10 +205,7 @@ void    left_sort(f_tag *tag, int di)
     else
     {
         if (di < 0)
-        {
-            tag->size += 1;
             tag->res += ft_putchar('-');
-        }
         tag->res += ft_putstr(ft_itoa_sign(di));
     }
 }
@@ -291,16 +273,16 @@ int     ft_printf(const char *format, ...)
 
 int     main(void)
 {
-    ft_printf("imt : %i\n", -267);
-    printf("org : %i\n", -267);
-    ft_printf("imt : %i\n", 0);
-    printf("org : %i\n", 0);
-    ft_printf("imt : %7i\n", -14);
-    printf("org : %7i\n", -14);
-    ft_printf("imt : %3i\n", 0);
-    printf("org : %3i\n", 0);
-    ft_printf("imt : %5i\n", -2562);
-    printf("org : %5i\n", -2562);
+    ft_printf("imt : %3.7d\n", -2375);
+    printf("org : %3.7d\n", -2375);
+    ft_printf("imt : %-10.5d\n", -216);
+    printf("org : %-10.5d\n", -216);
+    ft_printf("imt : %-3.7d\n", -2375);
+    printf("org : %-3.7d\n", -2375);
+    ft_printf("imt : %010.5d\n", -216);
+    //printf("org : %010.5d\n", -216);
+    ft_printf("imt : %08.3d\n", -8473);
+    //printf("org : %08.3d\n", -8473);
     ft_printf("imt : %4i\n", -2464);
     printf("org : %4i\n", -2464);
     ft_printf("imt : %-7i\n", -14);
