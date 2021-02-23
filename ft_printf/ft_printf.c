@@ -283,10 +283,10 @@ int     ft_printf(const char *format, ...)
     return (tag.res);
 }
 
-/*int     main(void)
+int     main(void)
 {
-    ft_printf("imt : %3.7d\n", -2375);
-    printf("org : %3.7d\n", -2375);
+    ft_printf("imt : %08.3d\n", 8375);
+    printf("org : %8.3d\n", -216);
     ft_printf("imt : %-10.5d\n", -216);
     printf("org : %-10.5d\n", -216);
     ft_printf("imt : %-3.7d\n", -2375);
@@ -307,4 +307,4 @@ int     ft_printf(const char *format, ...)
     printf("org : %-4i\n", -2464);
 
     return (0);
-}*/
+}
