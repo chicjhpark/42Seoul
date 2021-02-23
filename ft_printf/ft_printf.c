@@ -70,7 +70,7 @@ int     digits_count(int n)
             n /= -10;
             count++;
         }
-    else
+    if (n >= 0)
         while (n > 9)
         {
             n /= 10;
@@ -94,7 +94,7 @@ int     ft_putstr(char *s)
     return (res);
 }
 
-char    *ft_itoa(int n)
+char    *ft_itoa_sign(int n)
 {
     char    *s;
     int     count;
@@ -104,7 +104,7 @@ char    *ft_itoa(int n)
         return (NULL);
     s[count] = '\0';
     if (n == 0)
-        return (NULL);
+        return ("0");
     else if (n < 0)
         while (count--)
         {
@@ -125,7 +125,10 @@ void    largest_prec(f_tag *tag, int di)
     int gap;
     
     if (di < 0)
+    {
+        tag->size += 1;
         tag->res += ft_putchar('-');
+    }
     gap = tag->prec - tag->size;
     while (gap-- != 0)
         tag->res += ft_putchar('0');
@@ -141,7 +144,10 @@ void    largest_width_right(f_tag *tag, int di)
         while (gap-- != 0)
             tag->res += ft_putchar(' ');
         if (di < 0)
+        {
+            tag->size += 1;
             tag->res += ft_putchar('-');
+        }
         gap = tag->prec - tag->size;
         while (gap-- != 0)
             tag->res += ft_putchar('0');
@@ -152,7 +158,10 @@ void    largest_width_right(f_tag *tag, int di)
         while (gap-- != 0)
             tag->res += ft_putchar(' ');
         if (di < 0)
+        {
+            tag->size += 1;
             tag->res += ft_putchar('-');
+        }
     }
 }
 
@@ -161,20 +170,23 @@ void    largest_width_left(f_tag *tag, int di)
     int gap;
 
     if (di < 0)
+    {
+        tag->size += 1;
         tag->res += ft_putchar('-');
+    }
     if (tag->prec > tag->size)
     {
         gap = tag->prec - tag->size;
         while (gap-- != 0)
             tag->res += ft_putchar('0');
-        tag->res += ft_putstr(ft_itoa(di));
+        tag->res += ft_putstr(ft_itoa_sign(di));
         gap = tag->width - tag->prec;
         while (gap-- != 0)
             tag->res += ft_putchar(' ');
     }
     else
     {
-        tag->res += ft_putstr(ft_itoa(di));
+        tag->res += ft_putstr(ft_itoa_sign(di));
         gap = tag->width - tag->size;
         while (gap-- != 0)
             tag->res += ft_putchar(' ');
@@ -189,8 +201,11 @@ void    right_sort(f_tag *tag, int di)
         largest_width_right(tag, di);
     else
         if (di < 0)
+        {
+            tag->size += 1;
             tag->res += ft_putchar('-');
-    tag->res += ft_putstr(ft_itoa(di));    
+        }
+    tag->res += ft_putstr(ft_itoa_sign(di));    
 }
 
 void    left_sort(f_tag *tag, int di)
@@ -198,15 +213,18 @@ void    left_sort(f_tag *tag, int di)
     if (tag->prec > tag->width && tag->prec > tag-> size)
     {
         largest_prec(tag, di);
-        tag->res += ft_putstr(ft_itoa(di));
+        tag->res += ft_putstr(ft_itoa_sign(di));
     }
     else if (tag->width > tag->prec && tag->width > tag->size)
         largest_width_left(tag, di);
     else
     {
         if (di < 0)
+        {
+            tag->size += 1;
             tag->res += ft_putchar('-');
-        tag->res += ft_putstr(ft_itoa(di));
+        }
+        tag->res += ft_putstr(ft_itoa_sign(di));
     }
 }
 
@@ -269,4 +287,30 @@ int     ft_printf(const char *format, ...)
     check_format(&tag);
     va_end(tag.ap);
     return (tag.res);
+}
+
+int     main(void)
+{
+    ft_printf("imt : %i\n", -267);
+    printf("org : %i\n", -267);
+    ft_printf("imt : %i\n", 0);
+    printf("org : %i\n", 0);
+    ft_printf("imt : %7i\n", -14);
+    printf("org : %7i\n", -14);
+    ft_printf("imt : %3i\n", 0);
+    printf("org : %3i\n", 0);
+    ft_printf("imt : %5i\n", -2562);
+    printf("org : %5i\n", -2562);
+    ft_printf("imt : %4i\n", -2464);
+    printf("org : %4i\n", -2464);
+    ft_printf("imt : %-7i\n", -14);
+    printf("org : %-7i\n", -14);
+    ft_printf("imt : %-3i\n", 0);
+    printf("org : %-3i\n", 0);
+    ft_printf("imt : %-5i\n", -2562);
+    printf("org : %-5i\n", -2562);
+    ft_printf("imt : %-4i\n", -2464);
+    printf("org : %-4i\n", -2464);
+
+    return (0);
 }
