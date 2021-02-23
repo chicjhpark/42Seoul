@@ -25,7 +25,7 @@ void    init_tag(f_tag *tag)
     tag->minus = 0;
     tag->zero = 0;
     tag->width = 0;
-    tag->prec = 0;
+    tag->prec = -1;
     tag->size = 0;
 }
 
@@ -48,14 +48,15 @@ void    sort_width_prec(f_tag *tag)
 {
     if (*tag->fmt == '.')
     {
+		tag->zero = 0;
         if (*++tag->fmt == '*')
             tag->prec = va_arg(tag->ap, int);
-        else if (ft_isdigit(*tag->fmt) != 0)
+		else if (ft_isdigit(*tag->fmt) != 0)
             tag->prec = (tag->prec * 10) + *tag->fmt - '0';
     }
     else if (*tag->fmt == '*')
         tag->width = va_arg(tag->ap, int);
-    else if (ft_isdigit(*tag->fmt) != 0)
+	else if (ft_isdigit(*tag->fmt) != 0)
         tag->width = (tag->width * 10) + *tag->fmt - '0';
 }
 
@@ -244,7 +245,7 @@ void    sort_format(f_tag *tag)
 {
     if (*tag->fmt == '-')
         tag->minus = 1;
-    else if (*tag->fmt == '0')
+    else if (*tag->fmt == '0' && ft_isdigit(*(tag->fmt - 1)) == 0)
         tag->zero = 1;
     else if (*tag->fmt == '*' || *tag->fmt == '.' || ft_isdigit(*tag->fmt) != 0)
         sort_width_prec(tag);
