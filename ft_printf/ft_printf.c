@@ -149,10 +149,20 @@ void    largest_width_right(f_tag *tag, int di)
     else
     {
         gap = tag->width - tag->size;
-        while (gap-- != 0)
-            tag->res += ft_putchar(' ');
-        if (di < 0)
-            tag->res += ft_putchar('-');
+		if (tag->zero == 1)
+		{
+			if (di < 0)
+				tag->res += ft_putchar('-');
+			while (gap-- != 0)
+				tag->res += ft_putchar('0');
+		}
+		else
+		{
+			while (gap-- != 0)
+            	tag->res += ft_putchar(' ');
+        	if (di < 0)
+            	tag->res += ft_putchar('-');
+		}
     }
 }
 
@@ -216,6 +226,8 @@ void    print_di(f_tag *tag)
 
     di = va_arg(tag->ap, int);
     tag->size = digits_count(di);
+	if (di < 0)
+		tag->width -= 1;
     if (tag->minus == 0)
         right_sort(tag, di);
     else
@@ -271,7 +283,7 @@ int     ft_printf(const char *format, ...)
     return (tag.res);
 }
 
-int     main(void)
+/*int     main(void)
 {
     ft_printf("imt : %3.7d\n", -2375);
     printf("org : %3.7d\n", -2375);
@@ -295,4 +307,4 @@ int     main(void)
     printf("org : %-4i\n", -2464);
 
     return (0);
-}
+}*/

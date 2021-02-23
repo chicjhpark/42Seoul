@@ -18,4 +18,6 @@ typedef struct  s_tag
     int     res;
 }               f_tag;
 
+int		ft_printf(const char *format, ...);
+
 #endif
