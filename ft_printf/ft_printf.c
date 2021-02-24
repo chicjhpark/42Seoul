@@ -141,11 +141,11 @@ void    print_di(f_tag *tag)
         tag->res += ft_putchar(' ');
     if (tag->nbr < 0)
         tag->res += ft_putchar('-');
-    while (tag->zero-- > 0)
+    while (tag->zero-- > 0 && tag->prec <= 0)
         tag->res += ft_putchar('0');
     while (tag->prec-- > 0)
         tag->res += ft_putchar('0');
-    if (tag->nbr == 0 && tag->dot != 0 && tag->prec != 0)
+    if (tag->nbr == 0)
         tag->res += ft_putchar('0');
     else if (tag->nbr > 0 || tag->nbr < 0)
         tag->res += ft_putstr(ft_itoa_sign(tag));
@@ -181,7 +181,7 @@ void    sort_tag(f_tag *tag)
         {
             if (tag->minus == 1)
                 tag->rspace = tag->width - tag->prec;
-            else if (tag->zero == 1)
+            else if (tag->zero == 1 && tag->prec < 0)
                 tag->zero = tag->width - tag->prec;
             else
                 tag->lspace = tag->width - tag->prec;
@@ -197,6 +197,11 @@ void    sort_tag(f_tag *tag)
                 tag->lspace = tag->width - tag->size;
             tag->prec = 0;
         }
+    }
+    else
+    {
+        tag->prec = 0;
+        tag->zero = 0;
     }
 }
 
@@ -246,26 +251,10 @@ int     ft_printf(const char *format, ...)
 
 int     main(void)
 {
-    ft_printf("imt : %.3d\n", 0);
-    printf("org : %.3d\n", 0);
-    ft_printf("imt : %.4d\n", 5263);
-    printf("org : %.4d\n", 5263);
-    ft_printf("imt : %-3.7d\n", -2375);
-    printf("org : %-3.7d\n", -2375);
-    ft_printf("imt : %010.5d\n", -216);
-    //printf("org : %010.5d\n", -216);
-    ft_printf("imt : %08.3d\n", -8473);
-    //printf("org : %08.3d\n", -8473);
-    ft_printf("imt : %4i\n", -2464);
-    printf("org : %4i\n", -2464);
-    ft_printf("imt : %-7i\n", -14);
-    printf("org : %-7i\n", -14);
-    ft_printf("imt : %-3i\n", 0);
-    printf("org : %-3i\n", 0);
-    ft_printf("imt : %-5i\n", -2562);
-    printf("org : %-5i\n", -2562);
-    ft_printf("imt : %-4i\n", -2464);
-    printf("org : %-4i\n", -2464);
+    ft_printf("imt : %.3d\n", 13862);
+    printf("org : %.3d\n", 13862);
+    ft_printf("imt : %08.5d\n", 34);
+    printf("org : %08.5d\n", 34);
 
     return (0);
 }
