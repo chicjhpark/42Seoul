@@ -127,6 +127,12 @@ void    sort_width_prec(f_tag *tag)
         else
             tag->width = (tag->width * 10) + *tag->fmt - '0';
     }
+	if (tag->width < 0)
+	{
+		tag->width *= -1;
+		if (tag->minus == 0 && tag->zero == 0)
+			tag->minus = 1;
+	}
 }
 
 void    print_di(f_tag *tag)
@@ -140,14 +146,21 @@ void    print_di(f_tag *tag)
     }
     while (tag->lspace-- > 0)
         tag->res += ft_putchar(' ');
+	if (tag->nbr == 0 && tag->dot == 1 && tag->prec == 0)
+	{
+		if (tag->width > 0)
+			while (tag->rspace-- > 0 || tag->nbr-- >= 0)
+				tag->res += ft_putchar(' ');
+		return ;
+	}
     if (tag->nbr < 0)
         tag->res += ft_putchar('-');
-    while (tag->zero-- > 0 && tag->dot == 0)
+    while (tag->zero-- > 0 && tag->prec <= 0)
         tag->res += ft_putchar('0');
     while (tag->prec-- > 0)
         tag->res += ft_putchar('0');
-    if (tag->nbr == 0 && tag->dot == 1 && tag->prec == 0)
-        return ;
+    if (tag->nbr == 0)
+        tag->res += ft_putchar('0');
     else
         tag->res += ft_putstr(ft_itoa_sign(tag));
     while (tag->rspace-- > 0)
@@ -196,17 +209,22 @@ void    sort_tag(f_tag *tag)
                 tag->rspace = tag->width - tag->size;
 			else
 			{
-				if (tag->zero == 1 && tag->dot == 0)
+				if (tag->zero == 1 && tag->prec <= 0)
                 	tag->zero = tag->width - tag->size;
             	else
                 	tag->lspace = tag->width - tag->size;
 			}
-            tag->prec = 0;
+			if (tag->prec > 0)
+			{
+            	tag->prec = 0;
+				tag->zero = 0;
+			}
         }
     }
     else
     {
-        tag->prec = 0;
+		if (tag->prec > 0)
+        	tag->prec = 0;
         tag->zero = 0;
     }
 }
@@ -255,7 +273,7 @@ int     ft_printf(const char *format, ...)
     return (tag.res);
 }
 
-int     main(void)
+/*int     main(void)
 {
     ft_printf("imt : %.0d\n", 0);
     printf("org : %.3d\n", 13862);
@@ -263,4 +281,4 @@ int     main(void)
     printf("org : %08.5d\n", 34);
 
     return (0);
-}
+}*/
