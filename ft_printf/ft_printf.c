@@ -145,7 +145,7 @@ void    print_di(f_tag *tag)
         tag->res += ft_putchar('0');
     while (tag->prec-- > 0)
         tag->res += ft_putchar('0');
-    if (tag->nbr == 0 && tag->dot == 0)
+    if (tag->nbr == 0 && tag->dot != 0 && tag->prec != 0)
         tag->res += ft_putchar('0');
     else if (tag->nbr > 0 || tag->nbr < 0)
         tag->res += ft_putstr(ft_itoa_sign(tag));
@@ -173,7 +173,7 @@ void    check_tag(f_tag *tag)
 
 void    sort_tag(f_tag *tag)
 {
-    if (tag->prec > tag->width && tag->prec > tag->size)
+    if (tag->prec >= tag->width && tag->prec >= tag->size)
         tag->prec -= tag->size;
     else if (tag->width > tag->prec && tag->width > tag->size)
     {
@@ -246,10 +246,10 @@ int     ft_printf(const char *format, ...)
 
 int     main(void)
 {
-    ft_printf("imt : %.0d\n", 0);
-    printf("org : %.0d\n", 0);
-    ft_printf("imt : %-10.5d\n", -216);
-    printf("org : %-10.5d\n", -216);
+    ft_printf("imt : %.3d\n", 0);
+    printf("org : %.3d\n", 0);
+    ft_printf("imt : %.4d\n", 5263);
+    printf("org : %.4d\n", 5263);
     ft_printf("imt : %-3.7d\n", -2375);
     printf("org : %-3.7d\n", -2375);
     ft_printf("imt : %010.5d\n", -216);
