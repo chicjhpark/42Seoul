@@ -187,9 +187,7 @@ void    sort_tag(f_tag *tag)
                 tag->rspace = tag->width - tag->prec;
 			else
 				tag->lspace = tag->width - tag->prec;
-            if (tag->zero == 1)
-               // tag->zero = tag->width - tag->prec;
-			   tag->zero = 0;
+		    tag->zero = 0;
             tag->prec -= tag->size;
         }
         else
@@ -257,12 +255,12 @@ int     ft_printf(const char *format, ...)
     return (tag.res);
 }
 
-/*int     main(void)
+int     main(void)
 {
-    ft_printf("imt : %.3d\n", 13862);
+    ft_printf("imt : %.0d\n", 0);
     printf("org : %.3d\n", 13862);
     ft_printf("imt : %08.5d\n", 34);
     printf("org : %08.5d\n", 34);
 
     return (0);
-}*/
+}
