@@ -136,12 +136,13 @@ void    print_di(f_tag *tag)
     {
         tag->lspace -= 1;
         tag->rspace -= 1;
+        tag->zero -= 1;
     }
     while (tag->lspace-- > 0)
         tag->res += ft_putchar(' ');
     if (tag->nbr < 0)
         tag->res += ft_putchar('-');
-    while (tag->zero-- > 0 && tag->prec <= 0)
+    while (tag->zero-- > 0)
         tag->res += ft_putchar('0');
     while (tag->prec-- > 0)
         tag->res += ft_putchar('0');
@@ -174,7 +175,10 @@ void    check_tag(f_tag *tag)
 void    sort_tag(f_tag *tag)
 {
     if (tag->prec >= tag->width && tag->prec >= tag->size)
+    {
         tag->prec -= tag->size;
+        tag->zero = 0;
+    }
     else if (tag->width > tag->prec && tag->width > tag->size)
     {
         if (tag->prec > tag->size)
