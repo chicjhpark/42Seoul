@@ -13,6 +13,7 @@ typedef struct  s_tag
     int     prec;
     int     size;
     int     res;
+    int     nbr;
 }               f_tag;
 
 int     ft_putchar(char c)
@@ -51,7 +52,9 @@ void    sort_width_prec(f_tag *tag)
 		tag->zero = 0;
         if (*++tag->fmt == '*')
             tag->prec = va_arg(tag->ap, int);
-		else if (ft_isdigit(*tag->fmt) != 0)
+        else
+            tag->prec = 0;
+		if (ft_isdigit(*tag->fmt) != 0)
             tag->prec = (tag->prec * 10) + *tag->fmt - '0';
     }
     else if (*tag->fmt == '*')
@@ -60,24 +63,21 @@ void    sort_width_prec(f_tag *tag)
         tag->width = (tag->width * 10) + *tag->fmt - '0';
 }
 
-int     digits_count(int n)
+void     digits_size(f_tag *tag)
 {
-    int count;
-
-    count = 1;
-    if (n < 0)
-        while (n < - 9)
+    tag->size = 1;
+    if (tag->nbr < 0)
+        while (tag->nbr <= -10)
         {
-            n /= -10;
-            count++;
+            tag->nbr /= -10;
+            tag->size++;
         }
-    if (n >= 0)
-        while (n > 9)
+    if (tag->nbr >= 0)
+        while (tag->nbr >= 10)
         {
-            n /= 10;
-            count++;
+            tag->nbr /= 10;
+            tag->size++;
         }
-    return (count);
 }
 
 int     ft_putstr(char *s)
@@ -95,44 +95,42 @@ int     ft_putstr(char *s)
     return (res);
 }
 
-char    *ft_itoa_sign(int n)
+char    *ft_itoa_sign(f_tag *tag)
 {
     char    *s;
-    int     count;
 
-    count = digits_count(n);
-    if (!(s = (char *)malloc(sizeof(char) * (count + 1))))
+    if (!(s = (char *)malloc(sizeof(char) * (tag->size + 1))))
         return (NULL);
-    s[count] = '\0';
-    if (n == 0)
+    s[tag->size] = '\0';
+    if (tag->nbr == 0)
         return ("0");
-    else if (n < 0)
-        while (count--)
+    else if (tag->nbr < 0)
+        while (tag->size--)
         {
-            s[count] = ((n % 10) * -1) + '0';
-            n /= 10;
+            s[tag->nbr] = ((tag->nbr % 10) * -1) + '0';
+            tag->nbr /= 10;
         }
     else
-        while (count--)
+        while (tag->size--)
         {
-            s[count] = (n % 10) + '0';
-            n /= 10;
+            s[tag->size] = (tag->nbr % 10) + '0';
+            tag->nbr /= 10;
         }
     return (s);
 }
 
-void    largest_prec(f_tag *tag, int di)
+void    largest_prec(f_tag *tag)
 {
     int gap;
     
-    if (di < 0)
+    if (tag->nbr < 0)
         tag->res += ft_putchar('-');
     gap = tag->prec - tag->size;
     while (gap-- != 0)
         tag->res += ft_putchar('0');
 }
 
-void    largest_width_right(f_tag *tag, int di)
+void    largest_width_right(f_tag *tag)
 {
     int gap;
 
@@ -141,7 +139,7 @@ void    largest_width_right(f_tag *tag, int di)
         gap = tag->width - tag->prec;
         while (gap-- != 0)
             tag->res += ft_putchar(' ');
-        if (di < 0)
+        if (tag->nbr < 0)
             tag->res += ft_putchar('-');
         gap = tag->prec - tag->size;
         while (gap-- != 0)
@@ -152,7 +150,7 @@ void    largest_width_right(f_tag *tag, int di)
         gap = tag->width - tag->size;
 		if (tag->zero == 1)
 		{
-			if (di < 0)
+			if (tag->nbr < 0)
 				tag->res += ft_putchar('-');
 			while (gap-- != 0)
 				tag->res += ft_putchar('0');
@@ -161,78 +159,78 @@ void    largest_width_right(f_tag *tag, int di)
 		{
 			while (gap-- != 0)
             	tag->res += ft_putchar(' ');
-        	if (di < 0)
+        	if (tag->nbr < 0)
             	tag->res += ft_putchar('-');
 		}
     }
 }
 
-void    largest_width_left(f_tag *tag, int di)
+void    largest_width_left(f_tag *tag)
 {
     int gap;
 
-    if (di < 0)
+    if (tag->nbr < 0)
         tag->res += ft_putchar('-');
     if (tag->prec > tag->size)
     {
         gap = tag->prec - tag->size;
         while (gap-- != 0)
             tag->res += ft_putchar('0');
-        tag->res += ft_putstr(ft_itoa_sign(di));
+        tag->res += ft_putstr(ft_itoa_sign(tag));
         gap = tag->width - tag->prec;
         while (gap-- != 0)
             tag->res += ft_putchar(' ');
     }
     else
     {
-        tag->res += ft_putstr(ft_itoa_sign(di));
+        tag->res += ft_putstr(ft_itoa_sign(tag));
         gap = tag->width - tag->size;
         while (gap-- != 0)
             tag->res += ft_putchar(' ');
     }
 }
 
-void    right_sort(f_tag *tag, int di)
+void    right_sort(f_tag *tag)
 {
     if (tag->prec > tag->width && tag->prec > tag->size)
-        largest_prec(tag, di);
+        largest_prec(tag);
     else if (tag->width > tag->prec && tag->width > tag->size)
-        largest_width_right(tag, di);
+        largest_width_right(tag);
     else
-        if (di < 0)
+        if (tag->nbr < 0)
             tag->res += ft_putchar('-');
-    tag->res += ft_putstr(ft_itoa_sign(di));    
+    if (tag->prec == 0 && tag->nbr == 0)
+        return ;
+    tag->res += ft_putstr(ft_itoa_sign(tag));    
 }
 
-void    left_sort(f_tag *tag, int di)
+void    left_sort(f_tag *tag)
 {
     if (tag->prec > tag->width && tag->prec > tag-> size)
     {
-        largest_prec(tag, di);
-        tag->res += ft_putstr(ft_itoa_sign(di));
+        largest_prec(tag);
+        tag->res += ft_putstr(ft_itoa_sign(tag));
     }
     else if (tag->width > tag->prec && tag->width > tag->size)
-        largest_width_left(tag, di);
+        largest_width_left(tag);
     else
     {
-        if (di < 0)
+        if (tag->nbr < 0)
             tag->res += ft_putchar('-');
-        tag->res += ft_putstr(ft_itoa_sign(di));
+        tag->res += ft_putstr(ft_itoa_sign(tag));
     }
 }
 
 void    print_di(f_tag *tag)
 {
-    int di;
-
-    di = va_arg(tag->ap, int);
-    tag->size = digits_count(di);
-	if (di < 0)
+    tag->nbr = va_arg(tag->ap, int);
+    digits_size(tag);
+	if (tag->nbr < 0)
 		tag->width -= 1;
     if (tag->minus == 0)
-        right_sort(tag, di);
+        right_sort(tag);
     else
-        left_sort(tag, di);
+        left_sort(tag);
 }
 
 void    sort_spec(f_tag *tag)
@@ -286,8 +284,8 @@ int     ft_printf(const char *format, ...)
 
 int     main(void)
 {
-    ft_printf("imt : %08.3d\n", 8375);
-    printf("org : %8.3d\n", -216);
+    ft_printf("imt : %.0d\n", 0);
+    printf("org : %.0d\n", 0);
     ft_printf("imt : %-10.5d\n", -216);
     printf("org : %-10.5d\n", -216);
     ft_printf("imt : %-3.7d\n", -2375);
