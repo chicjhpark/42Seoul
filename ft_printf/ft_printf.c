@@ -147,9 +147,9 @@ void    print_di(f_tag *tag)
     if (tag->zero != 1)
         while (tag->lspace-- > 0)
             tag->res += ft_putchar(' ');
-    if (tag->nbr == 0 && tag->dot == 1 && tag->prec <= 0)
+    if (tag->nbr == 0 && tag->dot == 1 && tag->prec == 0)
     {
-        while (tag->rspace-- > 0)
+        while (tag->rspace-- > 0 || tag->size-- > 0)
             tag->res += ft_putchar(' ');
         return ;
     }
@@ -201,7 +201,8 @@ void    sort_tag(f_tag *tag)
                 tag->lspace = tag->width - tag->size;
         }
     }
-    tag->prec -= tag->size;
+    if (tag->prec > tag->size)
+        tag->prec -= tag->size;
 }
 
 void    check_type(f_tag *tag)
@@ -251,8 +252,10 @@ int     ft_printf(const char *format, ...)
 
 /*int     main(void)
 {
-    printf("org : |%.3d|\n", 0);
-    ft_printf("imt : |%.3d|\n", 0);
-    printf("org : |%07d|\n", -54);
-    ft_printf("imt : |%07d|\n", -54);
+    printf("org : |%5.0d|\n", 0);
+    ft_printf("imt : |%5.0d|\n", 0);
+    printf("org : |%5.d|\n",  0);
+    ft_printf("imt : |%5.d|\n", 0);
+    printf("org : |%.*d|\n", -1, 0);
+    ft_printf("imt : |%.*d|\n", -1, 0);
 }*/
