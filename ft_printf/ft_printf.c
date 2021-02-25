@@ -205,7 +205,7 @@ void    sort_tag(f_tag *tag)
                 tag->lspace = tag->width - tag->size;
         }
     }
-    if (tag->size >= tag->prec)
+    if (tag->size >= tag->prec && tag->prec != 0)
         tag->prec = -1;
     else if (tag->prec > tag->size)
         tag->prec -= tag->size;
@@ -264,4 +264,6 @@ int     main(void)
     ft_printf("imt : |%-4.1d|\n", 0);
     printf("org : |%.*d|\n", -1, 0);
     ft_printf("imt : |%.*d|\n", -1, 0);
+    printf("org : |%.0d|\n", 0);
+    ft_printf("imt : |%.0d|\n", 0);
 }
