@@ -203,7 +203,7 @@ void    sort_tag(f_tag *tag)
     }
     if (tag->prec >= tag->size)
         tag->prec -= tag->size;
-    else
+    else if (tag->prec > 0)
         tag->prec = 0;
 }
 
