@@ -119,13 +119,16 @@ void    sort_width_prec(f_tag *tag)
         if (tag->dot == 1)
             tag->prec = va_arg(tag->ap, int);
         else
-        {
             tag->width = va_arg(tag->ap, int);
+        if (tag->width < 0 || tag->prec < 0)
+        {
             if (tag->width < 0)
             {
                 tag->minus = 1;
                 tag->width *= -1;
             }
+            else
+                tag->dot = 0;
         }
     }
     else if (ft_isdigit(*tag->fmt) != 0)
@@ -253,12 +256,12 @@ int     ft_printf(const char *format, ...)
     return (tag.res);
 }
 
-/*int     main(void)
+int     main(void)
 {
-    printf("org : |%5.0d|\n", 0);
-    ft_printf("imt : |%5.0d|\n", 0);
+    printf("org : |%0*.*d|\n", 4, -4, -12);
+    ft_printf("imt : |%0*.*d|\n", 4, -4, -12);
     printf("org : |%5.d|\n",  0);
     ft_printf("imt : |%5.d|\n", 0);
     printf("org : |%.*d|\n", -1, 0);
     ft_printf("imt : |%.*d|\n", -1, 0);
-}*/
+}
