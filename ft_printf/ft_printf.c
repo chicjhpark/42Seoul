@@ -12,13 +12,13 @@
 
 #include "ft_printf.h"
 
-void	sort_spec(f_tag *tag)
+void	sort_spec(t_tag *tag)
 {
 	if (*tag->fmt == 'd' || *tag->fmt == 'i')
 		print_di(tag);
 }
 
-void	sort_tag(f_tag *tag)
+void	sort_tag(t_tag *tag)
 {
 	if (tag->minus == 1 || tag->dot == 1)
 		tag->zero = 0;
@@ -45,7 +45,7 @@ void	sort_tag(f_tag *tag)
 		tag->prec -= tag->size;
 }
 
-void	check_type(f_tag *tag)
+void	check_type(t_tag *tag)
 {
 	if (*tag->fmt == 'd' || *tag->fmt == 'i')
 	{
@@ -54,7 +54,7 @@ void	check_type(f_tag *tag)
 	}
 }
 
-void	sort_format(f_tag *tag)
+void	sort_format(t_tag *tag)
 {
 	tag->res = 0;
 	while (*tag->fmt != '\0')
@@ -79,7 +79,7 @@ void	sort_format(f_tag *tag)
 
 int		ft_printf(const char *format, ...)
 {
-	f_tag	tag;
+	t_tag	tag;
 
 	if (format == NULL)
 		return (-1);

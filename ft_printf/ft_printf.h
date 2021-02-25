@@ -40,11 +40,11 @@ int		ft_putchar(char c);
 int		ft_putstr(char *s);
 int		ft_isdigit(char c);
 int		strchr_spec(char c);
-char	*ft_itoa_sign(f_tag *tag);
-void	digits_size(f_tag *tag);
-void	sort_width_prec(f_tag *tag);
-void	init_tag(f_tag *tag);
-void	check_tag(f_tag *tag);
-void	print_di(f_tag *tag);
+char	*ft_itoa_sign(t_tag *tag);
+void	digits_size(t_tag *tag);
+void	sort_width_prec(t_tag *tag);
+void	init_tag(t_tag *tag);
+void	check_tag(t_tag *tag);
+void	print_di(t_tag *tag);
 
 #endif

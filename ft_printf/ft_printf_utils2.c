@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-char	*ft_itoa_sign(f_tag *tag)
+char	*ft_itoa_sign(t_tag *tag)
 {
 	char	*s;
 
@@ -34,7 +34,7 @@ char	*ft_itoa_sign(f_tag *tag)
 	return (s);
 }
 
-void	digits_size(f_tag *tag)
+void	digits_size(t_tag *tag)
 {
 	int	n;
 
@@ -54,7 +54,7 @@ void	digits_size(f_tag *tag)
 		}
 }
 
-void	sort_width_prec(f_tag *tag)
+void	sort_width_prec(t_tag *tag)
 {
 	if (*tag->fmt == '.')
 		tag->dot = 1;
@@ -81,7 +81,7 @@ void	sort_width_prec(f_tag *tag)
 	}
 }
 
-void	check_tag(f_tag *tag)
+void	check_tag(t_tag *tag)
 {
 	if (*tag->fmt == '-')
 		tag->minus = 1;

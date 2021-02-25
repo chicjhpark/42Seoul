@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	init_tag(f_tag *tag)
+void	init_tag(t_tag *tag)
 {
 	tag->minus = 0;
 	tag->zero = 0;
