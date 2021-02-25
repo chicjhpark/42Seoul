@@ -256,7 +256,7 @@ int     ft_printf(const char *format, ...)
     return (tag.res);
 }
 
-int     main(void)
+/*int     main(void)
 {
     printf("org : |%-4.*d|\n", 1, 0);
     ft_printf("imt : |%-4.*d|\n", 1, 0);
@@ -264,6 +264,10 @@ int     main(void)
     ft_printf("imt : |%-4.1d|\n", 0);
     printf("org : |%.*d|\n", -1, 0);
     ft_printf("imt : |%.*d|\n", -1, 0);
+<<<<<<< HEAD
     printf("org : |%.0d|\n", 0);
     ft_printf("imt : |%.0d|\n", 0);
 }
+=======
+}*/
+>>>>>>> 5107dc16c462eca53e693151a5497188af2fc1b8
