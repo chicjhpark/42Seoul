@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/26 08:21:04 by jaehpark          #+#    #+#             */
+/*   Updated: 2021/02/26 08:22:45 by jaehpark         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
@@ -21,7 +33,7 @@ typedef struct	s_tag
 	int		nbr;
 	int		lspace;
 	int		rspace;
-}				f_tag;
+}				t_tag;
 
 int		ft_printf(const char *format, ...);
 int		ft_putchar(char c);
@@ -31,7 +43,7 @@ int		strchr_spec(char c);
 char	*ft_itoa_sign(f_tag *tag);
 void	digits_size(f_tag *tag);
 void	sort_width_prec(f_tag *tag);
-void    init_tag(f_tag *tag);
+void	init_tag(f_tag *tag);
 void	check_tag(f_tag *tag);
 void	print_di(f_tag *tag);
 
