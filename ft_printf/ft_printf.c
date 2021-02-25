@@ -150,7 +150,7 @@ void    print_di(f_tag *tag)
     if (tag->zero != 1)
         while (tag->lspace-- > 0)
             tag->res += ft_putchar(' ');
-    if (tag->nbr == 0 && tag->dot == 1 && tag->prec < 0)
+    if (tag->nbr == 0 && tag->dot == 1 && tag->prec <= 0)
     {
         if (tag->width > 0)
             while (tag->rspace-- > 0 || tag->size-- > 0)
@@ -205,7 +205,8 @@ void    sort_tag(f_tag *tag)
                 tag->lspace = tag->width - tag->size;
         }
     }
-    tag->prec -= tag->size;
+    if (tag->prec >= tag->size)
+        tag->prec -= tag->size;
     if (tag->prec < 0)
         tag->dot = 0;
 }
