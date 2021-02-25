@@ -205,7 +205,8 @@ void    sort_tag(f_tag *tag)
                 tag->lspace = tag->width - tag->size;
         }
     }
-    tag->prec -= tag->size;
+    if (tag->prec >= tag->size)
+        tag->prec -= tag->size;
     if (tag->prec < 0)
         tag->dot = 0;
 }
