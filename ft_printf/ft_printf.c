@@ -205,10 +205,10 @@ void    sort_tag(f_tag *tag)
                 tag->lspace = tag->width - tag->size;
         }
     }
-    if (tag->prec >= tag->size)
+    else
+        tag->prec = 0;
+    if (tag->prec > 0)
         tag->prec -= tag->size;
-    if (tag->prec < 0)
-        tag->dot = 0;
 }
 
 void    check_type(f_tag *tag)
