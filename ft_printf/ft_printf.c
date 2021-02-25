@@ -29,8 +29,8 @@ void    init_tag(f_tag *tag)
     tag->size = 0;
     tag->dot = 0;
     tag->nbr = 0;
-    tag->lspace = 0;
-    tag->rspace = 0;
+    tag->lspace = -1;
+    tag->rspace = -1;
 }
 
 int     ft_putchar(char c)
@@ -149,7 +149,7 @@ void    print_di(f_tag *tag)
             tag->res += ft_putchar(' ');
     if (tag->nbr == 0 && tag->dot == 1 && tag->prec == 0)
     {
-        while (tag->rspace-- > 0 || tag->size-- > 0)
+        while (tag->rspace-- >= 0)
             tag->res += ft_putchar(' ');
         return ;
     }
