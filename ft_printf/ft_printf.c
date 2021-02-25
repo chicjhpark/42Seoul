@@ -147,10 +147,7 @@ void    print_di(f_tag *tag)
     if (tag->zero != 1)
         while (tag->lspace-- > 0)
             tag->res += ft_putchar(' ');
-    else
-        while (tag->lspace-- > 0)
-            tag->res += ft_putchar('0');
-    if (tag->nbr == 0 && tag->dot == 1)
+    if (tag->nbr == 0 && tag->dot == 1 && tag->prec <= 0)
     {
         while (tag->rspace-- > 0)
             tag->res += ft_putchar(' ');
@@ -158,6 +155,8 @@ void    print_di(f_tag *tag)
     }
     if (tag->nbr < 0)
         tag->res += ft_putchar('-');
+    while (tag->lspace-- > 0)
+        tag->res += ft_putchar('0');
     while (tag->prec-- > 0)
         tag->res += ft_putchar('0');
     tag->res += ft_putstr(ft_itoa_sign(tag));
@@ -184,7 +183,7 @@ void    check_tag(f_tag *tag)
 void    sort_tag(f_tag *tag)
 {
     if (tag->minus == 1 || tag->dot == 1)
-        tag->zero == 0;
+        tag->zero = 0;
     if (tag->width > tag->prec && tag->width > tag->size)
     {
         if (tag->prec > tag->size)
@@ -250,7 +249,10 @@ int     ft_printf(const char *format, ...)
     return (tag.res);
 }
 
-int     main(void)
+/*int     main(void)
 {
-    printf("org : |%")
-}
+    printf("org : |%.3d|\n", 0);
+    ft_printf("imt : |%.3d|\n", 0);
+    printf("org : |%07d|\n", -54);
+    ft_printf("imt : |%07d|\n", -54);
+}*/
