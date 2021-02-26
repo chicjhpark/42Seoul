@@ -17,7 +17,7 @@ void	sort_spec(t_tag *tag)
 	if (*tag->fmt == 'd' || *tag->fmt == 'i')
 		print_di(tag);
 	else if (*tag->fmt == 'u')
-		print_diu(tag);
+		print_di(tag);
 	else if (*tag->fmt == 'x' || *tag->fmt == 'X')
 		return ;
 	else if (*tag->fmt == 'c')
