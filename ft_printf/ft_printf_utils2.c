@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:20:49 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/26 11:21:23 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/26 11:54:25 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,19 @@ char	*ft_itoa_sign(t_tag *tag)
 	if (tag->nbr < 0)
 		while (tag->size-- > 0)
 		{
-			s[tag->size] = ((tag->nbr % div) * -1) + '0';
 			if ((tag->nbr % div) * -1 >= 10)
-				s[tag->size] += upp;
+					s[tag->size] = ((tag->nbr % div) * -1) + '0' + upp;
+			else
+				s[tag->size] = ((tag->nbr % div) * -1) + '0';
 			tag->nbr /= div;
 		}
 	if (tag->nbr >= 0)
 		while (tag->size-- > 0)
 		{
-			s[tag->size] = (tag->nbr % div) + '0';
-			if ((tag->nbr % div) >= 10)
-				s[tag->size] += upp;
+			if (tag->nbr % div >= 10)
+				s[tag->size] = (tag->nbr % div) + '0' + upp;
+			else
+				s[tag->size] = (tag->nbr % div) + '0';
 			tag->nbr /= div;
 		}
 	return (s);
