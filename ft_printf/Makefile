@@ -6,7 +6,7 @@ CFLAGS	= -Wall -Wextra -Werror
 SRCS	= ft_printf.c \
 			ft_printf_utils.c \
 			ft_printf_utils2.c \
-			ft_print_di.c \
+			ft_printf_nbr.c \
 
 OBJS	= $(SRCS:.c=.o)
 

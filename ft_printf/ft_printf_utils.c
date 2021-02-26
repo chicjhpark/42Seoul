@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:20:28 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/26 08:20:37 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/26 10:57:23 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ int		ft_putstr(char *s)
 int		ft_isdigit(char c)
 {
 	if (c >= '0' && c <= '9')
+		return (c);
+	else if (c >= 'a' && c <= 'f')
+		return (c);
+	else if (c >= 'A' && c <= 'F')
 		return (c);
 	return (0);
 }

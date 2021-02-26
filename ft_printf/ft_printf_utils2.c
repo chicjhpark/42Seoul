@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:20:49 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/26 08:20:52 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/26 11:21:23 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,41 +15,60 @@
 char	*ft_itoa_sign(t_tag *tag)
 {
 	char	*s;
+	int		div;
+	int		upp;
 
 	if (!(s = (char *)malloc(sizeof(char) * (tag->size + 1))))
 		return (NULL);
 	s[tag->size] = '\0';
+	div = 10;
+	upp = 0;
+	if (*tag->fmt == 'x' || *tag->fmt == 'X')
+	{
+		div = 16;
+		upp = 7;
+		if (*tag->fmt == 'x')
+			upp += 32;
+	}
 	if (tag->nbr < 0)
 		while (tag->size-- > 0)
 		{
-			s[tag->size] = ((tag->nbr % 10) * -1) + '0';
-			tag->nbr /= 10;
+			s[tag->size] = ((tag->nbr % div) * -1) + '0';
+			if ((tag->nbr % div) * -1 >= 10)
+				s[tag->size] += upp;
+			tag->nbr /= div;
 		}
 	if (tag->nbr >= 0)
 		while (tag->size-- > 0)
 		{
-			s[tag->size] = (tag->nbr % 10) + '0';
-			tag->nbr /= 10;
+			s[tag->size] = (tag->nbr % div) + '0';
+			if ((tag->nbr % div) >= 10)
+				s[tag->size] += upp;
+			tag->nbr /= div;
 		}
 	return (s);
 }
 
 void	digits_size(t_tag *tag)
 {
-	int	n;
+	long long	n;
+	int			div;
 
 	n = tag->nbr;
 	tag->size = 1;
+	div = 10;
+	if (*tag->fmt == 'x' || *tag->fmt == 'X')
+		div = 16;
 	if (n < 0)
-		while (n <= -10)
+		while (n <= -div)
 		{
-			n /= -10;
+			n /= -div;
 			tag->size++;
 		}
 	if (n >= 0)
-		while (n >= 10)
+		while (n >= div)
 		{
-			n /= 10;
+			n /= div;
 			tag->size++;
 		}
 }

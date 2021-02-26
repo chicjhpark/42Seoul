@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:20:16 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/26 08:20:20 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/26 10:54:48 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	sort_spec(t_tag *tag)
 	else if (*tag->fmt == 'u')
 		print_di(tag);
 	else if (*tag->fmt == 'x' || *tag->fmt == 'X')
-		return ;
+		print_di(tag);
 	else if (*tag->fmt == 'c')
 		return ;
 	else if (*tag->fmt == 's')
