@@ -14,14 +14,11 @@
 
 void	sort_spec(t_tag *tag)
 {
-	if (*tag->fmt == 'd' || *tag->fmt == 'i')
-		print_di(tag);
-	else if (*tag->fmt == 'u')
-		print_di(tag);
-	else if (*tag->fmt == 'x' || *tag->fmt == 'X')
-		print_di(tag);
+	if (*tag->fmt == 'd' || *tag->fmt == 'i' || *tag->fmt == 'u' ||
+		*tag->fmt == 'x' || *tag->fmt == 'X')
+		ft_printf_nbr(tag);
 	else if (*tag->fmt == 'c')
-		return ;
+		ft_printf_char(tag);
 	else if (*tag->fmt == 's')
 		return ;
 	else if (*tag->fmt == 'p')
@@ -58,12 +55,21 @@ void	sort_tag(t_tag *tag)
 void	check_type(t_tag *tag)
 {
 	if (*tag->fmt == 'd' || *tag->fmt == 'i')
+	{
 		tag->nbr = va_arg(tag->ap, int);
-	else if (*tag->fmt == 'u')
+		digits_size(tag);
+	}
+	else if (*tag->fmt == 'u' || *tag->fmt == 'x' || *tag->fmt == 'X')
+	{
 		tag->nbr = (unsigned int)va_arg(tag->ap, int);
-	else if (*tag->fmt == 'x' || *tag->fmt == 'X')
-		tag->nbr = (unsigned int)va_arg(tag->ap, int);
-	digits_size(tag);
+		digits_size(tag);
+	}
+	else if (*tag->fmt == 'c' || *tag->fmt == '%')
+		tag->str = (char)va_arg(tag->ap, int);
+	else if (*tag->fmt == 's')
+		tag->str = (char *)va_arg(tag->ap, const char *);
+	else if (*tag->fmt == 'p')
+		tag->str = (unsigned int)va_arg(tag->ap, void *);
 }
 
 void	sort_format(t_tag *tag)

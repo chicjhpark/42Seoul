@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	print_di(t_tag *tag)
+void	ft_printf_nbr(t_tag *tag)
 {
 	if (tag->nbr < 0)
 	{
