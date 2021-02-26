@@ -58,9 +58,14 @@ void	ft_printf_str(t_tag *tag)
 		tag->size = tag->prec;
 		if (tag->width >= tag->prec && tag->width > 0)
 		{
-			tag->prec = tag->width - tag->prec;
-			while (tag->prec-- > 0)
-				tag->res += ft_putchar(' ');
+			if (tag->minus == 1)
+				tag->rspace += 1;
+			else
+			{
+				tag->prec = tag->width - tag->prec;
+				while (tag->prec-- > 0)
+					tag->res += ft_putchar(' ');
+			}
 		}
 		while (tag->size-- > 0)
 			tag->res += ft_putchar(*tag->str++);
