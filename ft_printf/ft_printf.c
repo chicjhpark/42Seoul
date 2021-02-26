@@ -60,7 +60,7 @@ void	check_type(t_tag *tag)
 	if (*tag->fmt == 'd' || *tag->fmt == 'i')
 		tag->nbr = va_arg(tag->ap, int);
 	else if (*tag->fmt == 'u')
-		tag->nbr = va_arg(tag->ap, unsigned int);
+		tag->nbr = va_arg(tag->ap, int);
 	else if (*tag->fmt == 'x' || *tag->fmt == 'X')
 		tag->nbr = va_arg(tag->ap, int);
 	digits_size(tag);
