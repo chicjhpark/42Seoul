@@ -60,7 +60,8 @@ void	ft_printf_str(t_tag *tag)
 		else
 			tag->size = 0;
 	}
-	if (tag->width >= tag->prec || *tag->str == '\0')
+	//if (tag->width >= tag->prec || *tag->str == '\0')
+	if (tag->width > 0 || *tag->str == '\0')
 	{
 		if (tag->minus == 1)
 			tag->rspace = tag->width - tag->size;
