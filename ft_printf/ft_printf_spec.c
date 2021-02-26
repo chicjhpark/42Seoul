@@ -60,8 +60,12 @@ void	ft_printf_str(t_tag *tag)
 			tag->res += ft_putchar(*tag->str++);
 	}
 	else if (tag->prec > 0 && tag->width >= tag->prec)
+	{
+		tag->prec -= tag->size;
 		while (tag->prec-- > 0)
 			tag->res += ft_putchar(' ');
+		tag->res += ft_putstr(tag->str);
+	}
 	else
 		tag->res += ft_putstr(tag->str);
 	while (tag->rspace-- > 0)
