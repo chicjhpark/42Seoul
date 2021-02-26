@@ -18,6 +18,8 @@
 # include <unistd.h>
 # include <stdarg.h>
 
+typedef long long lint;
+
 typedef struct	s_tag
 {
 	va_list		ap;
@@ -30,7 +32,7 @@ typedef struct	s_tag
 	int			size;
 	int			dot;
 	int			res;
-	int			nbr;
+	lint		nbr;
 	int			lspace;
 	int			rspace;
 }				t_tag;

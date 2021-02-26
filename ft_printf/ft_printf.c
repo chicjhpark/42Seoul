@@ -16,6 +16,16 @@ void	sort_spec(t_tag *tag)
 {
 	if (*tag->fmt == 'd' || *tag->fmt == 'i')
 		print_di(tag);
+	else if (*tag->fmt == 'u')
+		print_diu(tag);
+	else if (*tag->fmt == 'x' || *tag->fmt == 'X')
+		return ;
+	else if (*tag->fmt == 'c')
+		return ;
+	else if (*tag->fmt == 's')
+		return ;
+	else if (*tag->fmt == 'p')
+		return ;
 }
 
 void	sort_tag(t_tag *tag)
@@ -48,10 +58,10 @@ void	sort_tag(t_tag *tag)
 void	check_type(t_tag *tag)
 {
 	if (*tag->fmt == 'd' || *tag->fmt == 'i')
-	{
 		tag->nbr = va_arg(tag->ap, int);
-		digits_size(tag);
-	}
+	else if (*tag->fmt == 'u')
+		tag->nbr = va_arg(tag->ap, unsigned int);
+	digits_size(tag);
 }
 
 void	sort_format(t_tag *tag)
