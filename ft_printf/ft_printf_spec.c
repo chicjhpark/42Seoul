@@ -56,8 +56,8 @@ void	ft_printf_str(t_tag *tag)
 	if (tag->dot == 1 && tag->prec >= 0)
 	{
 		tag->size = tag->prec;
-		tag->str[tag->size] = '\0';
-		tag->res += ft_putstr(tag->str);
+		while (tag->size-- > 0)
+			tag->res += ft_putchar(*tag->str++);
 	}
 	else
 		tag->res += ft_putstr(tag->str);

@@ -108,7 +108,11 @@ void	sort_width_prec(t_tag *tag)
 	else if (ft_isdigit(*tag->fmt) != 0)
 	{
 		if (tag->dot == 1)
+		{
+			if (tag->prec == -1)
+				tag->prec = 0;
 			tag->prec = (tag->prec * 10) + *tag->fmt - '0';
+		}
 		else
 			tag->width = (tag->width * 10) + *tag->fmt - '0';
 	}
@@ -118,7 +122,7 @@ void	check_tag(t_tag *tag)
 {
 	if (*tag->fmt == '-')
 		tag->minus = 1;
-	else if (*tag->fmt == '0' && tag->width == 0)
+	else if (*tag->fmt == '0' && tag->width == 0 && tag->dot == '0')
 		tag->zero = 1;
 	else if (*tag->fmt == '*' || *tag->fmt == '.' || ft_isdigit(*tag->fmt))
 		sort_width_prec(tag);

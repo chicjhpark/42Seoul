@@ -46,7 +46,7 @@ void	sort_tag(t_tag *tag)
 				tag->lspace = tag->width - tag->size;
 		}
 	}
-	if (tag->size >= tag->prec && tag->prec != 0)
+	if (tag->size >= tag->prec && tag->prec != 0 && *tag->fmt != 's')
 		tag->prec = -1;
 	else if (tag->prec > tag->size)
 		tag->prec -= tag->size;
@@ -71,7 +71,7 @@ void	check_type(t_tag *tag)
 	}
 	else if (*tag->fmt == 's')
 	{
-		tag->str = (char *)va_arg(tag->ap, const char *);
+ 		tag->str = (char *)va_arg(tag->ap, const char *);
 		digits_size_str(tag);
 	}
 	//else if (*tag->fmt == 'p')

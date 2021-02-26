@@ -17,7 +17,7 @@ void	init_tag(t_tag *tag)
 	tag->minus = 0;
 	tag->zero = 0;
 	tag->width = 0;
-	tag->prec = 0;
+	tag->prec = -1;
 	tag->size = 0;
 	tag->dot = 0;
 	tag->nbr = 0;
