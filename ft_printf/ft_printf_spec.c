@@ -51,38 +51,21 @@ void	ft_printf_char(t_tag *tag)
 
 void	ft_printf_str(t_tag *tag)
 {
+	if (tag->dot == 1 && tag->prec >= 0 && tag->size > tag->prec)
+		tag->size = tag->prec;
+	else if (tag->dot == 1 && tag->prec <= 0)
+		return ;
+	if (tag->width >= tag->prec)
+	{
+		if (tag->minus == 1)
+			tag->rspace = tag->width - tag->size;
+		else
+			tag->lspace = tag->width - tag->size;
+	}
 	while (tag->lspace-- > 0)
 		tag->res += ft_putchar(' ');
-	if (tag->dot == 1 && tag->size > tag->prec)
-	{
-		tag->size = tag->prec;
-		if (tag->width >= tag->prec && tag->width > 0)
-		{
-			tag->prec = tag->width - tag->prec;
-			if (tag->minus == 1)
-				tag->rspace += tag->prec;
-			else
-				while (tag->prec-- > 0)
-					tag->res += ft_putchar(' ');
-		}
-		while (tag->size-- > 0)
-			tag->res += ft_putchar(*tag->str++);
-	}
-	else if (tag->prec > 0 && tag->width >= tag->prec)
-	{
-		if (tag->prec > tag->size)
-			tag->prec -= tag->size;
-		else
-			tag->prec = tag->width - tag->prec;
-		if (tag->minus == 1)
-			tag->rspace += tag->prec;
-		else
-			while (tag->prec-- > 0)
-				tag->res += ft_putchar(' ');
-		tag->res += ft_putstr(tag->str);
-	}
-	else
-		tag->res += ft_putstr(tag->str);
+	while (tag->size-- > 0)
+		tag->res += ft_putchar(*tag->str++);
 	while (tag->rspace-- > 0)
 		tag->res += ft_putchar(' ');
 }
