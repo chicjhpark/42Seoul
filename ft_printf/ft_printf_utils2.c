@@ -23,7 +23,7 @@ char	*ft_itoa_sign(t_tag *tag)
 	s[tag->size] = '\0';
 	div = 10;
 	upp = 0;
-	if (*tag->fmt == 'x' || *tag->fmt == 'X')
+	if (*tag->fmt == 'x' || *tag->fmt == 'X' || *tag->fmt == 'p')
 	{
 		div = 16;
 		upp = 7;
@@ -59,7 +59,7 @@ void	digits_size(t_tag *tag)
 	n = tag->nbr;
 	tag->size = 1;
 	div = 10;
-	if (*tag->fmt == 'x' || *tag->fmt == 'X')
+	if (*tag->fmt == 'x' || *tag->fmt == 'X' || *tag->fmt == 'p')
 		div = 16;
 	if (n < 0)
 		while (n <= -div)

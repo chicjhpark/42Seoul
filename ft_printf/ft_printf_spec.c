@@ -19,11 +19,6 @@ void	ft_printf_nbr(t_tag *tag)
 		tag->lspace -= 1;
 		tag->rspace -= 1;
 	}
-	else if (*tag->fmt == 'p')
-	{
-		tag->lspace -= 2;
-		tag->rspace -= 2;
-	}
 	if (tag->zero != 1)
 		while (tag->lspace-- > 0)
 			tag->res += ft_putchar(' ');
@@ -41,7 +36,7 @@ void	ft_printf_nbr(t_tag *tag)
 	while (tag->prec-- > 0)
 		tag->res += ft_putchar('0');
 	if (*tag->fmt == 'p')
-		tag->res += write(1, "0x", 2);
+		tag->res += write(1, "00", 2);
 	tag->res += ft_putstr(ft_itoa_sign(tag));
 	while (tag->rspace-- > 0)
 		tag->res += ft_putchar(' ');
