@@ -59,7 +59,7 @@ void	ft_printf_str(t_tag *tag)
 		while (tag->size-- > 0)
 			tag->res += ft_putchar(*tag->str++);
 	}
-	else if (tag->prec > 0)
+	else if (tag->prec > 0 && tag->width >= tag->prec)
 		while (tag->prec-- > 0)
 			tag->res += ft_putchar(' ');
 	else
