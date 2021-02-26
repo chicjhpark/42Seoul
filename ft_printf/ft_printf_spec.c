@@ -59,6 +59,8 @@ void	ft_printf_str(t_tag *tag)
 		tag->str[tag->size] = '\0';
 		tag->res += ft_putstr(tag->str);
 	}
+	else
+		tag->res += ft_putstr(tag->str);
 	while (tag->rspace-- > 0)
 		tag->res += ft_putchar(' ');
 }

@@ -20,7 +20,7 @@ void	sort_spec(t_tag *tag)
 	else if (*tag->fmt == 'c')
 		ft_printf_char(tag);
 	else if (*tag->fmt == 's')
-		return ;
+		ft_printf_str(tag);
 	else if (*tag->fmt == 'p')
 		return ;
 }

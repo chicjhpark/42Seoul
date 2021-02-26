@@ -77,9 +77,12 @@ void	digits_size(t_tag *tag)
 
 void	digits_size_str(t_tag *tag)
 {
-	while (*tag->str != '\0')
+	char	*s;
+
+	s = tag->str;
+	while (*s != '\0')
 	{
-		tag->str++;
+		s++;
 		tag->size++;
 	}
 }
