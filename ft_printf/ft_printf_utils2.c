@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:20:49 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/26 11:54:25 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/26 15:02:02 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,15 @@ void	digits_size(t_tag *tag)
 			n /= div;
 			tag->size++;
 		}
+}
+
+void	digits_size_str(t_tag *tag)
+{
+	while (*tag->str != '\0')
+	{
+		tag->str++;
+		tag->size++;
+	}
 }
 
 void	sort_width_prec(t_tag *tag)

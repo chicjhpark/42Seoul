@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:21:04 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/26 10:59:44 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/26 14:42:03 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct	s_tag
 	va_list		ap;
 	char		*fmt;
 	char		*str;
+	char		c;
 	int			minus;
 	int			zero;
 	int			width;
@@ -44,9 +45,12 @@ int				ft_isdigit(char c);
 int				strchr_spec(char c);
 char			*ft_itoa_sign(t_tag *tag);
 void			digits_size(t_tag *tag);
+void			digits_size_str(t_tag *tag);
 void			sort_width_prec(t_tag *tag);
 void			init_tag(t_tag *tag);
 void			check_tag(t_tag *tag);
-void			print_di(t_tag *tag);
+void			ft_printf_nbr(t_tag *tag);
+void			ft_printf_char(t_tag *tag);
+void			ft_printf_str(t_tag *tag);
 
 #endif
