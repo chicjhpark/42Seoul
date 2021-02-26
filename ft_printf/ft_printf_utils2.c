@@ -122,7 +122,7 @@ void	check_tag(t_tag *tag)
 {
 	if (*tag->fmt == '-')
 		tag->minus = 1;
-	else if (*tag->fmt == '0' && tag->width == 0 && tag->dot == '0')
+	else if (*tag->fmt == '0' && tag->width == 0 && tag->dot == 0)
 		tag->zero = 1;
 	else if (*tag->fmt == '*' || *tag->fmt == '.' || ft_isdigit(*tag->fmt))
 		sort_width_prec(tag);
