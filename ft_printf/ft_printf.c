@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:20:16 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/26 15:01:10 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/27 04:49:50 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	sort_spec(t_tag *tag)
 	else if (*tag->fmt == 's')
 		ft_printf_str(tag);
 	else if (*tag->fmt == 'p')
+		ft_printf_nbr(tag);
+	else if (*tag->fmt == '%')
 		return ;
 }
 
@@ -55,27 +57,22 @@ void	sort_tag(t_tag *tag)
 void	check_type(t_tag *tag)
 {
 	if (*tag->fmt == 'd' || *tag->fmt == 'i')
-	{
 		tag->nbr = va_arg(tag->ap, int);
-		digits_size(tag);
-	}
 	else if (*tag->fmt == 'u' || *tag->fmt == 'x' || *tag->fmt == 'X')
-	{
 		tag->nbr = (unsigned int)va_arg(tag->ap, int);
-		digits_size(tag);
-	}
 	else if (*tag->fmt == 'c' || *tag->fmt == '%')
-	{
 		tag->c = (char)va_arg(tag->ap, int);
-		tag->size = 1;
-	}
 	else if (*tag->fmt == 's')
 	{
- 		tag->str = (char *)va_arg(tag->ap, const char *);
+		tag->str = (char *)va_arg(tag->ap, const char *);
 		digits_size_str(tag);
 	}
-	//else if (*tag->fmt == 'p')
-		//tag->str = (unsigned int)va_arg(tag->ap, void *);
+	else if (*tag->fmt == 'p')
+		tag->nbr = (unsigned int)va_arg(tag->ap, void *);
+	else if (*tag->fmt == '%')
+		tag->c = (char)va_arg(tag->ap, int);
+	if (*tag->fmt != 's')
+		digits_size(tag);
 }
 
 void	sort_format(t_tag *tag)

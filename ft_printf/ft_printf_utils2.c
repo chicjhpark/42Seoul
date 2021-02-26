@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:20:49 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/26 15:02:02 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/26 21:43:47 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_itoa_sign(t_tag *tag)
 		while (tag->size-- > 0)
 		{
 			if ((tag->nbr % div) * -1 >= 10)
-					s[tag->size] = ((tag->nbr % div) * -1) + '0' + upp;
+				s[tag->size] = ((tag->nbr % div) * -1) + '0' + upp;
 			else
 				s[tag->size] = ((tag->nbr % div) * -1) + '0';
 			tag->nbr /= div;
@@ -117,11 +117,7 @@ void	sort_width_prec(t_tag *tag)
 	else if (ft_isdigit(*tag->fmt) != 0)
 	{
 		if (tag->dot == 1)
-		{
-			if (tag->prec == -1)
-				tag->prec = 0;
 			tag->prec = (tag->prec * 10) + *tag->fmt - '0';
-		}
 		else
 			tag->width = (tag->width * 10) + *tag->fmt - '0';
 	}
