@@ -51,10 +51,10 @@ void	ft_printf_char(t_tag *tag)
 
 void	ft_printf_str(t_tag *tag)
 {
-	if (tag->dot == 1 && tag->size > tag->prec)
-		tag->size = tag->prec;
-	else if (tag->dot == 1 && tag->prec <= 0 && tag->width <= 0)
+	if (tag->dot == 1 && tag->prec <= 0 && tag->width <= 0)
 		return ;
+	else if (tag->dot == 1 && tag->size > tag->prec)
+		tag->size = tag->prec;
 	if (tag->width >= tag->prec)
 	{
 		if (tag->minus == 1)
