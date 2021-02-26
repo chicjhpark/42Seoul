@@ -53,7 +53,7 @@ void	ft_printf_str(t_tag *tag)
 {
 	while (tag->lspace-- > 0)
 		tag->res += ft_putchar(' ');
-	if (tag->dot == 1 && tag->prec >= 0 && tag->size > tag->prec)
+	if (tag->dot == 1 && tag->size > tag->prec)
 	{
 		tag->size = tag->prec;
 		while (tag->size-- > 0)
