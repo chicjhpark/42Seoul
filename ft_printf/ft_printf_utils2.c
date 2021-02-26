@@ -96,7 +96,10 @@ void	digits_size_str(t_tag *tag)
 void	sort_width_prec(t_tag *tag)
 {
 	if (*tag->fmt == '.')
+	{
 		tag->dot = 1;
+		tag->prec = 0;
+	}
 	else if (*tag->fmt == '*')
 	{
 		if (tag->dot == 1)
