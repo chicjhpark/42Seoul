@@ -60,7 +60,7 @@ void	check_type(t_tag *tag)
 		tag->nbr = va_arg(tag->ap, int);
 	else if (*tag->fmt == 'u' || *tag->fmt == 'x' || *tag->fmt == 'X')
 		tag->nbr = (unsigned int)va_arg(tag->ap, int);
-	else if (*tag->fmt == 'c' || *tag->fmt == '%')
+	else if (*tag->fmt == 'c')
 		tag->c = (char)va_arg(tag->ap, int);
 	else if (*tag->fmt == 's')
 	{
@@ -70,7 +70,7 @@ void	check_type(t_tag *tag)
 	else if (*tag->fmt == 'p')
 		tag->nbr = (unsigned int)va_arg(tag->ap, void *);
 	else if (*tag->fmt == '%')
-		tag->c = (char)va_arg(tag->ap, int);
+		tag->c = '%';
 	if (*tag->fmt != 's')
 		digits_size(tag);
 }
