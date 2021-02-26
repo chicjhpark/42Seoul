@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:20:00 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/27 05:08:34 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/27 06:11:28 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	ft_printf_nbr(t_tag *tag)
 	{
 		tag->lspace -= 1;
 		tag->rspace -= 1;
+	}
+	if (*tag-> fmt == 'p')
+	{
+		tag->lspace -= 2;
+		tag->rspace -= 2;
 	}
 	if (tag->zero != 1)
 		while (tag->lspace-- > 0)

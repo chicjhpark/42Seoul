@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:20:16 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/27 04:57:12 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/27 06:19:37 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	sort_spec(t_tag *tag)
 	else if (*tag->fmt == 'p')
 		ft_printf_nbr(tag);
 	else if (*tag->fmt == '%')
-		return ;
+		ft_printf_char(tag);
 }
 
 void	sort_tag(t_tag *tag)
