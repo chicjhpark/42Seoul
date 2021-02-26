@@ -48,7 +48,7 @@ void	sort_tag(t_tag *tag)
 	}
 	if (tag->size >= tag->prec && tag->prec != 0 && *tag->fmt != 's')
 		tag->prec = -1;
-	else if (tag->prec > tag->size)
+	else if (tag->prec > tag->size && *tag->fmt != 's')
 		tag->prec -= tag->size;
 }
 
