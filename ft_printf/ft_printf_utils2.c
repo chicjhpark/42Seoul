@@ -80,6 +80,12 @@ void	digits_size_str(t_tag *tag)
 	char	*s;
 
 	s = tag->str;
+	if (s == NULL)
+	{
+		tag->str = "(null)";
+		tag->size = 6;
+		return ;
+	}
 	while (*s != '\0')
 	{
 		s++;
