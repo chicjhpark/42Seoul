@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:20:00 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/28 04:42:10 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/28 05:15:36 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	ft_printf_nbr2(t_tag *tag)
 		tag->res += write(1, "0x", 2);
 	while (tag->prec-- > 0)
 		tag->res += ft_putchar('0');
-	tag->res += ft_putstr(ft_itoa_sign(tag));
+	if (*tag->fmt == 'x' || *tag->fmt == 'X' || *tag->fmt == 'p')
+		tag->res += ft_putstr(ft_xtoa_sign(tag));
+	else
+		tag->res += ft_putstr(ft_itoa_sign(tag));
 	while (tag->rspace-- > 0)
 		tag->res += ft_putchar(' ');
 }

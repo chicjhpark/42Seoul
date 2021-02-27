@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:21:04 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/28 00:46:17 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/28 05:13:56 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,14 @@ int				ft_putstr(char *s);
 int				ft_isdigit(char c);
 int				strchr_spec(char c);
 char			*ft_itoa_sign(t_tag *tag);
+char			*ft_xtoa_sign(t_tag *tag);
 void			digits_size(t_tag *tag);
 void			digits_size_str(t_tag *tag);
 void			sort_width_prec(t_tag *tag);
 void			init_tag(t_tag *tag);
 void			check_tag(t_tag *tag);
 void			ft_printf_nbr(t_tag *tag);
+void			ft_printf_nbr2(t_tag *tag);
 void			ft_printf_char(t_tag *tag);
 void			ft_printf_str(t_tag *tag);
 
