@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 04:53:10 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/28 05:16:26 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/28 05:24:22 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,10 @@ char	*ft_xtoa_sign(t_tag *tag)
 		tag->nbr /= 16;
 	}
 	return (s);
+}
+
+void	dot_check(t_tag *tag)
+{
+	tag->dot = 1;
+	tag->prec = 0;
 }

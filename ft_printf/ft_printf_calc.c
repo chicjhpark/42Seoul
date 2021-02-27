@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:20:49 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/28 05:10:10 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/28 05:25:16 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,7 @@ void	digits_size_str(t_tag *tag)
 void	sort_width_prec(t_tag *tag)
 {
 	if (*tag->fmt == '.')
-	{
-		tag->dot = 1;
-		tag->prec = 0;
-	}
+		dot_check(tag);
 	else if (*tag->fmt == '*')
 	{
 		if (tag->dot == 1)
