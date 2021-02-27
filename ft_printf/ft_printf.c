@@ -95,7 +95,8 @@ void	sort_format(t_tag *tag)
 				sort_tag(tag);
 				sort_spec(tag);
 			}
-			tag->fmt++;
+			if (*tag->fmt != '\0')
+				tag->fmt++;
 		}
 	}
 }
