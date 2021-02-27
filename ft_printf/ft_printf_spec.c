@@ -6,43 +6,14 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:20:00 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/28 04:10:04 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/28 04:42:10 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_printf_nbr(t_tag *tag)
+void	ft_printf_nbr2(t_tag *tag)
 {
-	if (tag->nbr < 0)
-	{
-		tag->lspace -= 1;
-		tag->rspace -= 1;
-	}
-	if (*tag-> fmt == 'p')
-	{
-		tag->lspace -= 2;
-		tag->rspace -= 2;
-		tag->width -= 2;
-	}
-	if (tag->zero != 1)
-		while (tag->lspace-- > 0)
-			tag->res += ft_putchar(' ');
-	if (tag->nbr == 0 && tag->dot == 1 && tag->prec == 0)
-	{
-		if (*tag->fmt == 'p')
-		{
-			if (tag->nbr == 0 && tag->minus == 0 && tag->width > 0)
-				tag->res += ft_putchar(' ');
-			tag->res += write(1, "0x", 2);
-			while (tag->minus == 1 && tag->width > 0 && (tag->rspace-- > 0 || tag->size-- > 0))
-				tag->res += ft_putchar(' ');
-		}
-		else if (tag->width > 0)
-			while (tag->rspace-- > 0 || tag->size-- > 0)
-				tag->res += ft_putchar(' ');
-		return ;
-	}
 	if (tag->nbr < 0)
 		tag->res += ft_putchar('-');
 	while (tag->lspace-- > 0)
@@ -54,6 +25,35 @@ void	ft_printf_nbr(t_tag *tag)
 	tag->res += ft_putstr(ft_itoa_sign(tag));
 	while (tag->rspace-- > 0)
 		tag->res += ft_putchar(' ');
+}
+
+void	ft_printf_nbr(t_tag *tag)
+{
+	if (tag->nbr < 0)
+	{
+		tag->lspace -= 1;
+		tag->rspace -= 1;
+	}
+	if (tag->zero != 1)
+		while (tag->lspace-- > 0)
+			tag->res += ft_putchar(' ');
+	if (tag->nbr == 0 && tag->dot == 1 && tag->prec == 0)
+	{
+		if (*tag->fmt == 'p')
+		{
+			if (tag->nbr == 0 && tag->minus == 0 && tag->width > 0)
+				tag->res += ft_putchar(' ');
+			tag->res += write(1, "0x", 2);
+			while (tag->minus == 1 && tag->width > 0 &&
+					(tag->rspace-- > 0 || tag->size-- > 0))
+				tag->res += ft_putchar(' ');
+		}
+		else if (tag->width > 0)
+			while (tag->rspace-- > 0 || tag->size-- > 0)
+				tag->res += ft_putchar(' ');
+		return ;
+	}
+	ft_printf_nbr2(tag);
 }
 
 void	ft_printf_char(t_tag *tag)

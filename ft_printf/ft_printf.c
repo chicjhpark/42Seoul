@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:20:16 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/28 00:56:21 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/28 04:39:28 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	sort_spec(t_tag *tag)
 
 void	sort_tag(t_tag *tag)
 {
-	if (tag->minus == 1 || (tag->dot == 1 && *tag->fmt != 'c' && *tag->fmt != '%'))
+	if (tag->minus == 1 || (tag->dot == 1 && *tag->fmt != 'c' &&
+				*tag->fmt != '%'))
 		tag->zero = 0;
 	if (tag->width > tag->prec && tag->width > tag->size)
 	{
@@ -68,11 +69,12 @@ void	check_type(t_tag *tag)
 		digits_size_str(tag);
 	}
 	else if (*tag->fmt == 'p')
+	{
 		tag->nbr = (long long)va_arg(tag->ap, void *);
+		tag->width -= 2;
+	}
 	else if (*tag->fmt == '%')
 		tag->c = '%';
-	else
-		tag->res = -1;
 	if (*tag->fmt != 's')
 		digits_size(tag);
 }
