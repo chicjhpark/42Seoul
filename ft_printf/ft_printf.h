@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:21:04 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/28 05:23:48 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/28 05:55:15 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <stdarg.h>
 
-typedef long long lint;
+typedef long long	t_lint;
 
 typedef struct	s_tag
 {
@@ -33,7 +33,7 @@ typedef struct	s_tag
 	int			size;
 	int			dot;
 	int			res;
-	lint		nbr;
+	t_lint		nbr;
 	int			lspace;
 	int			rspace;
 }				t_tag;
