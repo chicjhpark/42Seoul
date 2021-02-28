@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:21:04 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/28 23:42:30 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/03/01 01:55:54 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char			*ft_xtoa_sign(t_tag *tag);
 void			digits_size(t_tag *tag);
 void			digits_size_str(t_tag *tag);
 void			dot_check(t_tag *tag);
+void			hex_check(t_tag *tag);
 void			sort_width_prec(t_tag *tag);
 void			init_tag(t_tag *tag);
 void			check_tag(t_tag *tag);

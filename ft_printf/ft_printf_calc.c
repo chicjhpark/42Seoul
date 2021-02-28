@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:20:49 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/28 23:35:01 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/03/01 01:56:08 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,25 @@ char	*ft_itoa_sign(t_tag *tag)
 
 void	digits_size(t_tag *tag)
 {
-	long long	n;
-	int			div;
+	long long			n;
 
-	n = tag->nbr;
 	tag->size = 1;
-	div = 10;
 	if (*tag->fmt == 'x' || *tag->fmt == 'X' || *tag->fmt == 'p')
 	{
-		n = tag->pnbr;
-		div = 16;
+		hex_check(tag);
+		return ;
 	}
+	n = tag->nbr;
 	if (n < 0)
-		while (n <= -div)
+		while (n <= -10)
 		{
-			n /= -div;
+			n /= -10;
 			tag->size++;
 		}
 	if (n >= 0)
-		while (n >= div)
+		while (n >= 10)
 		{
-			n /= div;
+			n /= 10;
 			tag->size++;
 		}
 }
