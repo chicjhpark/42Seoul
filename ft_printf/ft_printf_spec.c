@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:20:00 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/28 05:15:36 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/03/01 00:11:06 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ void	ft_printf_nbr(t_tag *tag)
 	if (tag->zero != 1)
 		while (tag->lspace-- > 0)
 			tag->res += ft_putchar(' ');
-	if (tag->nbr == 0 && tag->dot == 1 && tag->prec == 0)
+	if (tag->nbr == 0 && tag->pnbr == 0 && tag->dot == 1 && tag->prec == 0)
 	{
 		if (*tag->fmt == 'p')
 		{
-			if (tag->nbr == 0 && tag->minus == 0 && tag->width > 0)
+			if (tag->pnbr == 0 && tag->minus == 0 && tag->width > 0)
 				tag->res += ft_putchar(' ');
 			tag->res += write(1, "0x", 2);
 			while (tag->minus == 1 && tag->width > 0 &&

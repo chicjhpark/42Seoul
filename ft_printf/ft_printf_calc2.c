@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 04:53:10 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/28 05:24:22 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/02/28 23:35:43 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ char	*ft_xtoa_sign(t_tag *tag)
 	s[tag->size] = '\0';
 	upp = 7;
 	sign = 1;
-	if (tag->nbr < 0)
+	if (tag->pnbr < 0)
 		sign = -1;
 	if (*tag->fmt == 'x' || *tag->fmt == 'p')
 		upp += 32;
 	while (tag->size-- > 0)
 	{
-		if ((tag->nbr % 16) * sign >= 10)
-			s[tag->size] = ((tag->nbr % 16) * sign) + '0' + upp;
+		if ((tag->pnbr % 16) * sign >= 10)
+			s[tag->size] = ((tag->pnbr % 16) * sign) + '0' + upp;
 		else
-			s[tag->size] = ((tag->nbr % 16) * sign) + '0';
-		tag->nbr /= 16;
+			s[tag->size] = ((tag->pnbr % 16) * sign) + '0';
+		tag->pnbr /= 16;
 	}
 	return (s);
 }

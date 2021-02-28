@@ -6,7 +6,7 @@
 /*   By: jaehpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 08:20:28 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/02/28 00:46:30 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/03/01 00:21:50 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ void	init_tag(t_tag *tag)
 	tag->minus = 0;
 	tag->zero = 0;
 	tag->width = 0;
-	tag->prec = -1;
+	tag->prec = 0;
 	tag->size = 0;
 	tag->dot = 0;
 	tag->nbr = 0;
+	tag->pnbr = 0;
 	tag->lspace = 0;
 	tag->rspace = 0;
 }
@@ -32,9 +33,11 @@ int		ft_putchar(char c)
 
 int		ft_putstr(char *s)
 {
-	int	res;
+	int		res;
+	char	*save;
 
 	res = 0;
+	save = s;
 	if (s == NULL)
 		return (0);
 	while (*s != '\0')
@@ -42,6 +45,7 @@ int		ft_putstr(char *s)
 		write(1, &*s++, 1);
 		res++;
 	}
+	free(save);
 	return (res);
 }
 
