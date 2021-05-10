@@ -1,29 +1,28 @@
 NAME		= cub3D
 
-CC		= gcc
+CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
-
-INCLUDES	= -Lmlx -lmlx -framework OpenGL -framework AppKit
+LIBS		= -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 SRCS		= main.c
 
 OBJS		= $(SRCS:.c=.o)
 
 %.o		: %.c
-		$(CC) $(CFLAGS) -c -I mlx $< -o $@
+		$(CC) $(CFLAGS) -c $<
 
 $(NAME)		: $(OBJS)
-		$(CC) $(INCLUDES) $< -o $@
+		$(CC) $(LIBS) $< -o $@
 
 .PHONY		: all clean fclean re bonus
 
 all		: $(NAME)
-		./cub3D
+		./cub3d
 
-clean		:
+clean	:
 		rm -f $(OBJS)
 
-fclean		: clean
+fclean	: clean
 		rm -f $(NAME)
 
 re		: fclean all
