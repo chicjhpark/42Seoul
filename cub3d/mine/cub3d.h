@@ -7,6 +7,14 @@
 # include <string.h>
 # include <math.h>
 
+# define TRUE					0
+# define FALSE					1
+
+# define TWO_PI					6.28318530717958647692
+
+# define MINIMAP_SCALE_SIZE		1.0
+# define M						MINIMAP_SCALE_SIZE
+
 # define ROW					11
 # define COL					15
 # define GRID_SIZE				64
@@ -14,7 +22,12 @@
 # define WIDTH					COL * GRID_SIZE // 480
 # define HEIGHT					ROW * GRID_SIZE // 352
 
-# define MINIMAP_SCALE			1.0
+# define FOV					60 * (M_PI / 180)
+
+# define FPS					30
+# define FRAME_TIME				1000 / FPS
+
+# define RAYS					WIDTH
 
 # define KEY_PRESS				2
 # define KEY_RELEASE			3
