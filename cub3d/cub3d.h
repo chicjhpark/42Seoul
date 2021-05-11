@@ -19,8 +19,8 @@
 # define COL					15
 # define GRID_SIZE				64
 
-# define WIDTH					COL * GRID_SIZE // 480
-# define HEIGHT					ROW * GRID_SIZE // 352
+# define WIDTH					COL * GRID_SIZE // 960
+# define HEIGHT					ROW * GRID_SIZE // 704
 
 # define FOV					60 * (M_PI / 180)
 

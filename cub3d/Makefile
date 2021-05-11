@@ -1,7 +1,7 @@
 NAME		= cub3D
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -g -Wall -Wextra -Werror
 LIBS		= -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 SRCS		= main.c
@@ -16,13 +16,13 @@ $(NAME)		: $(OBJS)
 
 .PHONY		: all clean fclean re bonus
 
-all		: $(NAME)
-		./cub3d
-
 clean	:
 		rm -f $(OBJS)
 
 fclean	: clean
 		rm -f $(NAME)
+
+all		: $(NAME)
+		rm -f $(OBJS) ; ./cub3d
 
 re		: fclean all

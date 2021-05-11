@@ -21,7 +21,7 @@ typedef struct		s_player
 	float		rot_spd;
 }					t_player;
 
-/*typedef	struct		s_ray
+typedef	struct		s_ray
 {
 	float		ray_ang;
 	float		hit_x;
@@ -33,7 +33,7 @@ typedef struct		s_player
 	int			ray_left;
 	int			ray_right;
 	int			hit_content;
-}					t_ray[RAYS];*/
+}					t_ray;
 
 typedef struct		s_set
 {
@@ -41,6 +41,7 @@ typedef struct		s_set
 	void		*win;
 	t_img		img;
 	t_player	player;
+	t_ray		ray;
 	int			map[ROW][COL];
 }					t_set;
 
@@ -52,7 +53,7 @@ void	get_map(t_set *set)
 		{1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1},
 		{1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1},
@@ -74,38 +75,28 @@ void	init_img(t_set *set, t_img *img)
 	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
 }
 
-void	init_player(t_player *player)
-{
-	player->x = WIDTH / 2;
-	player->y = HEIGHT / 2;
-	player->size = 13 * M;
-	player->rot_dir = 0;
-	player->move_dir = 0;
-	player->rot_ang = M_PI * 1.5;
-	player->move_spd = 3;
-	player->rot_spd = 3 * (M_PI / 180);
-}
 
-void	render_grid(t_img *img, int x, int y, int color) // 타일을 그린다.
+
+void	render_grid(t_img *img, int x1, int y1, int color) // 타일을 그린다.
 {
-	int		px;
-	int		py;
+	int		x2;
+	int		y2;
 	int		line_color;
 
 	line_color = 0x000000;
-	py = 0;
-	while (py < GRID_SIZE * M)
+	y2 = 0;
+	while (y2 < M * GRID_SIZE)
 	{
-		px = 0;
-		while (px < GRID_SIZE * M)
+		x2 = 0;
+		while (x2 < M * GRID_SIZE)
 		{
-			if (py == M * GRID_SIZE - 1 || px == M * GRID_SIZE - 1)
-				img->data[WIDTH * (y + py) + x + px] = line_color;
+			if (y2 == 0 || x2 == 0 || y2 == M * GRID_SIZE - M || x2 == M * GRID_SIZE - M)
+				img->data[WIDTH * (y1 + y2) + x1 + x2] = line_color;
 			else
-				img->data[WIDTH * (y + py) + x + px] = color;
-			px++;
+				img->data[WIDTH * (y1 + y2) + x1 + x2] = color;
+			x2++;
 		}
-		py++;
+		y2++;
 	}
 }
 
@@ -129,6 +120,18 @@ void	render_map(t_set *set) // 맵을 그린다.
 		}
 		y++;
 	}
+}
+
+void	init_player(t_player *player)
+{
+	player->x = WIDTH / 2;
+	player->y = HEIGHT / 2;
+	player->size = 8 * M;
+	player->rot_dir = 0;
+	player->move_dir = 0;
+	player->rot_ang = M_PI * 1.5;
+	player->move_spd = 3;
+	player->rot_spd = 3 * (M_PI / 180);
 }
 
 int		wall_collision(t_set *set, float x, float y) // 벽과 충돌했는지 검사한다. 충돌시에는 참(0)을 반환한다.
@@ -162,19 +165,19 @@ void	update_player(t_set *set, t_player *player) // 플레이어의 움직이는
 	}
 }
 
-void	render_player_ray_line(t_img *img, t_player *player) // 플레이어의 시야 광선 라인 한줄을 그린다.
+void	render_player_line(t_img *img, t_player *player) // 플레이어의 시야 방향을 나타내는 줄 하나를 그린다.
 {
-	int		px;
-	int		py;
-	int		ray_len;
+	int		x2;
+	int		y2;
+	int		len;
 
-	ray_len = 0;
-	while (ray_len < 40)
+	len = 0;
+	while (len < 40)
 	{
-		px = M * (player->x - M + cos(player->rot_ang) * ray_len);
-		py = M * (player->y - M + sin(player->rot_ang) * ray_len);
-		img->data[WIDTH * py + px] = 0xFF0000;
-		ray_len++;
+		x2 = M * (player->x + cos(player->rot_ang) * len);
+		y2 = M * (player->y + sin(player->rot_ang) * len);
+		img->data[WIDTH * y2 + x2] = 0xFF0000;
+		len++;
 	}
 }
 
@@ -182,47 +185,58 @@ void	render_player(t_img *img, t_player *player) // 플레이어를 그린다.
 {
 	int		x;
 	int		y;
-	int		px;
-	int		py;
+	int		size;
+	int		ang;
 
-	y = 0;
-	while (y < player->size)
+	ang = 0;
+	while (ang < 360)
 	{
-		x = 0;
-		while (x < player->size)
+		size = 0;
+		while (size < player->size)
 		{
-			px = M * (player->x + x - (player->size - 1) / 2 - M);
-			py = M * (player->y + y - (player->size - 1) / 2 - M);
-			img->data[WIDTH * py + px] = 0xFF0000;
-			x++;
+			x = M * (player->x + cos(ang * M_PI / 180) * size);
+			y = M * (player->y + sin(ang * M_PI / 180) * size);
+			img->data[WIDTH * y + x] = 0xFF0000;
+			size++;
 		}
-		y++;
+		ang++;
 	}
-	render_player_ray_line(img, player);
+	render_player_line(img, player);
 }
 
-void	update_ray() // 시야 방향에 따라 광선을 갱신한다.
+int		init_ray(t_ray *ray)
 {
+	if (!(ray = (t_ray *)malloc(sizeof(t_ray) * (RAYS + 1))))
+		return FALSE;
+	return TRUE;
 }
 
-void	update_rays(t_player *player) // 시야 방향에 따라 광선들을 갱신한다.
+void	update_ray(t_player *player, t_ray *ray) // 시야 방향에 따라 광선들을 갱신한다.
 {
-	int		col_i; // 열의 인덱스
-	float	ray_ang;
+	ray->ray_ang = player->rot_ang - (FOV / 2);
+}
 
-	ray_ang = player->rot_ang - (FOV / 2); // FOV의 절반을 뺀 첫번째 광선이다.
+void	render_ray(t_img *img, t_player *player, t_ray *ray) // 광선들을 그린다.
+{
+	int		x2;
+	int		y2;
+	int		i;
+	int		len;
 
-	col_i = 0;
-	while (col_i < RAYS)
+	i = 0;
+	while (i < RAYS)
 	{
-		//update_ray(ray_ang, col_i);
-		ray_ang += FOV / RAYS;
-		col_i++;
+		len = 0;
+		while (len < 100)
+		{
+			x2 = M * (player->x + cos(ray->ray_ang) * len) - M;
+			y2 = M * (player->y + sin(ray->ray_ang) * len) - M;
+			img->data[WIDTH * y2 + x2] = 0xFF0000;
+			len++;
+		}
+		ray->ray_ang += FOV / (RAYS - 1);
+		i++;
 	}
-}
-
-void	render_rays()
-{
 }
 
 int		key_press_hook(int key, t_player *player) // 누른 키에 따라 해당되는 값을 적용한다.
@@ -267,12 +281,13 @@ void	init_set(t_set *set) // 모든 객체를 초기화한다.
 	init_win(set);
 	init_img(set, &set->img);
 	init_player(&set->player);
+	init_ray(&set->ray);
 }
 
 void	update(t_set *set) // 다음 프레임을 그리기 전에 모든 객체를 갱신한다.
 {
 	update_player(set, &set->player);
-	update_rays(&set->player);
+	update_ray(&set->player, &set->ray);
 }
 
 int		render_loop(t_set *set) // 모든 객체를 프레임별로 그린다.
@@ -280,7 +295,7 @@ int		render_loop(t_set *set) // 모든 객체를 프레임별로 그린다.
 	update(set);
 	render_map(set);
 	render_player(&set->img, &set->player);
-	//render_rays(&set->img, &set->player);
+	render_ray(&set->img, &set->player, &set->ray);
 
 	mlx_put_image_to_window(set->mlx, set->win, set->img.img, 0, 0);
 
