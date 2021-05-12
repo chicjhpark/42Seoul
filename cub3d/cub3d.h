@@ -10,7 +10,11 @@
 # define TRUE					0
 # define FALSE					1
 
-# define TWO_PI					6.28318530717958647692
+//# define TWO_PI					6.28318530717958647692
+# define TWO_PI					M_PI * 2;
+
+# define rad(d)					(d) * (M_PI / 180)
+# define deg(d)					(d) * (180 / M_PI)
 
 # define MINIMAP_SCALE_SIZE		1.0
 # define M						MINIMAP_SCALE_SIZE

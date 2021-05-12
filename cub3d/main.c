@@ -23,15 +23,15 @@ typedef struct		s_player
 
 typedef	struct		s_ray
 {
-	float		ray_ang;
+	float		ang;
 	float		hit_x;
 	float		hit_y;
 	float		distance;
 	int			hit_vert;
-	int			ray_up;
-	int			ray_down;
-	int			ray_left;
-	int			ray_right;
+	int			up;
+	int			down;
+	int			left;
+	int			right;
 	int			hit_content;
 }					t_ray;
 
@@ -41,7 +41,7 @@ typedef struct		s_set
 	void		*win;
 	t_img		img;
 	t_player	player;
-	t_ray		ray;
+	t_ray		*ray;
 	int			map[ROW][COL];
 }					t_set;
 
@@ -126,12 +126,12 @@ void	init_player(t_player *player)
 {
 	player->x = WIDTH / 2;
 	player->y = HEIGHT / 2;
-	player->size = 8 * M;
+	player->size = M * 8;
 	player->rot_dir = 0;
 	player->move_dir = 0;
-	player->rot_ang = M_PI * 1.5;
+	player->rot_ang = rad(90);
 	player->move_spd = 3;
-	player->rot_spd = 3 * (M_PI / 180);
+	player->rot_spd = rad(3);
 }
 
 int		wall_collision(t_set *set, float x, float y) // 벽과 충돌했는지 검사한다. 충돌시에는 참(0)을 반환한다.
@@ -194,8 +194,8 @@ void	render_player(t_img *img, t_player *player) // 플레이어를 그린다.
 		size = 0;
 		while (size < player->size)
 		{
-			x = M * (player->x + cos(ang * M_PI / 180) * size);
-			y = M * (player->y + sin(ang * M_PI / 180) * size);
+			x = M * (player->x + cos(rad(ang)) * size);
+			y = M * (player->y + sin(rad(ang)) * size);
 			img->data[WIDTH * y + x] = 0xFF0000;
 			size++;
 		}
@@ -204,19 +204,49 @@ void	render_player(t_img *img, t_player *player) // 플레이어를 그린다.
 	render_player_line(img, player);
 }
 
-int		init_ray(t_ray *ray)
+float	normalize_ang(float ang) // 시야의 각도가 0도보다 작거나 360도보다 클 때 각도를 초기화시킨다.
 {
-	if (!(ray = (t_ray *)malloc(sizeof(t_ray) * (RAYS + 1))))
+	ang = fmodf(ang, M_PI * 2);
+	if (ang < 0)
+		ang += M_PI * 2;
+	return (ang);
+}
+
+int		init_ray(t_ray **ray)
+{
+	int		i;
+
+	if (!(*ray = (t_ray *)malloc(sizeof(t_ray) * (RAYS + 1))))
 		return FALSE;
-	return TRUE;
+	i = 0;
+	while (i < RAYS)
+	{
+		ray[i]->ang = normalize_ang(ray[i]->ang);
+		ray[i]->hit_x = 0;
+		ray[i]->hit_y = 0;
+		ray[i]->distance = 0;
+		ray[i]->down = ray[i]->ang > 0 && ray[i]->ang < M_PI;
+		ray[i]->up = !ray[i]->down;
+		ray[i]->right = ray[i]->ang < 0.5 * M_PI || ray[i]->ang > 1.5 * M_PI;
+		ray[i]->left = !ray[i]->right;
+		i++;
+	}
+	return (TRUE);
 }
 
-void	update_ray(t_player *player, t_ray *ray) // 시야 방향에 따라 광선들을 갱신한다.
+void	update_ray(t_player *player, t_ray **ray) // 시야 방향에 따라 광선들을 갱신한다.
 {
-	ray->ray_ang = player->rot_ang - (FOV / 2);
+	int		i;
+
+	i = 0;
+	while (i < RAYS)
+	{
+		ray[i]->ang = player->rot_ang - FOV / 2;
+		i++;
+	}
 }
 
-void	render_ray(t_img *img, t_player *player, t_ray *ray) // 광선들을 그린다.
+void	render_ray(t_img *img, t_player *player, t_ray **ray) // 광선들을 그린다.
 {
 	int		x2;
 	int		y2;
@@ -229,12 +259,12 @@ void	render_ray(t_img *img, t_player *player, t_ray *ray) // 광선들을 그린
 		len = 0;
 		while (len < 100)
 		{
-			x2 = M * (player->x + cos(ray->ray_ang) * len) - M;
-			y2 = M * (player->y + sin(ray->ray_ang) * len) - M;
+			x2 = M * (player->x + cos(ray[i]->ang) * len);
+			y2 = M * (player->y + sin(ray[i]->ang) * len);
 			img->data[WIDTH * y2 + x2] = 0xFF0000;
 			len++;
 		}
-		ray->ray_ang += FOV / (RAYS - 1);
+		ray[i]->ang += FOV / (RAYS - 1);
 		i++;
 	}
 }
@@ -251,7 +281,6 @@ int		key_press_hook(int key, t_player *player) // 누른 키에 따라 해당되
 		player->move_dir = -1;
 	else if (key == KEY_D)
 		player->rot_dir = 1;
-	printf("KEY PRESS : %d\n", key);
 	return TRUE;
 }
 
@@ -267,7 +296,6 @@ int		key_release_hook(int key, t_player *player) // 놓은 키에 따라 해당�
 		player->move_dir = 0;
 	else if (key == KEY_D)
 		player->rot_dir = 0;
-	printf("KEY RELEASE : %d\n", key);
 	return TRUE;
 }
 
