@@ -23,6 +23,6 @@ fclean	: clean
 		rm -f $(NAME)
 
 all		: $(NAME)
-		rm -f $(OBJS) ; ./cub3d
+		./cub3d
 
 re		: fclean all
