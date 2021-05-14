@@ -6,19 +6,18 @@
 # include <stdlib.h>
 # include <string.h>
 # include <math.h>
-# include <float.h>
+# include <float.h> // WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 # define TRUE					1
 # define FALSE					0
 
-//# define TWO_PI					6.28318530717958647692
 # define TWO_PI					M_PI * 2;
 
 # define rad(d)					(d) * (M_PI / 180)
 # define deg(d)					(d) * (180 / M_PI)
 
-# define F_MAX					FLT_MAX
-# define F_MIN					FLT_MIN
+# define F_MAX					FLT_MAX // WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# define F_MIN					FLT_MIN // WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 # define MINIMAP_SCALE_SIZE		1.0
 # define M						MINIMAP_SCALE_SIZE
@@ -31,9 +30,6 @@
 # define HEIGHT					ROW * GRID_SIZE // 704
 
 # define FOV					60 * (M_PI / 180)
-
-# define FPS					30
-# define FRAME_TIME				1000 / FPS
 
 # define RAYS					WIDTH
 

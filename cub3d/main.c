@@ -102,8 +102,6 @@ void	init_img(t_set *set, t_img *img)
 	img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
 }
 
-
-
 void	render_grid(t_img *img, int x1, int y1, int color) // 타일을 그린다.
 {
 	int		x2;
@@ -203,7 +201,7 @@ void	render_player_line(t_img *img, t_player *player) // 플레이어의 시야 
 	{
 		x = M * (player->x + cos(player->rot_ang) * len);
 		y = M * (player->y + sin(player->rot_ang) * len);
-		img->data[WIDTH * y + x] = 0xFF0000;
+		img->data[WIDTH * y + x] = 0xFFFF00;
 		len++;
 	}
 }
@@ -223,7 +221,7 @@ void	render_player(t_img *img, t_player *player) // 플레이어를 그린다.
 		{
 			x = M * (player->x + cos(rad(ang)) * size);
 			y = M * (player->y + sin(rad(ang)) * size);
-			img->data[WIDTH * y + x] = 0xFF0000;
+			img->data[WIDTH * y + x] = 0xFFFF00;
 			size++;
 		}
 		ang++;
@@ -246,16 +244,16 @@ float	normalize_ang(float ang) // 시야의 각도가 0도보다 작거나 360�
 	return (ang);
 }
 
-float	distance_between_point(float x1, float y1, float x2, float y2)
+float	distance_between_point(float x1, float y1, float x2, float y2) // 플레이어의 좌표와 벽이나 물체에 충돌한 지점의 거리를 계산한다.
 {
 	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
 
 void	init_data(t_data *data, float ang)
 {
-	data->down = ang > 0 && ang < M_PI;
+	data->down = ang > 0 && ang < M_PI; // 0도 ~ 180도는 컴퓨터 좌표상에서는 180도 ~ 360도로 적용되므로 아래를 보고 있는 것이다.
 	data->up = !data->down;
-	data->right = ang < 0.5 * M_PI || ang > 1.5 * M_PI;
+	data->right = ang < 0.5 * M_PI || ang > 1.5 * M_PI; // 90도 보다 작거나 270보다 크면 오른쪽을 보고 있는 것이디.
 	data->left = !data->right;
 	data->h_hit = FALSE;
 	data->h_hit_x = 0;
@@ -269,14 +267,14 @@ void	init_data(t_data *data, float ang)
 
 void	init_horiz_data(t_player *player, t_data *data, float ang)
 {
-	data->y_block = floor(player->y / GRID_SIZE) * GRID_SIZE;
-	data->y_block += data->down ? GRID_SIZE : 0;
-	data->x_block = player->x + (data->y_block - player->y) / tan(ang);
-	data->y_step = GRID_SIZE;
-	data->y_step *= data->up ? -1 : 1;
-	data->x_step = GRID_SIZE / tan(ang);
-	data->x_step *= (data->left && data->x_step > 0) ? -1 : 1;
-	data->x_step *= (data->right && data->x_step < 0) ? -1 : 1;
+	data->y_block = floor(player->y / GRID_SIZE) * GRID_SIZE; // 플레이어의 y좌표 위치를 수평교차로에 맞춘 것이다.
+	data->y_block += data->down ? GRID_SIZE : 0; // 플레이어가 아래쪽을 보고 있으면 수평교차로 지점을 한칸 내려서 맞춘다.
+	data->x_block = player->x + (data->y_block - player->y) / tan(ang); // 플레이어의 x좌표 위치를 수평교차로에 맞춘 것이다.
+	data->y_step = GRID_SIZE; // 수평 교차로를 만나게 되는 y의 폭이다.
+	data->y_step *= data->up ? -1 : 1; // 위를 보고 있다면 -1을 곱해준다. 이유는 컴퓨터상의 좌표에서는 위쪽으로 갈수록 값이 작아지기 때문이다.
+	data->x_step = GRID_SIZE / tan(ang); // 수평 교차로를 만나게 되는 x의 폭이다.
+	data->x_step *= (data->left && data->x_step > 0) ? -1 : 1; // 왼쪽을 보고 있으면 -가 되야하는데 x의 폭이 양수이기 떄문에 음수로 만들어준다.
+	data->x_step *= (data->right && data->x_step < 0) ? -1 : 1; // 오른쪽을 보고 있으면 +가 되야하는데 x의 폭이 음수이기 때문에 양수로 만들어준다.
 	data->h_touch_x = data->x_block;
 	data->h_touch_y = data->y_block;
 }
@@ -422,40 +420,38 @@ void	render_ray(t_img *img, t_player *player, t_ray *ray) // 광선들을 그린
 	}
 }
 
-int		key_press_hook(int key, t_player *player) // 누른 키에 따라 해당되는 값을 적용한다.
-{
-	if (key == KEY_ESC)
-		exit (0);
-	else if (key == KEY_W)
-		player->move_dir = 1;
-	else if (key == KEY_A)
-		player->rot_dir = -1;
-	else if (key == KEY_S)
-		player->move_dir = -1;
-	else if (key == KEY_D)
-		player->rot_dir = 1;
-	return TRUE;
-}
-
-int		key_release_hook(int key, t_player *player) // 놓은 키에 따라 해당되는 값을 적용한다.
-{
-	if (key == KEY_ESC)
-		exit (0);
-	else if (key == KEY_W)
-		player->move_dir = 0;
-	else if (key == KEY_A)
-		player->rot_dir = 0;
-	else if (key == KEY_S)
-		player->move_dir = 0;
-	else if (key == KEY_D)
-		player->rot_dir = 0;
-	return TRUE;
-}
-
-int		close_hook(t_ray **ray) // 창 닫기 버튼을 누르면 작동한다.
+int		close_hook(t_ray **ray) // 창닫기 버튼이나 ESC키를 누르면 프로그램이 종료된다.
 {
 	free(*ray);
 	exit (0);
+}
+
+int		key_press_hook(int key, t_set *set) // 누른 키에 따라 해당되는 값을 적용한다.
+{
+	if (key == KEY_ESC)
+		close_hook(&set->ray);
+	else if (key == KEY_W)
+		set->player.move_dir = 1;
+	else if (key == KEY_A)
+		set->player.rot_dir = -1;
+	else if (key == KEY_S)
+		set->player.move_dir = -1;
+	else if (key == KEY_D)
+		set->player.rot_dir = 1;
+	return TRUE;
+}
+
+int		key_release_hook(int key, t_set *set) // 놓은 키에 따라 해당되는 값을 적용한다.
+{
+	if (key == KEY_W)
+		set->player.move_dir = 0;
+	else if (key == KEY_A)
+		set->player.rot_dir = 0;
+	else if (key == KEY_S)
+		set->player.move_dir = 0;
+	else if (key == KEY_D)
+		set->player.rot_dir = 0;
+	return TRUE;
 }
 
 void	init_set(t_set *set) // 모든 객체를 초기화한다.
@@ -487,8 +483,8 @@ int		main(void)
 	t_set	set;
 
 	init_set(&set);
-	mlx_hook(set.win, KEY_PRESS, 0, &key_press_hook, &set.player);
-	mlx_hook(set.win, KEY_RELEASE, 0, &key_release_hook, &set.player);
+	mlx_hook(set.win, KEY_PRESS, 0, &key_press_hook, &set);
+	mlx_hook(set.win, KEY_RELEASE, 0, &key_release_hook, &set);
 	mlx_hook(set.win, WINDOW_CLOSE_BUTTON, 0, &close_hook, &set.ray);
 	mlx_loop_hook(set.mlx, render_loop, &set);
 	mlx_loop(set.mlx);
