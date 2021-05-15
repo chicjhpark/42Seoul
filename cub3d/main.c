@@ -19,6 +19,7 @@ typedef struct		s_player
 	float		rot_ang;
 	float		move_spd;
 	float		rot_spd;
+	int			move_side;
 }					t_player;
 
 typedef struct		s_data
@@ -69,6 +70,7 @@ typedef struct		s_set
 	t_img		img;
 	t_player	player;
 	t_ray		*ray;
+	int			*wall_tex;
 	int			map[ROW][COL];
 }					t_set;
 
@@ -106,9 +108,7 @@ void	render_grid(t_img *img, int x1, int y1, int color) // 타일을 그린다.
 {
 	int		x2;
 	int		y2;
-	int		line_color;
 
-	line_color = 0x000000;
 	y2 = 0;
 	while (y2 < M * GRID_SIZE)
 	{
@@ -116,7 +116,7 @@ void	render_grid(t_img *img, int x1, int y1, int color) // 타일을 그린다.
 		while (x2 < M * GRID_SIZE)
 		{
 			if (y2 == 0 || x2 == 0 || y2 == M * GRID_SIZE - M || x2 == M * GRID_SIZE - M)
-				img->data[WIDTH * (y1 + y2) + x1 + x2] = line_color;
+				img->data[WIDTH * (y1 + y2) + x1 + x2] = GRID_LINE_COLOR;
 			else
 				img->data[WIDTH * (y1 + y2) + x1 + x2] = color;
 			x2++;
@@ -138,9 +138,9 @@ void	render_map(t_set *set) // 맵을 그린다.
 		while (x < COL)
 		{
 			if (set->map[y][x] == 1)
-				render_grid(&set->img, M * GRID_SIZE * x, M * GRID_SIZE * y, 0x0000FF);
+				render_grid(&set->img, M * GRID_SIZE * x, M * GRID_SIZE * y, BLOCK_COLOR);
 			else
-				render_grid(&set->img, M * GRID_SIZE * x, M * GRID_SIZE * y, 0xFFFFFF);
+				render_grid(&set->img, M * GRID_SIZE * x, M * GRID_SIZE * y, GRID_COLOR);
 			x++;
 		}
 		y++;
@@ -157,6 +157,7 @@ void	init_player(t_player *player)
 	player->rot_ang = rad(90);
 	player->move_spd = 3;
 	player->rot_spd = rad(3);
+	player->move_side = 0;
 }
 
 int		check_collision(t_set *set, float x, float y) // 벽과 충돌했는지 검사한다. 충돌시에는 참(0)을 반환한다.
@@ -179,10 +180,19 @@ void	update_player(t_set *set, t_player *player) // 플레이어의 움직이는
 	float	new_x;
 	float	new_y;
 
-	move = player->move_dir * player->move_spd;
 	player->rot_ang += player->rot_dir * player->rot_spd;
-	new_x = player->x + cos(player->rot_ang) * move;
-	new_y = player->y + sin(player->rot_ang) * move;
+	if (player->move_side == 1 || player->move_side == -1)
+	{
+		move = player->move_side * player->move_spd;
+		new_x = player->x - sin(player->rot_ang) * move;
+		new_y = player->y + cos(player->rot_ang) * move;
+	}
+	else
+	{
+		move = player->move_dir * player->move_spd;
+		new_x = player->x + cos(player->rot_ang) * move;
+		new_y = player->y + sin(player->rot_ang) * move;
+	}
 	if (check_collision(set, new_x, new_y) == FALSE) // 벽과 충돌하지 않은 경우이다.
 	{
 		player->x = new_x;
@@ -201,7 +211,7 @@ void	render_player_line(t_img *img, t_player *player) // 플레이어의 시야 
 	{
 		x = M * (player->x + cos(player->rot_ang) * len);
 		y = M * (player->y + sin(player->rot_ang) * len);
-		img->data[WIDTH * y + x] = 0xFFFF00;
+		img->data[WIDTH * y + x] = PLAYER_COLOR;
 		len++;
 	}
 }
@@ -221,7 +231,7 @@ void	render_player(t_img *img, t_player *player) // 플레이어를 그린다.
 		{
 			x = M * (player->x + cos(rad(ang)) * size);
 			y = M * (player->y + sin(rad(ang)) * size);
-			img->data[WIDTH * y + x] = 0xFFFF00;
+			img->data[WIDTH * y + x] = PLAYER_COLOR;
 			size++;
 		}
 		ang++;
@@ -229,11 +239,20 @@ void	render_player(t_img *img, t_player *player) // 플레이어를 그린다.
 	render_player_line(img, player);
 }
 
-int		init_ray(t_ray **ray)
+int		close_hook(t_set *set) // 창닫기 버튼이나 ESC키를 누르면 프로그램이 종료된다.
 {
-	if (!(*ray = (t_ray *)malloc(sizeof(t_ray) * (RAYS + 1))))
-		return FALSE;
-	return TRUE;
+	if (set->ray != NULL)
+		free(set->ray);
+	mlx_destroy_window(set->mlx, set->win);
+	mlx_destroy_image(set->mlx, set->img.img);
+	exit (0);
+}
+
+void		init_ray(t_set *set, t_ray **ray)
+{
+	*ray = NULL;
+	if (!(*ray = (t_ray *)malloc(sizeof(t_ray) * RAYS)))
+		close_hook(set);
 }
 
 float	normalize_ang(float ang) // 시야의 각도가 0도보다 작거나 360도보다 클 때 각도를 초기화시킨다.
@@ -413,30 +432,124 @@ void	render_ray(t_img *img, t_player *player, t_ray *ray) // 광선들을 그린
 		{
 			x = M * (player->x + cos(ray[i].ang) * j);
 			y = M * (player->y + sin(ray[i].ang) * j);
-			img->data[WIDTH * y + x] = 0xFF0000;
+			img->data[WIDTH * y + x] = RAY_COLOR;
 			j++;
 		}
 		i++;
 	}
 }
 
-int		close_hook(t_ray **ray) // 창닫기 버튼이나 ESC키를 누르면 프로그램이 종료된다.
+void	init_tex(t_set *set, int **wall_tex)
 {
-	free(*ray);
-	exit (0);
+	int		x;
+	int		y;
+
+	*wall_tex = NULL;
+	if (!(*wall_tex = (int *)malloc(sizeof(int) * TEX_WIDTH * TEX_HEIGHT)))
+		close_hook(set);
+	x = 0;
+	while (x < TEX_WIDTH)
+	{
+		y = 0;
+		while (y < TEX_HEIGHT)
+		{
+			(*wall_tex)[TEX_WIDTH * y + x] = (x % 16 && y % 16) ? RED : BLACK;
+			y++;
+		}
+		x++;
+	}
 }
+
+void	render_projection(t_img *img, t_player player, t_ray *ray, int *wall_tex)
+{
+	int		i;
+
+	i = 0;
+	while (i < RAYS)
+	{
+		float	perp;
+		float	plane;
+		float	wall_height;
+		int		strip_height;
+		int		top;
+		int		bot;
+		int		y;
+		int		tex_x;
+
+		perp = ray[i].distance * cos(ray[i].ang - player.rot_ang); // 
+		plane = (WIDTH / 2) / tan(FOV / 2); // 투사체와 내 모니터화면의 거리
+		wall_height = (GRID_SIZE / perp) * plane;
+		strip_height = (int)wall_height;
+		top = (HEIGHT / 2) - (strip_height / 2);
+		top = top < 0 ? 0 : top;
+		bot = (HEIGHT / 2) + (strip_height / 2);
+		bot = bot > HEIGHT ? HEIGHT : bot;
+		y = -1;
+		while (++y < top)
+			img->data[(WIDTH * y) + i] = CEILING_COLOR;
+		if (ray[i].hit_vert)
+			tex_x = (int)ray[i].hit_y % TEX_HEIGHT;
+		else
+			tex_x = (int)ray[i].hit_x % TEX_WIDTH;
+		while (++y < bot)
+		{
+			int		distance_top;
+			int		tex_y;
+			int		wall_color;
+
+			distance_top = y + (strip_height / 2) - (HEIGHT / 2);
+			tex_y = distance_top * ((float)TEX_HEIGHT / strip_height);
+			wall_color = wall_tex[(TEX_WIDTH * tex_y) + tex_x];
+			img->data[(WIDTH * y) + i] = wall_color;
+		}
+		while (++y < HEIGHT)
+			img->data[(WIDTH * y) + i] = FLOOR_COLOR;
+		i++;
+	}
+}
+
+void	clear_frame(t_img *img, int color)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			img->data[WIDTH * y + x] = color;
+			x++;
+		}
+		y++;
+	}
+}
+
+/*int		close_hook(t_set *set) // 창닫기 버튼이나 ESC키를 누르면 프로그램이 종료된다.
+{
+	if (set->ray != NULL)
+		free(set->ray);
+	mlx_destroy_window(set->mlx, set->win);
+	mlx_destroy_image(set->mlx, set->img.img);
+	exit (0);
+}*/
 
 int		key_press_hook(int key, t_set *set) // 누른 키에 따라 해당되는 값을 적용한다.
 {
 	if (key == KEY_ESC)
-		close_hook(&set->ray);
+		close_hook(set);
 	else if (key == KEY_W)
 		set->player.move_dir = 1;
 	else if (key == KEY_A)
-		set->player.rot_dir = -1;
+		set->player.move_side= -1;
 	else if (key == KEY_S)
 		set->player.move_dir = -1;
 	else if (key == KEY_D)
+		set->player.move_side = 1;
+	else if (key == KEY_LEFT)
+		set->player.rot_dir = -1;
+	else if (key == KEY_RIGHT)
 		set->player.rot_dir = 1;
 	return TRUE;
 }
@@ -446,10 +559,14 @@ int		key_release_hook(int key, t_set *set) // 놓은 키에 따라 해당되는 
 	if (key == KEY_W)
 		set->player.move_dir = 0;
 	else if (key == KEY_A)
-		set->player.rot_dir = 0;
+		set->player.move_side = 0;
 	else if (key == KEY_S)
 		set->player.move_dir = 0;
 	else if (key == KEY_D)
+		set->player.move_side = 0;
+	else if (key == KEY_LEFT)
+		set->player.rot_dir = 0;
+	else if (key == KEY_RIGHT)
 		set->player.rot_dir = 0;
 	return TRUE;
 }
@@ -459,7 +576,8 @@ void	init_set(t_set *set) // 모든 객체를 초기화한다.
 	init_win(set);
 	init_img(set, &set->img);
 	init_player(&set->player);
-	init_ray(&set->ray);
+	init_ray(set, &set->ray);
+	init_tex(set, &set->wall_tex);
 }
 
 void	update(t_set *set) // 다음 프레임을 그리기 전에 모든 객체를 갱신한다.
@@ -471,6 +589,10 @@ void	update(t_set *set) // 다음 프레임을 그리기 전에 모든 객체를
 int		render_loop(t_set *set) // 모든 객체를 프레임별로 그린다.
 {
 	update(set);
+	mlx_clear_window(set->mlx, set->win);
+	clear_frame(&set->img, BLACK);
+	render_projection(&set->img, set->player, set->ray, set->wall_tex);
+	mlx_put_image_to_window(set->mlx, set->win, set->img.img, 0, 0);
 	render_map(set);
 	render_ray(&set->img, &set->player, set->ray);
 	render_player(&set->img, &set->player);
@@ -485,7 +607,7 @@ int		main(void)
 	init_set(&set);
 	mlx_hook(set.win, KEY_PRESS, 0, &key_press_hook, &set);
 	mlx_hook(set.win, KEY_RELEASE, 0, &key_release_hook, &set);
-	mlx_hook(set.win, WINDOW_CLOSE_BUTTON, 0, &close_hook, &set.ray);
+	mlx_hook(set.win, WINDOW_CLOSE_BUTTON, 0, &close_hook, &set);
 	mlx_loop_hook(set.mlx, render_loop, &set);
 	mlx_loop(set.mlx);
 	return TRUE;

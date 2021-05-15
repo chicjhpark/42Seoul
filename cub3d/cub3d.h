@@ -6,6 +6,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <math.h>
+# include <stdint.h>
 # include <float.h> // WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 # define TRUE					1
@@ -19,7 +20,7 @@
 # define F_MAX					FLT_MAX // WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # define F_MIN					FLT_MIN // WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-# define MINIMAP_SCALE_SIZE		1.0
+# define MINIMAP_SCALE_SIZE		0.2
 # define M						MINIMAP_SCALE_SIZE
 
 # define ROW					11
@@ -29,9 +30,31 @@
 # define WIDTH					COL * GRID_SIZE // 960
 # define HEIGHT					ROW * GRID_SIZE // 704
 
+# define TEX_WIDTH              64
+# define TEX_HEIGHT             64
+
 # define FOV					60 * (M_PI / 180)
 
 # define RAYS					WIDTH
+
+# define BLACK                  0xAA000000
+# define WHITE                  0xAAFFFFFF
+# define RED                    0xAAFF0000
+# define GREEN                  0xAA0FF000
+# define BLUE                   0xAA0000FF
+# define YELLOW                 0xAAFFFF00
+# define GRASS                  0x00008000
+# define SKY                    0x0087CEEB
+# define MIDNIGHT               0x00191970
+# define DIMGRAY                0x00696969
+
+# define BLOCK_COLOR            WHITE
+# define GRID_COLOR             BLACK
+# define GRID_LINE_COLOR        GREEN
+# define PLAYER_COLOR           YELLOW
+# define RAY_COLOR              RED
+# define FLOOR_COLOR            GRASS
+# define CEILING_COLOR          SKY
 
 # define KEY_PRESS				2
 # define KEY_RELEASE			3
