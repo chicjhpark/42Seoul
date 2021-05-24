@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 20:24:24 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/22 19:15:03 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/24 03:57:33 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	parse_content(t_set *set, int fd)
 		free(content);
 		content = NULL;
 		if (check_type(set->type) == TRUE && check_texture_path(set) == TRUE)
-			break;
+			break ;
 	}
 	if (check == 0 || check_type(set->type) == FALSE)
 		exit_msg("Invalid content.");

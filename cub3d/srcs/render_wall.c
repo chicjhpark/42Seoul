@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_texture.c                                   :+:      :+:    :+:   */
+/*   render_wall.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 16:40:13 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/23 04:33:21 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/24 17:35:27 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 
-void	render_walls(t_img *img, t_player player, t_ray *ray, int *wall_tex)
+u_int	replace_color(t_color color)
+{
+	return (color.r * 256 * 256 + color.g * 256 + color.b);
+}
+
+void	render_wall(t_set *set, t_img *img, t_player player, t_ray *ray)
 {
 	int		i;
 
@@ -25,6 +30,7 @@ void	render_walls(t_img *img, t_player player, t_ray *ray, int *wall_tex)
 		int		bot;
 		int		y;
 		int		tex_x;
+		int		num;
 
 		vert_dist = ray[i].distance * cos(ray[i].ang - player.rot_ang);
 		wall_height = (GRID_SIZE / vert_dist) * ((img->x / 2) / (tan(FOV) / 2));
@@ -34,11 +40,27 @@ void	render_walls(t_img *img, t_player player, t_ray *ray, int *wall_tex)
 		bot = bot > img->y ? img->y : bot;
 		y = -1;
 		while (++y < top)
-			img->data[(img->x * y) + i] = CEILING_COLOR;
+			img->data[(img->x * y) + i] = replace_color(set->ceil);
 		if (ray[i].hit_vert)
+		{
 			tex_x = (int)ray[i].hit_y % TEX_HEIGHT;
+			if (ray[i].left)
+			{
+				num = 3;
+			}
+			else
+				num = 2;
+		}
 		else
+		{
 			tex_x = (int)ray[i].hit_x % TEX_WIDTH;
+			if (ray[i].up)
+				num = 0;
+			else
+			{
+				num = 1;
+			}
+		}
 		while (++y < bot)
 		{
 			int		distance_top;
@@ -47,11 +69,11 @@ void	render_walls(t_img *img, t_player player, t_ray *ray, int *wall_tex)
 
 			distance_top = y + (wall_height / 2) - (img->y / 2); // ?
 			tex_y = distance_top * ((float)TEX_HEIGHT / wall_height);
-			wall_color = wall_tex[(TEX_WIDTH * tex_y) + tex_x];
+			wall_color = set->tex[num][(TEX_WIDTH * tex_y) + tex_x];
 			img->data[(img->x * y) + i] = wall_color;
 		}
 		while (++y < img->y)
-			img->data[(img->x * y) + i] = FLOOR_COLOR;
+			img->data[(img->x * y) + i] = replace_color(set->floor);
 		i++;
 	}
 }

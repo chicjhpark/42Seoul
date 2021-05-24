@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   color.h											:+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: jaehpark <jaehpark@student.42seoul.kr>	 +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2021/05/16 18:50:25 by jaehpark		  #+#	#+#			 */
-/*   Updated: 2021/05/16 21:25:50 by jaehpark		 ###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/24 21:01:55 by jaehpark          #+#    #+#             */
+/*   Updated: 2021/05/24 21:12:46 by jaehpark         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLOR_H
@@ -26,13 +26,12 @@
 # define MIDNIGHT			0xAA191970
 # define DIMGRAY			0xAA696969
 # define SHADE				0x01000000
+# define DARK_YELLOW		0xAA9B870C
 
 # define BLOCK_COLOR		WHITE
 # define GRID_COLOR			BLACK
 # define GRID_LINE_COLOR	GREEN
 # define PLAYER_COLOR		YELLOW
 # define RAY_COLOR			RED
-# define FLOOR_COLOR		GRASS
-# define CEILING_COLOR		SKY
 
 #endif

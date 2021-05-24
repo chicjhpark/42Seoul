@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 16:31:10 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/23 01:31:23 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/24 22:24:34 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,32 @@ void	render_player(t_img *img, t_player *player) // 플레이어를 그린다.
 		ang++;
 	}
 	render_player_line(img, player);
+}
+
+void	render_map_sprite(t_set *set, t_img *img, t_sprite *sprite_tex)
+{
+	int		i;
+	int		x;
+	int		y;
+	int		ang;
+	int		size;
+
+	i = 0;
+	while (i < set->sprite_num)
+	{
+		ang = 0;
+		while (ang < 360)
+		{
+			size = 0;
+			while (size < set->player.size * 3)
+			{
+				x = MINIMAP * (sprite_tex[i].x + cos(ang * (M_PI / 180)) * size);
+				y = MINIMAP * (sprite_tex[i].y + sin(ang * (M_PI / 180)) * size);
+				img->data[set->win_x * y + x] = sprite_tex[i].visible ? YELLOW : DARK_YELLOW;
+				size++;
+			}
+			ang++;
+		}
+		i++;
+	}
 }

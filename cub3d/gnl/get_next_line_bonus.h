@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 02:04:30 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/19 06:47:42 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/24 20:42:05 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # define OPEN_MAX 256
 # define BUFFER_SIZE 256
 
-int		        get_next_line(int fd, char **line);
-ssize_t	        gnl_strlen(char *s);
-char	        *gnl_strdup(char *s1);
-char	        *gnl_strjoin(char *s1, char *s2);
+int			get_next_line(int fd, char **line);
+ssize_t		gnl_strlen(char *s);
+char		*gnl_strdup(char *s1);
+char		*gnl_strjoin(char *s1, char *s2);
 
 #endif

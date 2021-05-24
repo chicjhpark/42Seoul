@@ -6,13 +6,13 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 20:24:20 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/22 19:14:57 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/24 03:52:57 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int		check_texture(t_set *set, char *type)
+int		check_tex(t_set *set, char *type)
 {
 	if (ft_strcmp(type, "NO") == TRUE && set->type[1] == 1)
 		exit_msg("Duplicate north texture.");
@@ -48,14 +48,14 @@ void	parse_texture(t_set *set, char **data)
 		exit_msg("Invalid texture or sprite.");
 	if (check_extension(data[1], ".xpm") == FALSE)
 		exit_msg("Invalid texture extension.");
-	if (ft_strcmp(data[0], "NO") == TRUE && check_texture(set, "NO") == TRUE)
+	if (ft_strcmp(data[0], "NO") == TRUE && check_tex(set, "NO") == TRUE)
 		set->north = ft_strdup(data[1]);
-	else if (ft_strcmp(data[0], "SO") == TRUE && check_texture(set, "SO") == TRUE)
+	else if (ft_strcmp(data[0], "SO") == TRUE && check_tex(set, "SO") == TRUE)
 		set->south = ft_strdup(data[1]);
-	else if (ft_strcmp(data[0], "WE") == TRUE && check_texture(set, "WE") == TRUE)
+	else if (ft_strcmp(data[0], "WE") == TRUE && check_tex(set, "WE") == TRUE)
 		set->west = ft_strdup(data[1]);
-	else if (ft_strcmp(data[0], "EA") == TRUE && check_texture(set, "EA") == TRUE)
+	else if (ft_strcmp(data[0], "EA") == TRUE && check_tex(set, "EA") == TRUE)
 		set->east = ft_strdup(data[1]);
-	else if (ft_strcmp(data[0], "S") == TRUE && check_texture(set, "S") == TRUE)
+	else if (ft_strcmp(data[0], "S") == TRUE && check_tex(set, "S") == TRUE)
 		set->sprite = ft_strdup(data[1]);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 18:50:03 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/16 18:50:03 by jaehpark         ###   ########.fr       */
+/*   Created: 2021/05/24 21:04:01 by jaehpark          #+#    #+#             */
+/*   Updated: 2021/05/24 21:04:01 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
-# include <float.h> // WARNING
-# include <string.h> // WARNING
+# include <float.h>
+# include <string.h>
 # include <mlx.h>
 # include <libft.h>
 # include <get_next_line.h>
@@ -30,6 +30,5 @@
 # include "key.h"
 # include "update.h"
 # include "render.h"
-# include "exit.h"
 
 #endif

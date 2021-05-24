@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 20:40:39 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/23 05:53:03 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/24 20:14:03 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,33 @@ void	check_position(t_set *set, int x, int y, char *pos)
 	}
 }
 
+void	check_sprite(t_set *set)
+{
+	int		x;
+	int		y;
+	int		i;
+
+	if (!(set->sprite_tex = (t_sprite *)malloc(sizeof(t_sprite) * (set->sprite_num))))
+		exit_msg("Failed malloc.");
+	y = 0;
+	i = 0;
+	while (set->map[y])
+	{
+		x = 0;
+		while (set->map[y][x])
+		{
+			if (set->map[y][x] == '2')
+			{
+				set->sprite_tex[i].x = (0.5 + x) * GRID_SIZE;
+				set->sprite_tex[i].y = (0.5 + y) * GRID_SIZE;
+				i++;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
 void	check_map(t_set *set, char **map)
 {
 	int		y;
@@ -75,4 +102,7 @@ void	check_map(t_set *set, char **map)
 		}
 		y++;
 	}
+	check_sprite(set);
+	if (!set->dir)
+		exit_msg("Missing player position.");
 }

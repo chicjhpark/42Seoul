@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 20:24:28 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/23 00:44:57 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/24 22:43:23 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ int		render_loop(t_set *set)
 {
 	update(set);
 	mlx_clear_window(set->mlx, set->win);
-	clear_frame(&set->img, BLACK);
-	render_walls(&set->img, set->player, set->ray, set->wall_tex);
+	render_wall(set, &set->img, set->player, set->ray);
+	render_sprite(set, &set->player, set->ray, set->sprite_tex);
 	mlx_put_image_to_window(set->mlx, set->win, set->img.img, 0, 0);
 	render_map(set);
 	render_ray(set, &set->img, &set->player, set->ray);
 	render_player(&set->img, &set->player);
+	render_map_sprite(set, &set->img, set->sprite_tex);
 	mlx_put_image_to_window(set->mlx, set->win, set->img.img, 0, 0);
 	return TRUE;
 }

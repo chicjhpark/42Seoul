@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 20:28:30 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/22 19:14:50 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/24 03:55:14 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	parse_resolution(t_set *set, char **data)
 		exit_msg("Duplicate resolution.");
 	while (data[count])
 		count++;
-	if (count != 3 || check_num(data[1]) == FALSE || check_num(data[2]) == FALSE)
+	if (count != 3 || check_num(data[1]) == FALSE
+					|| check_num(data[2]) == FALSE)
 		exit_msg("Invalid resolution.");
 	mlx_get_screen_size(set->mlx, &set->win_x, &set->win_y);
 	x = ft_atoi(data[1]);

@@ -1,18 +1,18 @@
 R 800 600
 
-NO north.xpm
+NO ./texture/north.xpm
 
-SO south.xpm
+SO ./texture/south.xpm
 
-WE west.xpm
+WE ./texture/west.xpm
 
-EA east.xpm
+EA ./texture/east.xpm
 
-S sprite.xpm
+S ./texture/sprite.xpm
 
-F 180,255,255
+F 0,80,0
 
-C 255,255,255
+C 19,19,70
 
         1111111111111111111111111
         100000000011001E000000001

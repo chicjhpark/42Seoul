@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 20:39:04 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/23 05:58:53 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/24 18:51:39 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,11 @@ void	check_content(t_set *set, char *content, char *form)
 		{
 			if (content[i] == form[j])
 			{
+				if (content[i] == '2')
+					set->sprite_num++;
 				if (check_dir(set, content[i], "NSEW") == FALSE)
 					exit_msg("Duplicate player dir.");
-				break;
+				break ;
 			}
 			j++;
 		}
@@ -110,6 +112,7 @@ void	parse_map(t_set *set, int fd)
 {
 	char	*content;
 	int		check;
+	int		read_map;
 	t_list	*map;
 
 	content = NULL;
@@ -118,11 +121,14 @@ void	parse_map(t_set *set, int fd)
 	{
 		if (content[0])
 		{
+			read_map = 1;
 			check_content(set, content, " 012NSEW");
 			ft_lstadd_back(&map, ft_lstnew(content));
 		}
+		else if (read_map == 1)
+			exit_msg("Invalid map.");
 		if (check == 0)
-			break;
+			break ;
 	}
 	if (check == -1)
 		exit_msg("Failed reading.");

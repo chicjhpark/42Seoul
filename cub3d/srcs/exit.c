@@ -6,11 +6,11 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 23:08:35 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/22 22:38:02 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/24 21:00:48 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "exit.h"
+#include "init.h"
 
 void    free_array(char **arr)
 {
