@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 16:16:58 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/22 23:23:44 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/25 19:34:56 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	update_player(t_set *set, t_player *player)
 	float	new_y;
 
 	player->rot_ang += player->rot_dir * player->rot_spd;
+	player->rot_ang = normalize_ang(player->rot_ang);
 	if (player->move_side == 1 || player->move_side == -1)
 	{
 		move = player->move_side * player->move_spd;
@@ -38,15 +39,15 @@ void	update_player(t_set *set, t_player *player)
 	}
 }
 
-void	update_ray(t_set *set, t_player *player, t_ray *ray, float ang, int i)
+void	update_ray(t_set *set, t_ray *ray, float ang, int i)
 {
 	ang = normalize_ang(ang);
 	init_data(&ray->data, ang);
-	init_horiz_data(player, &ray->data, ang);
+	init_horiz_data(&set->player, &ray->data, ang);
 	horiz_intersection(set, &ray->data);
-	init_vert_data(player, &ray->data, ang);
+	init_vert_data(&set->player, &ray->data, ang);
 	vert_intersection(set, &ray->data);
-	select_closest_distance(player, ray, &ray->data, ang, i);
+	select_closest_distance(set, &ray->data, ang, i);
 }
 
 void	update_rays(t_set *set, t_player *player, t_ray *ray)
@@ -54,12 +55,12 @@ void	update_rays(t_set *set, t_player *player, t_ray *ray)
 	float	ang;
 	int		i;
 
-	ang = player->rot_ang - (FOV / 2);
+	ang = player->rot_ang - (set->fov / 2);
 	i = 0;
 	while (i < set->rays)
 	{
-		update_ray(set, player, ray, ang, i);
-		ang += FOV / (set->rays - 1);
+		update_ray(set, ray, ang, i);
+		ang += set->fov / (set->rays - 1);
 		i++;
 	}
 }

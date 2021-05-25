@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 20:40:39 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/24 20:14:03 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/25 16:45:49 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		check_valid_map(char **map, int x, int y)
 void	check_position(t_set *set, int x, int y, char *pos)
 {
 	int		i;
-	
+
 	i = 0;
 	while (pos[i])
 	{
@@ -59,7 +59,8 @@ void	check_sprite(t_set *set)
 	int		y;
 	int		i;
 
-	if (!(set->sprite_tex = (t_sprite *)malloc(sizeof(t_sprite) * (set->sprite_num))))
+	if (!(set->sprites =
+		(t_sprite *)malloc(sizeof(t_sprite) * (set->sprite_num))))
 		exit_msg("Failed malloc.");
 	y = 0;
 	i = 0;
@@ -70,8 +71,8 @@ void	check_sprite(t_set *set)
 		{
 			if (set->map[y][x] == '2')
 			{
-				set->sprite_tex[i].x = (0.5 + x) * GRID_SIZE;
-				set->sprite_tex[i].y = (0.5 + y) * GRID_SIZE;
+				set->sprites[i].x = (0.5 + x) * GRID_SIZE;
+				set->sprites[i].y = (0.5 + y) * GRID_SIZE;
 				i++;
 			}
 			x++;
@@ -84,7 +85,7 @@ void	check_map(t_set *set, char **map)
 {
 	int		y;
 	int		x;
-	
+
 	y = 0;
 	while (map[y])
 	{
@@ -93,9 +94,11 @@ void	check_map(t_set *set, char **map)
 		{
 			if (y == 0 && map[y][x] != '1' && map[y][x] != ' ')
 				exit_msg("Invalid map.");
-			else if (y == set->map_y - 1 && map[y][x] != '1' && map[y][x] != ' ')
+			else if (y == set->map_y - 1 &&
+						map[y][x] != '1' && map[y][x] != ' ')
 				exit_msg("Invalid map.");
-			else if (map[y][x] != ' ' && map[y][x] != '1' && check_valid_map(map, x, y) == FALSE)
+			else if (map[y][x] != ' ' && map[y][x] != '1' &&
+						check_valid_map(map, x, y) == FALSE)
 				exit_msg("Invalid map.");
 			check_position(set, x, y, "NSWE");
 			x++;

@@ -6,16 +6,16 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 23:09:29 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/24 06:01:04 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/25 19:36:04 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void    init_default(t_set *set)
+void	init_default(t_set *set)
 {
-    ft_memset(set, 0, sizeof(t_set));
-    set->mlx = mlx_init();
+	ft_memset(set, 0, sizeof(t_set));
+	set->mlx = mlx_init();
 }
 
 void	clear_frame(t_img *img, int color)

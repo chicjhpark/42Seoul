@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 16:24:58 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/22 19:14:27 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/25 17:18:39 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		key_press_hook(int key, t_set *set)
 	else if (key == KEY_W)
 		set->player.move_dir = 1;
 	else if (key == KEY_A)
-		set->player.move_side= -1;
+		set->player.move_side = -1;
 	else if (key == KEY_S)
 		set->player.move_dir = -1;
 	else if (key == KEY_D)
@@ -33,7 +33,7 @@ int		key_press_hook(int key, t_set *set)
 		set->player.rot_dir = -1;
 	else if (key == KEY_RIGHT)
 		set->player.rot_dir = 1;
-	return TRUE;
+	return (TRUE);
 }
 
 int		key_release_hook(int key, t_set *set)
@@ -50,5 +50,5 @@ int		key_release_hook(int key, t_set *set)
 		set->player.rot_dir = 0;
 	else if (key == KEY_RIGHT)
 		set->player.rot_dir = 0;
-	return TRUE;
+	return (TRUE);
 }

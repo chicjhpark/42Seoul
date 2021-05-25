@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 21:01:55 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/24 21:12:46 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/25 17:26:00 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 # define BLOCK_COLOR		WHITE
 # define GRID_COLOR			BLACK
-# define GRID_LINE_COLOR	GREEN
+# define LINE_COLOR			GREEN
 # define PLAYER_COLOR		YELLOW
 # define RAY_COLOR			RED
 

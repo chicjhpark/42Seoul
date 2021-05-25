@@ -6,7 +6,7 @@
 #    By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/16 18:51:24 by jaehpark          #+#    #+#              #
-#    Updated: 2021/05/24 17:24:55 by jaehpark         ###   ########.fr        #
+#    Updated: 2021/05/25 16:51:17 by jaehpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRCS_NAME	= cub3d.c \
 				render_minimap.c \
 				update.c \
 				update_ray.c \
-				render_sprite.c
+				render_sprite.c \
+				init_tex.c
 				
 #SRCS		= $(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
 OBJS_DIR	= ./objs

@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 18:51:04 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/22 19:09:23 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/25 16:22:19 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define KEY_BACK				125
 # define KEY_FRONT				126
 
-int		    key_press_hook(int key, t_set *set);
-int		    key_release_hook(int key, t_set *set);
-int         close_hook(t_set *set);
+int		key_press_hook(int key, t_set *set);
+int		key_release_hook(int key, t_set *set);
+int		close_hook(t_set *set);
 
 #endif

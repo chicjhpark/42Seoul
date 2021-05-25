@@ -46,7 +46,7 @@
 
 #define	MLX_H
 
-#include "../mlx_custom/mlx_custom.h"
+#include "mlx_custom.h"
 
 void	*mlx_init();
 /*

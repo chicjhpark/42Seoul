@@ -1,29 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   render_sprite.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/25 15:38:12 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/25 17:49:07 by jaehpark         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "render.h"
-
 void	check_visible_sprite(t_set *set, t_player *player, t_sprite *sprite)
 {
 	int		i;
 	float	ang;
 	float	epsilon;
 
-	i = -1;
+	i = 0;
 	epsilon = 0.2;
-	while (++i < set->sprite_num)
+	while (i < set->sprite_num)
 	{
-		ang = player->rot_ang -
-				atan2(sprite[i].y - player->y, sprite[i].x - player->x);
+		ang = player->rot_ang - atan2(sprite[i].y - player->y, sprite[i].x - player->x);
 		if (ang > M_PI)
 			ang -= M_PI * 2;
 		if (ang < -M_PI)
@@ -33,11 +18,11 @@ void	check_visible_sprite(t_set *set, t_player *player, t_sprite *sprite)
 		{
 			sprite[i].visible = 1;
 			sprite[i].ang = ang;
-			sprite[i].distance = distance_between_point(sprite[i].x,
-								sprite[i].y, player->x, player->y);
+			sprite[i].distance = distance_between_point(sprite[i].x, sprite[i].y, player->x, player->y);
 		}
 		else
 			sprite[i].visible = 0;
+		i++;
 	}
 }
 
@@ -68,19 +53,18 @@ void	relocate_sprite(t_set *set, t_sprite *sprite)
 void	init_sprite(t_set *set, t_player *player, t_sprite *sprite, int i)
 {
 	sprite[i].perp = sprite[i].distance * cos(sprite[i].ang);
-	sprite[i].height =
-		(GRID_SIZE / sprite[i].perp) * ((set->win_x / 2) / tan(set->fov / 2));
+	sprite[i].height = (GRID_SIZE / sprite[i].perp) * ((set->win_x / 2) / tan(set->fov / 2));
 	sprite[i].width = sprite[i].height;
 	sprite[i].top = (set->win_y / 2) - (sprite[i].height / 2);
 	sprite[i].top = (sprite[i].top < 0) ? 0 : sprite[i].top;
 	sprite[i].bot = (set->win_y / 2) + (sprite[i].height / 2);
 	sprite[i].bot = (sprite[i].bot > set->win_y) ? set->win_y : sprite[i].bot;
-	sprite[i].ang = atan2(sprite[i].y - player->y,
-							sprite[i].x - player->x) - player->rot_ang;
+	sprite[i].ang = atan2(sprite[i].y - player->y, sprite[i].x - player->x) - player->rot_ang;
 	sprite[i].pos = tan(sprite[i].ang) * ((set->win_x / 2) / tan(set->fov / 2));
 	sprite[i].left = (set->win_x / 2) + sprite[i].pos - (sprite[i].width / 2);
 	sprite[i].right = sprite[i].left + sprite[i].width;
 	sprite[i].texel_width = (TEX_WIDTH / sprite[i].width);
+
 }
 
 void	render_sprite(t_set *set, t_sprite *sprite, int x, int i)
@@ -90,7 +74,7 @@ void	render_sprite(t_set *set, t_sprite *sprite, int x, int i)
 	int		tex_y;
 	int		dist_top;
 	int		color;
-
+	
 	tex_x = (x - sprite[i].left) * sprite[i].texel_width;
 	y = sprite[i].top;
 	while (y < sprite[i].bot)
@@ -111,7 +95,7 @@ void	render_sprites(t_set *set, t_player *player, t_sprite *sprite)
 {
 	int		i;
 	int		x;
-
+	
 	check_visible_sprite(set, player, sprite);
 	relocate_sprite(set, sprite);
 	i = 0;

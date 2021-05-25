@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 20:24:24 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/24 03:57:33 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/25 17:24:41 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	parse_type(t_set *set, char **data)
 void	parse_types(t_set *set, const char *content)
 {
 	char	**data;
-	
+
 	data = NULL;
 	if ((data = ft_split(content, ' ')) == NULL)
 		exit_msg("Invalid split.");

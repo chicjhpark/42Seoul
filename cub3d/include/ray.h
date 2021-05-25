@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 16:02:33 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/23 00:16:59 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/25 16:23:21 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ typedef struct		s_data
 
 typedef	struct		s_ray
 {
-	float		ang;
-	float		hit_x;
-	float		hit_y;
-	float		distance;
-	int			hit_vert;
-	int			up;
-	int			down;
-	int			left;
-	int			right;
-	int			hit_content;
-	t_data		data;
+	float	ang;
+	float	hit_x;
+	float	hit_y;
+	float	distance;
+	int		hit_vert;
+	int		up;
+	int		down;
+	int		left;
+	int		right;
+	int		hit_content;
+	t_data	data;
 }					t_ray;
 
 #endif
