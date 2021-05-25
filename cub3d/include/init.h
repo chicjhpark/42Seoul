@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 22:18:33 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/26 00:13:02 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/26 05:35:09 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 # define ERROR		-2
 
 # define GRID_SIZE	64
-# define TEX_WIDTH	64
-# define TEX_HEIGHT	64
 
 # define MINIMAP	0.2
 

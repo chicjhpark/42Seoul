@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 16:40:13 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/25 20:34:07 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/26 05:09:39 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ void	update_wall(t_set *set, t_ray *ray, t_wall *wall, int i)
 	wall->bot = wall->bot > set->win_y ? set->win_y : wall->bot;
 	if (set->ray[i].hit_vert)
 	{
-		wall->tex_x = (int)set->ray[i].hit_y % TEX_HEIGHT;
+		wall->tex_x = (int)set->ray[i].hit_y % set->tex_size[wall->num].y;
 		wall->tex_x = set->ray[i].left ?
-						-wall->tex_x + TEX_WIDTH - 1 : wall->tex_x;
+						-wall->tex_x + set->tex_size[wall->num].x - 1 : wall->tex_x;
 		wall->num = set->ray[i].left ? 3 : 2;
 	}
 	else
 	{
-		wall->tex_x = (int)set->ray[i].hit_x % TEX_WIDTH;
+		wall->tex_x = (int)set->ray[i].hit_x % set->tex_size[wall->num].x;
 		wall->tex_x = set->ray[i].up ?
-						wall->tex_x : -wall->tex_x + TEX_WIDTH - 1;
+						wall->tex_x : -wall->tex_x + set->tex_size[wall->num].x - 1;
 		wall->num = set->ray[i].up ? 0 : 1;
 	}
 }
@@ -60,9 +60,9 @@ void	render_wall(t_set *set, t_img *img, t_ray *ray)
 		while (++y < set->wall.bot)
 		{
 			dist_top = y + (set->wall.height / 2) - (set->win_y / 2);
-			tex_y = dist_top * ((float)TEX_HEIGHT / set->wall.height);
+			tex_y = dist_top * ((float)set->tex_size[set->wall.num].y / set->wall.height);
 			color = set->tex[set->wall.num]
-							[(TEX_WIDTH * tex_y) + set->wall.tex_x];
+							[(set->tex_size[set->wall.num].x * tex_y) + set->wall.tex_x];
 			set->img.data[(set->win_x * y) + i] = color;
 		}
 		while (++y < img->y)

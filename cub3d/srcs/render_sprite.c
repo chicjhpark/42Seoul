@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 15:38:12 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/25 17:49:07 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/26 05:09:35 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	init_sprite(t_set *set, t_player *player, t_sprite *sprite, int i)
 	sprite[i].pos = tan(sprite[i].ang) * ((set->win_x / 2) / tan(set->fov / 2));
 	sprite[i].left = (set->win_x / 2) + sprite[i].pos - (sprite[i].width / 2);
 	sprite[i].right = sprite[i].left + sprite[i].width;
-	sprite[i].texel_width = (TEX_WIDTH / sprite[i].width);
+	sprite[i].texel_width = (set->tex_size[4].x / sprite[i].width);
 }
 
 void	render_sprite(t_set *set, t_sprite *sprite, int x, int i)
@@ -98,8 +98,8 @@ void	render_sprite(t_set *set, t_sprite *sprite, int x, int i)
 		if (x > 0 && x < set->win_x && y > 0 && y < set->win_y)
 		{
 			dist_top = y + (sprite[i].height / 2) - (set->win_y / 2);
-			tex_y = dist_top * (TEX_HEIGHT / sprite[i].height);
-			color = set->tex[4][TEX_WIDTH * tex_y + tex_x];
+			tex_y = dist_top * (set->tex_size[4].y / sprite[i].height);
+			color = set->tex[4][set->tex_size[4].x * tex_y + tex_x];
 			if (sprite[i].distance < set->ray[x].distance && color != 0x000000)
 				set->img.data[set->win_x * y + x] = color;
 		}
