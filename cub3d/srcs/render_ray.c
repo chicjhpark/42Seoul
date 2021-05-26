@@ -6,11 +6,11 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 19:15:13 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/25 17:30:50 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/26 22:46:18 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render.h"
+#include "cub3d.h"
 
 int		check_collision(t_set *set, float x, float y)
 {

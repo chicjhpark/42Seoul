@@ -1,19 +1,18 @@
 R 800 600
 
-NO /Users/jaehpark/42Seoul/cub3d/texture/north.xpm
+NO /Users/jhpark/42Seoul/cub3d/texture/north.xpm
 
-SO /Users/jaehpark/42Seoul/cub3d/texture/south.xpm
+SO /Users/jhpark/42Seoul/cub3d/texture/south.xpm
 
-WE /Users/jaehpark/42Seoul/cub3d/texture/west.xpm
+WE /Users/jhpark/42Seoul/cub3d/texture/west.xpm
 
-EA /Users/jaehpark/42Seoul/cub3d/texture/east.xpm
+EA /Users/jhpark/42Seoul/cub3d/texture/east.xpm
 
-S /Users/jaehpark/42Seoul/cub3d/texture/sprite.xpm
+S /Users/jhpark/42Seoul/cub3d/texture/sprite.xpm
 
 F 0,80,0
 
 C 19,19,70
-
 
         1111111111111111111111111
         100000001011001E000000001

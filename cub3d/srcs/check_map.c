@@ -6,11 +6,11 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 20:40:39 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/25 16:45:49 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/26 19:29:45 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "cub3d.h"
 
 int		check_valid_map(char **map, int x, int y)
 {

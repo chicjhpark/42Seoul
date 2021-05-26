@@ -6,11 +6,11 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 16:16:58 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/25 19:34:56 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/26 19:31:24 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "update.h"
+#include "cub3d.h"
 
 void	update_player(t_set *set, t_player *player)
 {

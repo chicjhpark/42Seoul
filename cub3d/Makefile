@@ -6,16 +6,17 @@
 #    By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/16 18:51:24 by jaehpark          #+#    #+#              #
-#    Updated: 2021/05/25 16:51:17 by jaehpark         ###   ########.fr        #
+#    Updated: 2021/05/26 23:44:09 by jaehpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= cub3D
 
 CC			= gcc
-CFLAGS		= -g -Wall -Wextra -Werror
+# CFLAGS		= -g -Wall -Wextra -Werror
+CFLAGS		= -g3 -fsanitize=address  -Wall -Wextra -Werror
 
-INCS		= -Ilibft -Imlx -Ignl -Iinclude
+INCS		= -Ilibft -Imlx -Iinclude
 
 SRCS_DIR	= srcs
 SRCS_NAME	= cub3d.c \

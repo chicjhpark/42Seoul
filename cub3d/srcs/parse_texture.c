@@ -6,11 +6,11 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 20:24:20 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/24 03:52:57 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/26 19:30:33 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "cub3d.h"
 
 int		check_tex(t_set *set, char *type)
 {

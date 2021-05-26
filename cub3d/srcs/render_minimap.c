@@ -6,13 +6,11 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 16:31:10 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/25 17:28:09 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/26 22:46:13 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render.h"
-#include "color.h"
-#include "init.h"
+#include "cub3d.h"
 
 void	render_grid(t_set *set, int x1, int y1, int color)
 {

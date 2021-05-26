@@ -6,14 +6,12 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 21:01:55 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/25 17:26:00 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/26 19:20:43 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLOR_H
 # define COLOR_H
-
-# include "cub3d.h"
 
 # define BLACK				0xAA000000
 # define WHITE				0xAAFFFFFF

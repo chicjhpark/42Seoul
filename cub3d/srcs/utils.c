@@ -6,11 +6,11 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 23:09:29 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/25 19:36:04 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/26 19:31:35 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "cub3d.h"
 
 void	init_default(t_set *set)
 {

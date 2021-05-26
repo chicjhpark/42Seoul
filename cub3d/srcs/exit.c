@@ -6,12 +6,11 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 23:08:35 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/25 22:23:48 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/26 22:37:21 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "init.h"
-#include <mlx.h>
+#include "cub3d.h"
 
 void	free_array(char **arr)
 {
@@ -23,6 +22,7 @@ void	free_array(char **arr)
 		free(arr[i]);
 		i++;
 	}
+	free(arr[i]);
 	free(arr);
 }
 

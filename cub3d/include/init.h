@@ -6,23 +6,74 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 22:18:33 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/26 05:35:09 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/26 19:35:19 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INIT_H
 # define INIT_H
 
-# include <math.h>
-# include <libft.h>
-# include "player.h"
-# include "ray.h"
+# include "cub3d.h"
 
 # define TRUE		0
 # define FALSE		-1
 # define ERROR		-2
 
 # define MINIMAP	0.2
+
+typedef struct		s_data
+{
+	int		down;
+	int		up;
+	int		right;
+	int		left;
+	float	x_block;
+	float	y_block;
+	float	x_step;
+	float	y_step;
+	int		h_hit;
+	float	h_hit_x;
+	float	h_hit_y;
+	char	h_content;
+	float	h_touch_x;
+	float	h_touch_y;
+	float	h_distance;
+	int		v_hit;
+	float	v_hit_x;
+	float	v_hit_y;
+	char	v_content;
+	float	v_touch_x;
+	float	v_touch_y;
+	float	v_distance;
+}					t_data;
+
+typedef	struct		s_ray
+{
+	float	ang;
+	float	hit_x;
+	float	hit_y;
+	float	distance;
+	int		hit_vert;
+	int		up;
+	int		down;
+	int		left;
+	int		right;
+	int		hit_content;
+	t_data	data;
+}					t_ray;
+
+typedef struct		s_player
+{
+	float		x;
+	float		y;
+	float		size;
+	float		rot_dir;
+	float		move_dir;
+	float		rot_ang;
+	float		move_spd;
+	float		rot_spd;
+	int			move_side;
+}					t_player;
 
 typedef struct		s_img
 {
@@ -116,9 +167,5 @@ void				init_img(t_set *set, t_img *img);
 void				init_ray(t_set *set, t_ray **ray);
 void				init_set(t_set *set);
 void				init_tex(t_set *set);
-void				free_set(t_set *set);
-void				exit_msg(const char *msg);
-int					exit_success(t_set *set);
-void				free_array(char **arr);
 
 #endif

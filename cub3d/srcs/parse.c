@@ -6,11 +6,11 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 20:24:24 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/25 17:24:41 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/26 19:30:38 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "cub3d.h"
 
 int		check_type(int *type)
 {

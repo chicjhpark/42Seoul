@@ -6,11 +6,11 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 05:44:19 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/25 19:34:25 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/26 22:39:13 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render.h"
+#include "cub3d.h"
 
 void	init_horiz_data(t_set *set, t_player *player, t_data *data, float ang)
 {
@@ -43,7 +43,7 @@ void	horiz_intersection(t_set *set, t_data *data)
 			data->h_hit_x = data->h_touch_x;
 			data->h_hit_y = data->h_touch_y;
 			data->h_content = set->map[(int)floor(y_check / set->tex_size[0].x)]
-									[(int)floor(x_check / set->tex_size[0].x)];
+									[(int)floor(x_check / set->tex_size[0].y)];
 			data->h_hit = 1;
 			break ;
 		}
@@ -57,8 +57,7 @@ void	horiz_intersection(t_set *set, t_data *data)
 
 void	init_vert_data(t_set *set, t_player *player, t_data *data, float ang)
 {
-	data->x_block = floor((player->x) / set->tex_size[0].x) *
-													set->tex_size[0].x;
+	data->x_block = floor(player->x / set->tex_size[0].x) * set->tex_size[0].x;
 	data->x_block += data->right ? set->tex_size[0].x : 0;
 	data->y_block = player->y + (data->x_block - player->x) * tan(ang);
 	data->x_step = set->tex_size[0].x;
@@ -75,10 +74,10 @@ void	vert_intersection(t_set *set, t_data *data)
 	float	x_check;
 	float	y_check;
 
-	while (data->v_touch_x > 0 &&
+	while (data->v_touch_x >= 0 &&
 			data->v_touch_x <= set->map_x * set->tex_size[0].x &&
 			data->v_touch_y >= 0 &&
-			data->v_touch_y <= set->map_y * set->tex_size[0].x)
+			data->v_touch_y <= set->map_y * set->tex_size[0].y)
 	{
 		x_check = data->v_touch_x + (data->left ? -1 : 0);
 		y_check = data->v_touch_y;

@@ -6,11 +6,11 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 20:39:04 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/26 00:34:23 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/26 19:30:21 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "cub3d.h"
 
 int		get_map_x(t_list *map)
 {

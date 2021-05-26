@@ -6,12 +6,11 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 16:50:35 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/26 07:12:22 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/26 21:21:12 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "init.h"
-#include "color.h"
+#include "cub3d.h"
 
 int		data_size(int *arr)
 {

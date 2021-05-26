@@ -6,12 +6,11 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 23:07:19 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/26 05:10:40 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/26 19:21:46 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "init.h"
-#include "color.h"
+#include "cub3d.h"
 
 void	init_win(t_set *set)
 {
