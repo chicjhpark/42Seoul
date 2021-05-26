@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 05:44:19 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/26 22:39:13 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/27 00:52:05 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	horiz_intersection(t_set *set, t_data *data)
 	float	x_check;
 	float	y_check;
 
-	while (data->h_touch_x >= 0 &&
-			data->h_touch_x <= set->map_x * set->tex_size[0].x &&
+	while (data->h_touch_x > 0 &&
+			data->h_touch_x < set->map_x * set->tex_size[0].x &&
 			data->h_touch_y > 0 &&
 			data->h_touch_y < set->map_y * set->tex_size[0].x)
 	{
@@ -74,10 +74,10 @@ void	vert_intersection(t_set *set, t_data *data)
 	float	x_check;
 	float	y_check;
 
-	while (data->v_touch_x >= 0 &&
-			data->v_touch_x <= set->map_x * set->tex_size[0].x &&
-			data->v_touch_y >= 0 &&
-			data->v_touch_y <= set->map_y * set->tex_size[0].y)
+	while (data->v_touch_x > 0 &&
+			data->v_touch_x < set->map_x * set->tex_size[0].x &&
+			data->v_touch_y > 0 &&
+			data->v_touch_y < set->map_y * set->tex_size[0].y)
 	{
 		x_check = data->v_touch_x + (data->left ? -1 : 0);
 		y_check = data->v_touch_y;

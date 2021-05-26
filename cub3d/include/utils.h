@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 21:01:44 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/26 23:21:10 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/27 00:48:33 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ void		exit_msg(const char *msg);
 int			exit_success(t_set *set);
 void		free_array(char **arr);
 void		free_set(t_set *set);
-void			save_bmp(int x, int y);
-void			generate_image(unsigned char *image, int y, int x, char *file_name);
-unsigned char	*create_file_header(int y, int stride);
-unsigned char	*create_info_header(int y, int x);
+void		save_bmp(t_set *set);
+int			render_loop(t_set *set);
 
 #endif

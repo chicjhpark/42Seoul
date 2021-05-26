@@ -6,12 +6,12 @@
 #    By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/16 19:38:10 by jaehpark          #+#    #+#              #
-#    Updated: 2021/05/26 21:12:27 by jaehpark         ###   ########.fr        #
+#    Updated: 2021/05/27 00:28:34 by jaehpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -g3 -fsanitize=address -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 
 SRCS = ft_memset.c \
 	   ft_bzero.c \

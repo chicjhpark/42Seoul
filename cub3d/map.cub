@@ -1,4 +1,4 @@
-R 800 600
+R 800 10000
 
 NO /Users/jhpark/42Seoul/cub3d/texture/north.xpm
 
@@ -10,7 +10,7 @@ EA /Users/jhpark/42Seoul/cub3d/texture/east.xpm
 
 S /Users/jhpark/42Seoul/cub3d/texture/sprite.xpm
 
-F 0,80,0
+F 0,0,0
 
 C 19,19,70
 

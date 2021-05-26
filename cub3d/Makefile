@@ -6,15 +6,14 @@
 #    By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/16 18:51:24 by jaehpark          #+#    #+#              #
-#    Updated: 2021/05/26 23:44:09 by jaehpark         ###   ########.fr        #
+#    Updated: 2021/05/27 01:04:35 by jaehpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= cub3D
 
 CC			= gcc
-# CFLAGS		= -g -Wall -Wextra -Werror
-CFLAGS		= -g3 -fsanitize=address  -Wall -Wextra -Werror
+CFLAGS		= -g -Wall -Wextra -Werror
 
 INCS		= -Ilibft -Imlx -Iinclude
 
@@ -39,9 +38,10 @@ SRCS_NAME	= cub3d.c \
 				update.c \
 				update_ray.c \
 				render_sprite.c \
-				init_tex.c
+				init_tex.c \
+				save_bmp.c
 				
-#SRCS		= $(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
+SRCS		= $(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
 OBJS_DIR	= ./objs
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS_NAME:.c=.o))
 
@@ -54,7 +54,7 @@ MLX_NAME	= mlx
 MLX			= $(addprefix $(MLX_DIR)/, libmlx.a)
 
 $(NAME)		: $(LIB) $(MLX) $(OBJS)
-		$(CC) $(CFLAGS) $(INCS) -Iinclude -L$(LIB_DIR) -l$(LIB_NAME) -L$(MLX_DIR) -l$(MLX_NAME) -framework OpenGL -framework AppKit -lz $(OBJS) -o $@
+		$(CC) $(CFLAGS) $(INCS) -L$(LIB_DIR) -l$(LIB_NAME) -L$(MLX_DIR) -l$(MLX_NAME) -framework OpenGL -framework AppKit -lz $(OBJS) -o $@
 
 $(LIB)		:
 		$(MAKE) -C $(LIB_DIR) bonus
@@ -64,7 +64,7 @@ $(MLX)		:
 
 $(OBJS_DIR)/%.o : $(SRCS_DIR)/%.c
 	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) -Iinclude -c $< -o $@
+	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
 
 all 	: $(NAME)
 
