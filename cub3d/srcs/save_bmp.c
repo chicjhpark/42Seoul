@@ -6,71 +6,58 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 00:54:31 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/05/27 01:02:57 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/05/27 04:02:28 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void			ft_file_header(t_set *set, int fd)
+void			file_header(t_set *set, int fd)
 {
-	int						filesize;
+	int						size;
 	int						padding;
-	static unsigned char	fileheader[] = {
-		0, 0,
-		0, 0, 0, 0,
-		0, 0, 0, 0,
-		0, 0, 0, 0,
-	};
+	static unsigned char	header[14];
 
+	ft_memset(header, 0, 14);
 	padding = (4 - (set->win_x * 3) % 4) % 4;
-	filesize = 54 + (3 * set->win_x + padding) * set->win_y;
-	fileheader[0] = (unsigned char)('B');
-	fileheader[1] = (unsigned char)('M');
-	fileheader[2] = (unsigned char)(filesize);
-	fileheader[3] = (unsigned char)(filesize >> 8);
-	fileheader[4] = (unsigned char)(filesize >> 16);
-	fileheader[5] = (unsigned char)(filesize >> 24);
-	fileheader[10] = (unsigned char)(54);
-	write(fd, fileheader, 14);
+	size = 54 + (3 * set->win_x + padding) * set->win_y;
+	header[0] = (unsigned char)('B');
+	header[1] = (unsigned char)('M');
+	header[2] = (unsigned char)(size);
+	header[3] = (unsigned char)(size >> 8);
+	header[4] = (unsigned char)(size >> 16);
+	header[5] = (unsigned char)(size >> 24);
+	header[10] = (unsigned char)(54);
+	write(fd, header, 14);
 }
 
-void			ft_image_header(t_set *set, int fd)
+void			info_header(t_set *set, int fd)
 {
-	static unsigned char	infoheader[] = {
-		0, 0, 0, 0,
-		0, 0, 0, 0,
-		0, 0, 0, 0,
-		0, 0, 0, 0,
-		0, 0, 0, 0,
-		0, 0, 0, 0,
-		0, 0, 0, 0,
-		0, 0, 0, 0,
-		0, 0, 0, 0,
-		0, 0, 0, 0,
-	};
+	static unsigned char	header[40];
 
-	infoheader[0] = (unsigned char)(40);
-	infoheader[4] = (unsigned char)(set->win_x);
-	infoheader[5] = (unsigned char)(set->win_x >> 8);
-	infoheader[6] = (unsigned char)(set->win_x >> 16);
-	infoheader[7] = (unsigned char)(set->win_x >> 24);
-	infoheader[8] = (unsigned char)(set->win_y);
-	infoheader[9] = (unsigned char)(set->win_y >> 8);
-	infoheader[10] = (unsigned char)(set->win_y >> 16);
-	infoheader[11] = (unsigned char)(set->win_y >> 24);
-	infoheader[12] = (unsigned char)(1);
-	infoheader[14] = (unsigned char)(24);
-	write(fd, infoheader, 40);
+	ft_memset(header, 0, 40);
+	header[0] = (unsigned char)(40);
+	header[4] = (unsigned char)(set->win_x);
+	header[5] = (unsigned char)(set->win_x >> 8);
+	header[6] = (unsigned char)(set->win_x >> 16);
+	header[7] = (unsigned char)(set->win_x >> 24);
+	header[8] = (unsigned char)(set->win_y);
+	header[9] = (unsigned char)(set->win_y >> 8);
+	header[10] = (unsigned char)(set->win_y >> 16);
+	header[11] = (unsigned char)(set->win_y >> 24);
+	header[12] = (unsigned char)(1);
+	header[14] = (unsigned char)(24);
+	write(fd, header, 40);
 }
 
-void			ft_save_buffer(t_set *set, int fd)
+void			save_buffer(t_set *set, int fd)
 {
 	int						i;
 	int						j;
 	int						padding;
-	static unsigned char	zero[3] = { 0, 0, 0};
+	static unsigned char	rgb[3];
 
+	ft_memset(rgb, 0, 3);
 	padding = (4 - (set->win_x * 3) % 4) % 4;
 	i = set->win_y;
 	while (i > 0)
@@ -83,7 +70,7 @@ void			ft_save_buffer(t_set *set, int fd)
 			j++;
 		}
 		if (padding > 0)
-			write(fd, &zero, padding);
+			write(fd, &rgb, padding);
 	}
 }
 
@@ -93,15 +80,16 @@ void			save_bmp(t_set *set)
 
 	set->img.img = mlx_new_image(set->mlx, set->win_x, set->win_y);
 	set->img.data = (int *)mlx_get_data_addr(set->img.img, &set->img.bpp,
-			&set->img.size_l, &set->img.endian);
+										&set->img.size_l, &set->img.endian);
 	render_loop(set);
-	if ((fd = open("output.bmp"
+	if ((fd = open("screen_shot.bmp"
 					, O_WRONLY | O_TRUNC | O_CREAT, 0744)) == -1)
-		exit_msg("Failed save bmp.");
-	ft_file_header(set, fd);
-	ft_image_header(set, fd);
-	ft_save_buffer(set, fd);
+		exit_msg("Failed save.");
+	file_header(set, fd);
+	info_header(set, fd);
+	save_buffer(set, fd);
 	close(fd);
+	free_set(set);
 	printf("Save success.\n");
 	exit(0);
 }
