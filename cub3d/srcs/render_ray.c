@@ -17,11 +17,11 @@ int		check_collision(t_set *set, float x, float y)
 	int		map_x;
 	int		map_y;
 
-	if (x < 0 || x >= set->map_x * GRID_SIZE ||
-		y < 0 || y >= set->map_y * GRID_SIZE)
+	if (x < 0 || x >= set->map_x * set->tex_size[0].x ||
+		y < 0 || y >= set->map_y * set->tex_size[0].y)
 		return (TRUE);
-	map_x = floor(x / GRID_SIZE);
-	map_y = floor(y / GRID_SIZE);
+	map_x = floor(x / set->tex_size[0].x);
+	map_y = floor(y / set->tex_size[0].y);
 	if (set->map[map_y][map_x] == '1')
 		return (TRUE);
 	return (FALSE);

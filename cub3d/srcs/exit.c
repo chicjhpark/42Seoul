@@ -36,15 +36,15 @@ void	free_set(t_set *set)
 	free(set->tex[4]);
 	free(set->ray);
 	free(set->sprites);
-	mlx_destroy_image(set->mlx, set->img.img);
 	mlx_destroy_window(set->mlx, set->win);
+	mlx_destroy_image(set->mlx, set->img.img);
 	free(set->mlx);
 }
 
 void	exit_msg(const char *msg)
 {
 	printf("Error\n%s\n", msg);
-	exit(0);
+	exit(1);
 }
 
 int		exit_success(t_set *set)

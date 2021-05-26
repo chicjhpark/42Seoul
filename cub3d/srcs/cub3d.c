@@ -26,10 +26,10 @@ int		render_loop(t_set *set)
 	render_wall(set, &set->img, set->ray);
 	render_sprites(set, &set->player, set->sprites);
 	mlx_put_image_to_window(set->mlx, set->win, set->img.img, 0, 0);
-	render_map(set);
+	/*render_map(set);
 	render_ray(set, &set->img, &set->player, set->ray);
 	render_player(&set->img, &set->player);
-	render_map_sprites(set, &set->img, set->sprites);
+	render_map_sprites(set, &set->img, set->sprites);*/
 	mlx_put_image_to_window(set->mlx, set->win, set->img.img, 0, 0);
 	return (TRUE);
 }

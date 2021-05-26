@@ -68,8 +68,8 @@ void	relocate_sprite(t_set *set, t_sprite *sprite)
 void	init_sprite(t_set *set, t_player *player, t_sprite *sprite, int i)
 {
 	sprite[i].perp = sprite[i].distance * cos(sprite[i].ang);
-	sprite[i].height =
-		(GRID_SIZE / sprite[i].perp) * ((set->win_x / 2) / tan(set->fov / 2));
+	sprite[i].height = (set->tex_size[0].y / sprite[i].perp) *
+						((set->win_x / 2) / tan(set->fov / 2));
 	sprite[i].width = sprite[i].height;
 	sprite[i].top = (set->win_y / 2) - (sprite[i].height / 2);
 	sprite[i].top = (sprite[i].top < 0) ? 0 : sprite[i].top;

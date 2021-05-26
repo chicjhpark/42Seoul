@@ -71,8 +71,8 @@ void	check_sprite(t_set *set)
 		{
 			if (set->map[y][x] == '2')
 			{
-				set->sprites[i].x = (0.5 + x) * GRID_SIZE;
-				set->sprites[i].y = (0.5 + y) * GRID_SIZE;
+				set->sprites[i].x = x;
+				set->sprites[i].y = y;
 				i++;
 			}
 			x++;

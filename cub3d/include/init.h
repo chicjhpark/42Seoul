@@ -22,8 +22,6 @@
 # define FALSE		-1
 # define ERROR		-2
 
-# define GRID_SIZE	64
-
 # define MINIMAP	0.2
 
 typedef struct		s_img

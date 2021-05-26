@@ -43,9 +43,9 @@ void	update_ray(t_set *set, t_ray *ray, float ang, int i)
 {
 	ang = normalize_ang(ang);
 	init_data(&ray->data, ang);
-	init_horiz_data(&set->player, &ray->data, ang);
+	init_horiz_data(set, &set->player, &ray->data, ang);
 	horiz_intersection(set, &ray->data);
-	init_vert_data(&set->player, &ray->data, ang);
+	init_vert_data(set, &set->player, &ray->data, ang);
 	vert_intersection(set, &ray->data);
 	select_closest_distance(set, &ray->data, ang, i);
 }

@@ -12,14 +12,14 @@
 
 #include "render.h"
 
-void	init_horiz_data(t_player *player, t_data *data, float ang)
+void	init_horiz_data(t_set *set, t_player *player, t_data *data, float ang)
 {
-	data->y_block = floor(player->y / GRID_SIZE) * GRID_SIZE;
-	data->y_block += data->down ? GRID_SIZE : 0;
+	data->y_block = floor(player->y / set->tex_size[0].x) * set->tex_size[0].x;
+	data->y_block += data->down ? set->tex_size[0].x : 0;
 	data->x_block = player->x + (data->y_block - player->y) / tan(ang);
-	data->y_step = GRID_SIZE;
+	data->y_step = set->tex_size[0].x;
 	data->y_step *= data->up ? -1 : 1;
-	data->x_step = GRID_SIZE / tan(ang);
+	data->x_step = set->tex_size[0].x / tan(ang);
 	data->x_step *= (data->left && data->x_step > 0) ? -1 : 1;
 	data->x_step *= (data->right && data->x_step < 0) ? -1 : 1;
 	data->h_touch_x = data->x_block;
@@ -31,8 +31,10 @@ void	horiz_intersection(t_set *set, t_data *data)
 	float	x_check;
 	float	y_check;
 
-	while (data->h_touch_x >= 0 && data->h_touch_x <= set->map_x * GRID_SIZE
-			&& data->h_touch_y > 0 && data->h_touch_y < set->map_y * GRID_SIZE)
+	while (data->h_touch_x >= 0 &&
+			data->h_touch_x <= set->map_x * set->tex_size[0].x &&
+			data->h_touch_y > 0 &&
+			data->h_touch_y < set->map_y * set->tex_size[0].x)
 	{
 		x_check = data->h_touch_x;
 		y_check = data->h_touch_y + (data->up ? -1 : 0);
@@ -40,8 +42,8 @@ void	horiz_intersection(t_set *set, t_data *data)
 		{
 			data->h_hit_x = data->h_touch_x;
 			data->h_hit_y = data->h_touch_y;
-			data->h_content = set->map[(int)floor(y_check / GRID_SIZE)]
-										[(int)floor(x_check / GRID_SIZE)];
+			data->h_content = set->map[(int)floor(y_check / set->tex_size[0].x)]
+									[(int)floor(x_check / set->tex_size[0].x)];
 			data->h_hit = 1;
 			break ;
 		}
@@ -53,14 +55,15 @@ void	horiz_intersection(t_set *set, t_data *data)
 	}
 }
 
-void	init_vert_data(t_player *player, t_data *data, float ang)
+void	init_vert_data(t_set *set, t_player *player, t_data *data, float ang)
 {
-	data->x_block = floor((player->x) / GRID_SIZE) * GRID_SIZE;
-	data->x_block += data->right ? GRID_SIZE : 0;
+	data->x_block = floor((player->x) / set->tex_size[0].x) *
+													set->tex_size[0].x;
+	data->x_block += data->right ? set->tex_size[0].x : 0;
 	data->y_block = player->y + (data->x_block - player->x) * tan(ang);
-	data->x_step = GRID_SIZE;
+	data->x_step = set->tex_size[0].x;
 	data->x_step *= data->left ? -1 : 1;
-	data->y_step = GRID_SIZE * tan(ang);
+	data->y_step = set->tex_size[0].x * tan(ang);
 	data->y_step *= (data->up && data->y_step > 0) ? -1 : 1;
 	data->y_step *= (data->down && data->y_step < 0) ? -1 : 1;
 	data->v_touch_x = data->x_block;
@@ -72,8 +75,10 @@ void	vert_intersection(t_set *set, t_data *data)
 	float	x_check;
 	float	y_check;
 
-	while (data->v_touch_x > 0 && data->v_touch_x <= set->map_x * GRID_SIZE
-		&& data->v_touch_y >= 0 && data->v_touch_y <= set->map_y * GRID_SIZE)
+	while (data->v_touch_x > 0 &&
+			data->v_touch_x <= set->map_x * set->tex_size[0].x &&
+			data->v_touch_y >= 0 &&
+			data->v_touch_y <= set->map_y * set->tex_size[0].x)
 	{
 		x_check = data->v_touch_x + (data->left ? -1 : 0);
 		y_check = data->v_touch_y;
@@ -81,8 +86,8 @@ void	vert_intersection(t_set *set, t_data *data)
 		{
 			data->v_hit_x = data->v_touch_x;
 			data->v_hit_y = data->v_touch_y;
-			data->v_content = set->map[(int)floor(y_check / GRID_SIZE)]
-										[(int)floor(x_check / GRID_SIZE)];
+			data->v_content = set->map[(int)floor(y_check / set->tex_size[0].x)]
+									[(int)floor(x_check / set->tex_size[0].x)];
 			data->v_hit = 1;
 			break ;
 		}

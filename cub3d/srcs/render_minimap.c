@@ -20,13 +20,13 @@ void	render_grid(t_set *set, int x1, int y1, int color)
 	int		y2;
 
 	y2 = 0;
-	while (y2 < MINIMAP * GRID_SIZE)
+	while (y2 < MINIMAP * set->tex_size[0].y)
 	{
 		x2 = 0;
-		while (x2 < MINIMAP * GRID_SIZE)
+		while (x2 < MINIMAP * set->tex_size[0].x)
 		{
-			if (y2 == 0 || x2 == 0 || y2 == MINIMAP * GRID_SIZE - MINIMAP ||
-				x2 == MINIMAP * GRID_SIZE - MINIMAP)
+			if (y2 == 0 || x2 == 0 || y2 == MINIMAP * set->tex_size[0].y
+				- MINIMAP || x2 == MINIMAP * set->tex_size[0].x - MINIMAP)
 				set->img.data[set->win_x * (y1 + y2) + x1 + x2] = LINE_COLOR;
 			else
 				set->img.data[set->win_x * (y1 + y2) + x1 + x2] = color;
@@ -48,11 +48,11 @@ void	render_map(t_set *set)
 		while (set->map[y][x])
 		{
 			if (set->map[y][x] == '1')
-				render_grid(set, MINIMAP * GRID_SIZE * x,
-							MINIMAP * GRID_SIZE * y, BLOCK_COLOR);
+				render_grid(set, MINIMAP * set->tex_size[0].x * x,
+							MINIMAP * set->tex_size[0].y * y, BLOCK_COLOR);
 			else if (set->map[y][x] != ' ')
-				render_grid(set, MINIMAP * GRID_SIZE * x,
-							MINIMAP * GRID_SIZE * y, GRID_COLOR);
+				render_grid(set, MINIMAP * set->tex_size[0].x * x,
+							MINIMAP * set->tex_size[0].y * y, GRID_COLOR);
 			x++;
 		}
 		y++;

@@ -15,7 +15,6 @@
 
 void	init_win(t_set *set)
 {
-	set->mlx = mlx_init();
 	set->win = mlx_new_window(set->mlx, set->win_x, set->win_y, "Cub3D");
 }
 
@@ -28,10 +27,10 @@ void	init_img(t_set *set, t_img *img)
 		mlx_get_data_addr(img->img, &img->bpp, &img->size_l, &img->endian);
 }
 
-void	init_player(t_player *player)
+void	init_player(t_set *set, t_player *player)
 {
-	player->x = (0.5 + player->x) * GRID_SIZE;
-	player->y = (0.5 + player->y) * GRID_SIZE;
+	player->x = (0.5 + player->x) * set->tex_size[0].x;
+	player->y = (0.5 + player->y) * set->tex_size[0].y;
 	player->size = MINIMAP * 32;
 	player->rot_dir = 0;
 	player->move_dir = 0;
@@ -52,7 +51,7 @@ void	init_set(t_set *set)
 	set->fov = 60 * (M_PI / 180);
 	init_win(set);
 	init_img(set, &set->img);
-	init_player(&set->player);
 	init_ray(set, &set->ray);
 	init_tex(set);
+	init_player(set, &set->player);
 }
