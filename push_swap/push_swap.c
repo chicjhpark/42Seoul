@@ -17,9 +17,11 @@
 #define TRUE	0
 #define FALSE	1
 
+typedef unsigned long	u_long;
+
 void	print_result(int *a, int *b, int argc)
 {
-	int 	i;
+	int		i;
 
 	i = 0;
 	printf("a : ");
@@ -39,7 +41,7 @@ void	print_result(int *a, int *b, int argc)
 	printf("\n");
 }
 
-void	init_a(int *a, char **argv)
+void	init_stack(int *a, int *b, char **argv)
 {
 	int		i;
 
@@ -49,14 +51,59 @@ void	init_a(int *a, char **argv)
 		a[i] = ft_atoi(argv[i + 1]);
 		i++;
 	}
+	a[i] = '\0';
+	ft_bzero(b, i);
+}
+
+int		check_sort(int *a, int num)
+{
+	int		i;
+
+	i = 0;
+	while (i < num)
+	{
+		if (a[i] > a[i + 1])
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
+
+int		ft_swap(int *n)
+{
+	int		temp;
+
+	if (n[0] > n[1])
+	{
+		temp = n[0];
+		n[0] = n[1];
+		n[1] = temp;
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
+void	ft_sort(int *a, int *b, int num)
+{
+	if (ft_swap(a) == TRUE)
+		write(1, "sa\n", 3);
+	if (ft_swap(b) == TRUE)
+		write(1, "sb\n", 3);
+	if (check_sort(a, num) == TRUE)
+		return ;
+	else
+		ft_sort(a, b, num);
 }
 
 int		main(int argc, char **argv)
 {
 	int		a[argc];
 	int		b[argc];
+	int		num;
 
-	init_a(a, argv);
+	num = argc - 1;
+	init_stack(a, b, argv);
+	ft_sort(a, b, num);
 	print_result(a, b, argc);
 	return (0);
 }
