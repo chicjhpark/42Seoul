@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 22:45:30 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/06/08 00:04:02 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/06/08 01:59:52 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		check_sort_a(int *n, int n_num)
 {
 	int		i;
 
-	if (n_num == 0)
+	if (n_num < 1)
 		return (FALSE);
 	i = 0;
 	while (i < n_num - 1)
@@ -67,7 +67,7 @@ int		check_sort_b(int *n, int n_num)
 {
 	int		i;
 
-	if (n_num == 0)
+	if (n_num < 1)
 		return (FALSE);
 	i = 0;
 	while (i < n_num - 1)
@@ -83,7 +83,7 @@ int		check_largest(int *n, int i, int num)
 {
 	int		j;
 
-	if (num == 0)
+	if (num < 2)
 		return (FALSE);
 	j = 0;
 	while (j < num)
@@ -99,7 +99,7 @@ int		check_smallest(int *n, int i, int num)
 {
 	int		j;
 
-	if (num == 0)
+	if (num < 2)
 		return (FALSE);
 	j = 0;
 	while (j < num)
