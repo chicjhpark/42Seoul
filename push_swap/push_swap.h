@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 05:13:46 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/06/07 21:32:21 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/06/08 07:18:56 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void				print_result(int *a, int *b, t_info info);
 void				init_info(t_info *info, int argc);
 void				init_stack(int *a, int *b, t_info info, char **argv);
 void				init_pivot(int *a, int *b, t_info *info);
-void				ft_swap(int *n);
+void				ft_swap(int *n, char c);
 void				ft_push(int *n, int *n2, int *n_num, int *n2_num);
-void				ft_rotate(int *n, int num);
-void				ft_reverse_rotate(int *n, int num);
+void				ft_rotate(int *n, int num, char c);
+void				ft_reverse_rotate(int *n, int num, char c);
 
 #endif

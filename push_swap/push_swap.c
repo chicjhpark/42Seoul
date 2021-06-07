@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:50:44 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/06/08 02:17:52 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/06/08 07:52:03 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,37 +19,35 @@ void	sort_stack(int *a, int *b, t_info *info)
 	if (check_smallest(a, info->a_num - 1, info->a_num) == TRUE &&
 		check_largest(b, info->b_num - 1, info->b_num) == TRUE)
 	{
-		ft_reverse_rotate(a, info->a_num);
-		ft_reverse_rotate(b, info->b_num);
+		ft_reverse_rotate(a, info->a_num, 0);
+		ft_reverse_rotate(b, info->b_num, 0);
 		ft_msg("rrr");
 	}
 	else if (check_smallest(a, info->a_num - 1, info->a_num) == TRUE)
-	{
-		ft_reverse_rotate(a, info->a_num);
-		ft_msg("rra");
-	}
+		ft_reverse_rotate(a, info->a_num, 'a');
 	else if (check_largest(b, info->b_num - 1, info->b_num) == TRUE)
-	{
-		ft_reverse_rotate(b, info->b_num);
-		ft_msg("rrb");
-	}
+		ft_reverse_rotate(b, info->b_num, 'b');
 	if (check_largest(a,  0, info->a_num) == TRUE &&
 		check_smallest(b, 0, info->b_num) == TRUE)
 	{
-		ft_rotate(a, info->a_num);
-		ft_rotate(b, info->b_num);
+		ft_rotate(a, info->a_num, 0);
+		ft_rotate(b, info->b_num, 0);
 		ft_msg("rr");
 	}
 	else if (check_largest(a,  0, info->a_num) == TRUE)
-	{
-		ft_rotate(a, info->a_num);
-		ft_msg("ra");
-	}
+		ft_rotate(a, info->a_num, 'a');
 	else if (check_smallest(b, 0, info->b_num) == TRUE)
+		ft_rotate(b, info->b_num, 'b');
+	if (a[0] > a[1] && info->a_num >= 2 && b[0] < b[1] && info->b_num >= 2)
 	{
-		ft_rotate(b, info->b_num);
-		ft_msg("rb");
+		ft_swap(a, 0);
+		ft_swap(b, 0);
+		ft_msg("ss");
 	}
+	else if (a[0] > a[1] && info->a_num >= 2)
+		ft_swap(a, 'a');
+	else if (b[0] < b[1] && info->b_num >= 2)
+		ft_swap(b, 'b');
 	init_pivot(a, b, info);
 	if (a[0] < info->pivot_a)
 	{
@@ -61,26 +59,10 @@ void	sort_stack(int *a, int *b, t_info *info)
 		ft_push(a, b, &info->a_num, &info->b_num);
 		ft_msg("pa");
 	}
-	if (check_sort_a(a, info->a_num) == TRUE && check_sort_b(b, info->b_num) == TRUE)
+	else if (check_sort_a(a, info->a_num) == TRUE && check_sort_b(b, info->b_num) == TRUE)
 	{
 		ft_push(a, b, &info->a_num, &info->b_num);
 		ft_msg("pa");
-	}
-	if (a[0] > a[1] && info->a_num >= 2 && b[0] < b[1] && info->b_num >= 2)
-	{
-		ft_swap(a);
-		ft_swap(b);
-		ft_msg("ss");
-	}
-	else if (a[0] > a[1] && info->a_num >= 2)
-	{
-		ft_swap(a);
-		ft_msg("sa");
-	}
-	else if (b[0] < b[1] && info->b_num >= 2)
-	{
-		ft_swap(b);
-		ft_msg("sb");
 	}
 	sort_stack(a, b, info);
 }
