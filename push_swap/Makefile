@@ -6,7 +6,7 @@
 #    By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/28 15:44:16 by jaehpark          #+#    #+#              #
-#    Updated: 2021/05/29 18:12:22 by jaehpark         ###   ########.fr        #
+#    Updated: 2021/06/04 18:15:43 by jaehpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,10 @@ CFLAGS		= -g -Wall -Wextra -Werror
 INCS		= -Ilibft
 
 SRCS_DIR	= ./
-SRCS_NAME	= push_swap.c
+SRCS_NAME	= push_swap.c \
+				utils.c \
+				init.c \
+				operation.c
 SRCS		= $(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
 
 OBJS_DIR	= ./objs
