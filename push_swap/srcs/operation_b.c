@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 20:26:27 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/06/09 00:28:22 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/06/09 07:45:44 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*rotate_b(int *b, t_info *info)
 		i++;
 	}
 	b[i - 1] = temp;
-	return("rb");
+	return ("rb");
 }
 
 char	*reverse_rotate_b(int *b, t_info *info)
@@ -80,5 +80,5 @@ char	*reverse_rotate_b(int *b, t_info *info)
 		i--;
 	}
 	b[0] = temp;
-	return("rrb");
+	return ("rrb");
 }

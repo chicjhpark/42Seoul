@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 05:13:46 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/06/09 00:07:27 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/06/09 07:45:00 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct		s_info
 	int				num;
 	int				a_num;
 	int				b_num;
+	int				max;
+	int				min;
 	int				pivot;
 	int				pivot_i;
 }					t_info;
@@ -36,9 +38,8 @@ int					check_sort_a(int *a, t_info *info);
 int					check_sort_b(int *b, t_info *info);
 int					check_largest(int *n, int i, int num);
 int					check_smallest(int *n, int i, int num);
-void				print_result(int *a, int *b, t_info info);
 void				init_info(t_info *info, int argc);
-void				init_stack(int *a, int *b, t_info info, char **argv);
+void				init_stack(int **a, int **b, t_info info, char **argv);
 char				*swap_a(int *a);
 char				*swap_b(int *b);
 char				*push_a(int *a, int *b, t_info *info);
