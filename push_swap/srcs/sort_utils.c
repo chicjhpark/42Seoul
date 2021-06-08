@@ -6,38 +6,38 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 20:32:13 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/06/08 20:32:49 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/06/09 00:11:43 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		check_sort_a(int *n, int n_num)
+int		check_sort_a(int *a, t_info *info)
 {
 	int		i;
 
-	if (n_num < 1)
+	if (info->a_num < 1)
 		return (FALSE);
 	i = 0;
-	while (i < n_num - 1)
+	while (i < info->a_num - 1)
 	{
-		if (n[i] > n[i + 1])
+		if (a[i] > a[i + 1])
 			return (FALSE);
 		i++;
 	}
 	return (TRUE);
 }
 
-int		check_sort_b(int *n, int n_num)
+int		check_sort_b(int *b, t_info *info)
 {
 	int		i;
 
-	if (n_num < 1)
+	if (info->b_num < 1)
 		return (FALSE);
 	i = 0;
-	while (i < n_num - 1)
+	while (i < info->b_num - 1)
 	{
-		if (n[i] < n[i + 1])
+		if (b[i] < b[i + 1])
 			return (FALSE);
 		i++;
 	}

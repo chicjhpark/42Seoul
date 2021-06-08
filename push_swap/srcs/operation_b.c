@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 20:26:27 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/06/08 20:28:27 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/06/09 00:28:22 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,41 +22,41 @@ char	*swap_b(int *b)
 	return ("sb");
 }
 
-char	*push_b(int *b, int *a, int *b_num, int *a_num)
+char	*push_b(int *b, int *a, t_info *info)
 {
 	int		i;
 
-	if (a_num[0] == 0)
-		return ;
-	i = b_num[0];
+	if (info->a_num == 0)
+		return (NULL);
+	i = info->b_num;
 	while (i > 0)
 	{
 		b[i] = b[i - 1];
 		i--;
 	}
-	b_num[0] += 1;
+	info->b_num += 1;
 	b[0] = a[0];
 	i = 0;
-	while (i < a_num[0])
+	while (i < info->a_num)
 	{
-		b[i] = a[i + 1];
+		a[i] = a[i + 1];
 		i++;
 	}
-	b[i] = 0;
-	a[0] -= 1;
+	a[i] = 0;
+	info->a_num -= 1;
 	return ("pb");
 }
 
-char	*rotate_b(int *b, int num)
+char	*rotate_b(int *b, t_info *info)
 {
 	int		temp;
 	int		i;
 
-	if (num < 2)
-		return ;
+	if (info->b_num < 2)
+		return (NULL);
 	temp = b[0];
 	i = 0;
-	while (i < num)
+	while (i < info->b_num)
 	{
 		b[i] = b[i + 1];
 		i++;
@@ -65,15 +65,15 @@ char	*rotate_b(int *b, int num)
 	return("rb");
 }
 
-char	*reverse_rotate_a(int *b, int num)
+char	*reverse_rotate_b(int *b, t_info *info)
 {
 	int		temp;
 	int		i;
 
-	if (num < 2)
-		return ;
-	temp = b[num - 1];
-	i = num;
+	if (info->b_num < 2)
+		return (NULL);
+	temp = b[info->b_num - 1];
+	i = info->b_num;
 	while (i > 0)
 	{
 		b[i] = b[i - 1];
