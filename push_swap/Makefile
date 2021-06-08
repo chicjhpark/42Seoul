@@ -6,7 +6,7 @@
 #    By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/28 15:44:16 by jaehpark          #+#    #+#              #
-#    Updated: 2021/06/04 18:15:43 by jaehpark         ###   ########.fr        #
+#    Updated: 2021/06/08 20:39:14 by jaehpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,16 @@ NAME		= push_swap
 CC			= gcc
 CFLAGS		= -g -Wall -Wextra -Werror
 
-INCS		= -Ilibft
+INCS		= -Ilibft -I.
 
-SRCS_DIR	= ./
+SRCS_DIR	= ./srcs
 SRCS_NAME	= push_swap.c \
 				utils.c \
 				init.c \
-				operation.c
+				operation_a.c \
+				operation_b.c \
+				sort_utils.c
+				
 SRCS		= $(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
 
 OBJS_DIR	= ./objs
@@ -42,6 +45,7 @@ $(OBJS_DIR)/%.o : $(SRCS_DIR)/%.c
 	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
 
 all 	: $(NAME)
+		cp $(NAME) ./tester
 
 clean	:
 		$(MAKE) -C $(LIB_DIR) clean

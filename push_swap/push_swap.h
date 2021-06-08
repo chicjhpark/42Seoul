@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 05:13:46 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/06/08 07:18:56 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/06/08 20:40:13 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,14 @@ int					check_smallest(int *n, int i, int num);
 void				print_result(int *a, int *b, t_info info);
 void				init_info(t_info *info, int argc);
 void				init_stack(int *a, int *b, t_info info, char **argv);
-void				init_pivot(int *a, int *b, t_info *info);
-void				ft_swap(int *n, char c);
-void				ft_push(int *n, int *n2, int *n_num, int *n2_num);
-void				ft_rotate(int *n, int num, char c);
-void				ft_reverse_rotate(int *n, int num, char c);
+void				init_pivot(int *a, t_info *info);
+char				*swap_a(int *a);
+char				*swap_b(int *b);
+char				*push_a(int *a, int *b, int *a_num, int *b_num);
+char				*push_b(int *b, int *a, int *b_num, int *a_num);
+char				*rotate_a(int *a, int num);
+char				*rotate_b(int *b, int num);
+char				*reverse_rotate_a(int *a, int num);
+char				*reverse_rotate_b(int *b, int num);
 
 #endif
