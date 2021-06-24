@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 20:26:27 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/06/09 07:45:44 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/06/24 15:59:39 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*push_b(int *b, int *a, t_info *info)
 		a[i] = a[i + 1];
 		i++;
 	}
-	a[i] = 0;
+	a[i] = info->max;
 	info->a_num -= 1;
 	return ("pb");
 }
@@ -73,7 +73,7 @@ char	*reverse_rotate_b(int *b, t_info *info)
 	if (info->b_num < 2)
 		return (NULL);
 	temp = b[info->b_num - 1];
-	i = info->b_num;
+	i = info->b_num - 1;
 	while (i > 0)
 	{
 		b[i] = b[i - 1];

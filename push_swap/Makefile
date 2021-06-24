@@ -6,7 +6,7 @@
 #    By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/28 15:44:16 by jaehpark          #+#    #+#              #
-#    Updated: 2021/06/08 20:39:14 by jaehpark         ###   ########.fr        #
+#    Updated: 2021/06/10 06:33:36 by jaehpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS_NAME	= push_swap.c \
 				init.c \
 				operation_a.c \
 				operation_b.c \
+				operation_ab.c \
 				sort_utils.c
 				
 SRCS		= $(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
@@ -45,7 +46,6 @@ $(OBJS_DIR)/%.o : $(SRCS_DIR)/%.c
 	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
 
 all 	: $(NAME)
-		cp $(NAME) ./tester
 
 clean	:
 		$(MAKE) -C $(LIB_DIR) clean

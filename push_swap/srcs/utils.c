@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 22:45:30 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/06/08 20:32:46 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/06/13 17:46:00 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,23 @@ void		exit_msg(void)
 
 void		ft_msg(char *s)
 {
+	if (s == NULL)
+		return ;
 	write(1, s, ft_strlen(s));
 	write(1, "\n", 1);
+}
+
+int			*ft_intset(int *b, int c, size_t len)
+{
+	size_t			i;
+
+	i = 0;
+	while (i < len)
+	{
+		b[i] = c;
+		i++;
+	}
+	return (b);
 }
 
 long long	ft_atol(char *s)
