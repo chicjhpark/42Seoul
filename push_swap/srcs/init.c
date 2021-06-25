@@ -6,34 +6,70 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 22:46:03 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/06/23 20:29:30 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/06/25 12:15:18 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	init_pivot(int *a, t_info *info)
+void	init_pivot(int *n, int num, t_info *info)
 {
 	int		min;
 	int		max;
 	int		temp;
 	int		i;
 
-	min = a[check_min(a, info->a_num)];
-	max = a[check_max(a, info->a_num)];
+	min = n[check_min(n, num)];
+	max = n[check_max(n, num)];
 	while (min != max)
 	{
+		temp = max;
+		i = -1;
+		while (++i < num)
+			if (min < n[i] && temp > n[i])
+				temp = n[i];
+		min = temp;
+		i = -1;
+		while (++i < num)
+			if (max > n[i] && temp < n[i])
+				temp = n[i];
+		max = temp;
 		temp = min;
 		i = -1;
-		while (++i < info->a_num)
-			if (max > a[i] && temp < a[i])
-				temp = a[i];
+		while (++i < num)
+			if (max > n[i] && temp < n[i])
+				temp = n[i];
 		max = temp;
+		temp = min;
 		i = -1;
-		while (++i < info->a_num)
-			if (min < a[i] && temp > a[i])
-				temp = a[i];
-		min = temp;
+		while (++i < num)
+			if (max > n[i] && temp < n[i])
+				temp = n[i];
+		max = temp;
+		temp = min;
+		i = -1;
+		while (++i < num)
+			if (max > n[i] && temp < n[i])
+				temp = n[i];
+		max = temp;
+		temp = min;
+		i = -1;
+		while (++i < num)
+			if (max > n[i] && temp < n[i])
+				temp = n[i];
+		max = temp;
+		temp = min;
+		i = -1;
+		while (++i < num)
+			if (max > n[i] && temp < n[i])
+				temp = n[i];
+		max = temp;
+		temp = min;
+		i = -1;
+		while (++i < num)
+			if (max > n[i] && temp < n[i])
+				temp = n[i];
+		max = temp;
 	}
 	info->pivot = min;
 }

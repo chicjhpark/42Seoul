@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 22:45:30 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/06/13 17:46:00 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/06/24 22:14:29 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,30 @@ long long	ft_atol(char *s)
 	if (n < 0)
 		return (1);
 	return (n * sign);
+}
+
+void	push_a_max(int *a, int *b, t_info *info)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < 3 && info->b_num > 0)
+	{
+		j = 0;
+		while (j < info->b_num)
+		{
+			if (j == check_max(b, info->b_num))
+				break;
+			j++;
+		}
+		if (j > info->b_num / 2)
+			while (check_max(b, info->b_num) != 0 && info->b_num > 1)
+				ft_msg(reverse_rotate_b(b, info));
+		else
+			while (check_max(b, info->b_num) != 0 && info->b_num > 1)
+				ft_msg(rotate_b(b, info));
+		ft_msg(push_a(a, b, info));
+		i++;
+	}
 }

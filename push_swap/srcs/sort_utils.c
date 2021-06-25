@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 20:32:13 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/06/22 18:04:04 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/06/25 01:13:29 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		check_sort_b(int *b, t_info *info)
 	i = 0;
 	while (i < info->b_num - 1)
 	{
-		if ((b[i] < b[i + 1]))
+		if (b[i] < b[i + 1])
 			return (FALSE);
 		i++;
 	}
@@ -80,16 +80,24 @@ int		check_min(int *n, int num)
 	return (j);
 }
 
-int		check_pivot(int *a, t_info *info)
+int		check_pivot(int *n, int num, t_info *info, char c)
 {
 	int		i;
 
 	i = 0;
-	while (i < info->a_num)
-	{
-		if (a[i] < info->pivot)
-			return (TRUE);
-		i++;
-	}
+	if (c == 'a')
+		while (i < num)
+		{
+			if (n[i] < info->pivot)
+				return (TRUE);
+			i++;
+		}
+	else
+		while (i < num)
+		{
+			if (n[i] > info->pivot)
+				return (TRUE);
+			i++;
+		}
 	return (FALSE);
 }
