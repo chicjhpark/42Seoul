@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:50:44 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/06/25 11:50:55 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/06/27 12:36:02 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,23 @@
 
 void	simple_sort_stack(int *a, int *b, t_info *info)
 {
- 	while (info->a_num <= 3 && info->b_num <= 3 && check_sort_a(a, info) == FALSE)
+ 	while (info->a_num <= 3 && info->b_num <= 3
+	 		&& check_sort_a(a, info) == FALSE)
 	{
 		if (check_max(a, info->a_num) == 0 && check_min(b, info->b_num) == 0)
 			ft_msg(rotate_ab(a, b, info));
 		else if (check_max(a, info->a_num) == 0)
 			ft_msg(rotate_a(a, info));
-		else if (check_max(a, info->a_num) == 1 && check_min(b, info->b_num) == 1)
+		else if (check_max(a, info->a_num) == 1
+				&& check_min(b, info->b_num) == 1)
 			ft_msg(reverse_rotate_ab(a, b, info));
 		else if (check_max(a, info->a_num) == 1)
 			ft_msg(reverse_rotate_a(a, info));
 		else
 			ft_msg(swap_ab(a, b, info));
 	}
-	while (info->a_num <= 3 && info->b_num > 3 && check_sort_a(a, info) == FALSE)
+	while (info->a_num <= 3 && info->b_num > 3
+			&& check_sort_a(a, info) == FALSE)
 	{
 		if (check_max(a, info->a_num) == 0 && check_max(b, info->b_num) > 0
 			&& check_max(b, info->b_num) < info->b_num / 2)
@@ -48,7 +51,8 @@ void	simple_sort_stack(int *a, int *b, t_info *info)
 
 void	sort_stack(int *a, int *b, t_info *info)
 {
-	while (info->a_num > 3 && info->b_num <= 3 && check_sort_a(a, info) == FALSE)
+	while (info->a_num > 3 && info->b_num <= 3
+			&& check_sort_a(a, info) == FALSE)
 	{
 		if (a[0] > a[1])
 			ft_msg(swap_ab(a, b, info));
@@ -63,7 +67,7 @@ void	sort_stack(int *a, int *b, t_info *info)
 	}
 	while (info->a_num > 3 && info->b_num > 3 && check_sort_a(a, info) == FALSE)
 	{
-		if (a[0] > a[1] && b[1] > b[0] && b[1] > b[2] && b[0] > b[2])
+		if (a[0] > a[1] && b[1] > b[0] && b[1] > b[2])// && b[0] > b[2])
 			ft_msg(swap_ab(a, b, info));
 		else if (a[0] > a[1])
 			ft_msg(swap_a(a));
@@ -133,7 +137,8 @@ void	parse_stack(int *a, int *b, t_info *info)
 	while (info->a_num > 3 && check_sort_a(a, info) == FALSE)
 	{
 		init_pivot(a, info->a_num, info);
-		while (info->a_num > 3 && check_pivot(a, info->a_num, info, 'a') == TRUE)
+		while (info->a_num > 3
+				&& check_pivot(a, info->a_num, info, 'a') == TRUE)
 			pivot_sort_a(a, b, info);
 	}
 	while (check_sort_a(a, info) != TRUE || info->a_num != info->num)

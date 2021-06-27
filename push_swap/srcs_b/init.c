@@ -6,43 +6,11 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/03 22:46:03 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/06/26 10:32:52 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/06/26 18:16:06 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	init_pivot(int *n, int num, t_info *info)
-{
-	int		min;
-	int		max;
-	int		temp;
-	int		i;
-	int		j;
-
-	min = n[check_min(n, num)];
-	max = n[check_max(n, num)];
-	while (min != max)
-	{
-		temp = max;
-		i = -1;
-		while (++i < num)
-			if (min < n[i] && temp > n[i])
-				temp = n[i];
-		min = temp;
-		j = -1;
-		while (++j < num / 100 + 2)
-		{
-			temp = min;
-			i = -1;
-			while (++i < num)
-				if (max > n[i] && temp < n[i])
-					temp = n[i];
-			max = temp;
-		}
-	}
-	info->pivot = min;
-}
 
 void	init_info(t_info *info, int argc)
 {
