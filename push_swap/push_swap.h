@@ -32,6 +32,7 @@ typedef struct		s_info
 }					t_info;
 
 int					*ft_intset(int *b, int c, size_t len);
+int					ft_strcmp(char *s1, char *s2);
 long long			ft_atol(char *s);
 void				exit_msg(void);
 void				ft_msg(char *s);
@@ -60,5 +61,8 @@ char				*rotate_ab(int *a, int *b, t_info *info);
 char				*reverse_rotate_a(int *a, t_info *info);
 char				*reverse_rotate_b(int *b, t_info *info);
 char				*reverse_rotate_ab(int *a, int *b, t_info *info);
+void				checker_reverse_rotate_ab(int *a, int *b, t_info *info);
+void				checker_rotate_ab(int *a, int *b, t_info *info);
+void				checker_swap_ab(int *a, int *b);
 
 #endif

@@ -12,73 +12,54 @@
 
 #include "push_swap.h"
 
-int		ft_swap_push(int *a, int *b, t_info *info, char *buf)
+void	check_operation(int *a, int *b, t_info *info, char *buf)
 {
 	if (buf[0] == 's' && buf[1] == 'a' && buf[2] == '\n')
 		swap_a(a);
 	else if (buf[0] == 's' && buf[1] == 'b' && buf[2] == '\n')
 		swap_b(b);
 	else if (buf[0] == 's' && buf[1] == 's' && buf[2] == '\n')
-	{
-		swap_a(a);
-		swap_b(b);
-	}
+		checker_swap_ab(a, b);
 	else if (buf[0] == 'p' && buf[1] == 'a' && buf[2] == '\n')
 		push_a(a, b, info);
 	else if (buf[0] == 'p' && buf[1] == 'b' && buf[2] == '\n')
 		push_b(b, a, info);
-	else
-		return (FALSE);
-	return (TRUE);
-}
-
-int		ft_rotate(int *a, int *b, t_info *info, char *buf)
-{
-	if (buf[0] == 'r' && buf[1] == 'a' && buf[2] == '\n')
+	else if (buf[0] == 'r' && buf[1] == 'a' && buf[2] == '\n')
 		rotate_a(a, info);
 	else if (buf[0] == 'r' && buf[1] == 'b' && buf[2] == '\n')
 		rotate_b(b, info);
 	else if (buf[0] == 'r' && buf[1] == 'r' && buf[2] == '\n')
-	{
-		rotate_a(a, info);
-		rotate_b(b, info);
-	}
-	else
-		return (FALSE);
-	return (TRUE);
-}
-
-int		ft_reverse_rotate(int *a, int *b, t_info *info, char *buf)
-{
-	char	line;
-
-	read(0, &line, 1);
-	if (buf[0] == 'r' && buf[1] == 'r' && buf[2] == 'a' && line == '\n')
+		checker_rotate_ab(a, b, info);
+	else if (buf[0] == 'r' && buf[1] == 'r' && buf[2] == 'a' && buf[3] == '\n')
 		reverse_rotate_a(a, info);
-	else if (buf[0] == 'r' && buf[1] == 'r' && buf[2] == 'b' && line == '\n')
+	else if (buf[0] == 'r' && buf[1] == 'r' && buf[2] == 'b' && buf[3] == '\n')
 		reverse_rotate_b(b, info);
-	else if (buf[0] == 'r' && buf[1] == 'r' && buf[2] == 'r' && line == '\n')
-	{
-		reverse_rotate_a(a, info);
-		reverse_rotate_b(b, info);
-	}
+	else if (buf[0] == 'r' && buf[1] == 'r' && buf[2] == 'r' && buf[3] == '\n')
+		checker_reverse_rotate_ab(a, b, info);
 	else
-		return (FALSE);
-	return (TRUE);
+		exit_msg();
 }
 
 void	sort_operation(int *a, int *b, t_info *info)
 {
-	char	buf[3];
+	char	buf[256];
+	char	temp;
+	int		i;
 
-	while (read(0, &buf, sizeof(buf)) != 0)
+	temp = 0;
+	while (read(0, &temp, 1) != 0)
 	{
-		if (buf[0] != 's' && buf[0] != 'p' && buf[0] != 'r')
-			exit_msg();
-		if (ft_swap_push(a, b, info, buf) == FALSE)
-			if (ft_rotate(a, b, info, buf) == FALSE)
-				if (ft_reverse_rotate(a, b, info, buf) == FALSE)
-					exit_msg();
+		ft_memset(buf, 0, sizeof(buf));
+		buf[0] = temp;
+		i = 1;
+		while (temp != '\n' && read(0, &temp, 1) != 0)
+		{
+			buf[i] = temp;
+			i++;
+		}
+		if (temp == EOF)
+			break ;
+		check_operation(a, b, info, buf);
 	}
 	if (check_sort_a(a, info) == TRUE && info->a_num == info->num)
 		ft_msg("OK");
@@ -96,10 +77,7 @@ int		main(int argc, char **argv)
 	{
 		init_info(&info, argc);
 		init_stack(&a, &b, info, &argv[1]);
-		if (check_sort_a(a, &info) == TRUE)
-			ft_msg("OK");
-		else
-			sort_operation(a, b, &info);
+		sort_operation(a, b, &info);
 		free(a);
 		free(b);
 	}

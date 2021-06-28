@@ -12,6 +12,37 @@
 
 #include "push_swap.h"
 
+void	pivot_sort_a2(int *a, int *b, t_info *info)
+{
+	if (a[0] > a[info->a_num - 1] && check_max(b, info->b_num) > 0
+		&& check_max(b, info->b_num) < info->b_num / 2)
+		ft_msg(rotate_ab(a, b, info));
+	else if (a[0] > a[info->a_num - 1])
+		ft_msg(rotate_a(a, info));
+	else if (b[1] > b[0] && b[1] > b[2] && b[0] > b[2])
+		ft_msg(swap_ab(a, b, info));
+	else
+		ft_msg(swap_a(a));
+}
+
+void	pivot_sort_a3(int *a, int *b, t_info *info)
+{
+	if (a[info->a_num - 1] < info->pivot
+		&& check_max(b, info->b_num) > info->b_num / 2)
+		ft_msg(reverse_rotate_ab(a, b, info));
+	else if (a[info->a_num - 1] < info->pivot)
+		ft_msg(reverse_rotate_a(a, info));
+	else if (a[0] < a[1] && check_max(b, info->b_num) > 0
+			&& check_max(b, info->b_num) < info->b_num / 2)
+		ft_msg(rotate_ab(a, b, info));
+	else if (a[0] < a[1])
+		ft_msg(rotate_a(a, info));
+	else if (b[1] > b[0] && b[1] > b[2] && b[0] > b[2])
+		ft_msg(swap_ab(a, b, info));
+	else
+		ft_msg(swap_a(a));
+}
+
 void	pivot_sort_a(int *a, int *b, t_info *info)
 {
 	if (a[0] < info->pivot && a[0] < a[1] && a[0] < a[info->a_num - 1])
@@ -29,34 +60,9 @@ void	pivot_sort_a(int *a, int *b, t_info *info)
 			ft_msg(swap_a(a));
 	}
 	else if (a[1] < a[0] && a[1] < a[info->a_num - 1])
-	{
-		if (a[0] > a[info->a_num - 1] && check_max(b, info->b_num) > 0
-			&& check_max(b, info->b_num) < info->b_num / 2)
-			ft_msg(rotate_ab(a, b, info));
-		else if (a[0] > a[info->a_num - 1])
-			ft_msg(rotate_a(a, info));
-		else if (b[1] > b[0] && b[1] > b[2] && b[0] > b[2])
-			ft_msg(swap_ab(a, b, info));
-		else
-			ft_msg(swap_a(a));
-	}
+		pivot_sort_a2(a, b, info);
 	else
-	{
-		if (a[info->a_num - 1] < info->pivot
-			&& check_max(b, info->b_num) > info->b_num / 2)
-			ft_msg(reverse_rotate_ab(a, b, info));
-		else if (a[info->a_num - 1] < info->pivot)
-			ft_msg(reverse_rotate_a(a, info));
-		else if (a[0] < a[1] && check_max(b, info->b_num) > 0
-				&& check_max(b, info->b_num) < info->b_num / 2)
-			ft_msg(rotate_ab(a, b, info));
-		else if (a[0] < a[1])
-			ft_msg(rotate_a(a, info));
-		else if (b[1] > b[0] && b[1] > b[2] && b[0] > b[2])
-			ft_msg(swap_ab(a, b, info));
-		else
-			ft_msg(swap_a(a));
-	}
+		pivot_sort_a3(a, b, info);
 }
 
 void	parse_stack(int *a, int *b, t_info *info)

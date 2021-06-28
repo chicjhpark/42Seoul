@@ -15,7 +15,7 @@ NAME		= push_swap
 NAME_B		= checker
 
 CC			= gcc
-CFLAGS		= -g -Wall -Wextra -Werror
+CFLAGS		= -g3 -fsanitize=address -Wall -Wextra -Werror
 
 INCS		= -Ilibft -I.
 
@@ -27,7 +27,8 @@ SRCS_NAME	= push_swap.c \
 				operation_b.c \
 				operation_ab.c \
 				sort.c \
-				sort_utils.c
+				sort_utils.c \
+				pivot_sort.c
 
 SRCS_B_DIR	= ./srcs_b
 SRCS_B_NAME	= checker.c \
@@ -35,6 +36,7 @@ SRCS_B_NAME	= checker.c \
 				init.c \
 				operation_a.c \
 				operation_b.c \
+				operation_ab.c \
 				sort_utils.c
 
 SRCS		= $(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
