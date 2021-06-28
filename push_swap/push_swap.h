@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 05:13:46 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/06/26 17:33:41 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/06/28 09:08:48 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ typedef struct		s_info
 	int				max;
 	int				min;
 	int				pivot;
-	int				p_num;
-	int				fix;
+	int				p_max;
 }					t_info;
 
 int					*ft_intset(int *b, int c, size_t len);
@@ -42,6 +41,11 @@ int					check_sort_b(int *b, t_info *info);
 int					check_max(int *n, int num);
 int					check_min(int *n, int num);
 int					check_pivot(int *n, int num, t_info *info, char c);
+int					check_p_max(int *b, t_info *info);
+void				sort_stack(int *a, int *b, t_info *info);
+void				sort_stack2(int *a, int *b, t_info *info);
+void				sort_stack3(int *a, int *b, t_info *info);
+void				sort_stack4(int *a, int *b, t_info *info);
 void				init_info(t_info *info, int argc);
 void				init_stack(int **a, int **b, t_info info, char **argv);
 void				init_pivot(int *n, int num, t_info *info);

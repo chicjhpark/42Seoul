@@ -6,7 +6,7 @@
 #    By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/28 15:44:16 by jaehpark          #+#    #+#              #
-#    Updated: 2021/06/26 18:17:31 by jaehpark         ###   ########.fr        #
+#    Updated: 2021/06/27 16:58:06 by jaehpark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS_NAME	= push_swap.c \
 				operation_a.c \
 				operation_b.c \
 				operation_ab.c \
+				sort.c \
 				sort_utils.c
 
 SRCS_B_DIR	= ./srcs_b

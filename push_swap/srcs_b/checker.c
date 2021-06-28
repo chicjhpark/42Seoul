@@ -6,7 +6,7 @@
 /*   By: jaehpark <jaehpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/07 23:28:13 by jaehpark          #+#    #+#             */
-/*   Updated: 2021/06/27 12:19:17 by jaehpark         ###   ########.fr       */
+/*   Updated: 2021/06/28 09:03:42 by jaehpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,28 +70,20 @@ int		ft_reverse_rotate(int *a, int *b, t_info *info, char *buf)
 void	sort_operation(int *a, int *b, t_info *info)
 {
 	char	buf[3];
-	int		ret;
 
-	while (1)
+	while (read(0, &buf, sizeof(buf)) != 0)
 	{
-		if (read(0, &buf, sizeof(buf)) == 0)
-		{
-			if (check_sort_a(a, info) == TRUE && info->a_num == info->num)
-				ft_msg("OK");
-			else
-				ft_msg("KO");
-			return ;
-		}
-		ret = 0;
-		if (ft_swap_push(a, b, info, buf) == TRUE)
-			ret++;
-		else if (ft_rotate(a, b, info, buf) == TRUE)
-			ret++;
-		else if (ft_reverse_rotate(a, b, info, buf) == TRUE)
-			ret++;
-		if (ret == 0)
+		if (buf[0] != 's' && buf[0] != 'p' && buf[0] != 'r')
 			exit_msg();
+		if (ft_swap_push(a, b, info, buf) == FALSE)
+			if (ft_rotate(a, b, info, buf) == FALSE)
+				if (ft_reverse_rotate(a, b, info, buf) == FALSE)
+					exit_msg();
 	}
+	if (check_sort_a(a, info) == TRUE && info->a_num == info->num)
+		ft_msg("OK");
+	else
+		ft_msg("KO");
 }
 
 int		main(int argc, char **argv)
